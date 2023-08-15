@@ -8,43 +8,24 @@ abstract class DomainException implements Exception {
 
 /// ドメイン層で発生する入力値検査例外
 class ValidatorException extends DomainException {
-  const ValidatorException._([
-    super.message = 'validator exception',
-    this.target,
-  ]);
+  const ValidatorException._([super.message = 'validator exception']);
 
   /// 引数が不正
-  factory ValidatorException.invalidArgument([
-    String? target,
-  ]) {
-    return ValidatorException._(
-      'Invalid argument',
-      target,
-    );
+  factory ValidatorException.invalidArgument() {
+    return const ValidatorException._('Invalid argument');
   }
 
   /// Email
-  factory ValidatorException.invalidEmail([
-    String? target,
-  ]) {
-    return ValidatorException._(
+  factory ValidatorException.invalidEmail() {
+    return const ValidatorException._(
       'Invalid Email',
-      target,
     );
   }
 
   /// Password
-  factory ValidatorException.invalidPassword([
-    String? target,
-  ]) {
-    return ValidatorException._(
-      'Please enter at least 6 alphanumeric characters.',
-      target,
-    );
+  factory ValidatorException.invalidPassword() {
+    return const ValidatorException._('Please enter at least 6 alphanumeric characters.');
   }
-
-  /// 対象
-  final String? target;
 
   @override
   String toString() => 'ValidatorException: $message';
