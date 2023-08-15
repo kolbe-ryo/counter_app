@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../exceptions.dart';
+import '../../exceptions.dart';
 
 part 'string_value.freezed.dart';
 

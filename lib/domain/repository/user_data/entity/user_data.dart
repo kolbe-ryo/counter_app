@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../counter/entity/value_object/string_value.dart';
+import '../../common_object/string_value.dart';
 
 part 'user_data.freezed.dart';
 

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../common_object/string_value.dart';
 import 'value_object/count_value.dart';
-import 'value_object/string_value.dart';
 import 'value_object/updated_datetime_value.dart';
 
 part 'counter.freezed.dart';
