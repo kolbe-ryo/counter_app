@@ -15,9 +15,10 @@ class UserData with _$UserData {
   factory UserData.create(
     String id,
     String password,
-  ) =>
-      UserData._(
-        id: StringValue(id),
-        password: StringValue(password),
-      );
+  ) {
+    return UserData._(
+      id: StringValue(id),
+      password: StringValue(password),
+    );
+  }
 }
