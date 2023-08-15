@@ -1,0 +1,23 @@
+import '../common_object/string_value.dart';
+import 'entity/authenticate_user_data.dart';
+
+/// ユーザー認証リポジトリ
+abstract class UserDataRepository {
+  /// Emailで利用登録を行う
+  Future<void> signUp({
+    // TODO: 認証に必要な情報を渡す
+    required AuthenticateUserData userData,
+  });
+
+  /// Emailでサインインする
+  Future<void> signIn({
+    // TODO: 認証に必要な情報を渡す
+    required AuthenticateUserData userData,
+  });
+
+  /// Passwordのリセット案内をEmailに送信する
+  Future<void> resetPassword({
+    // TODO: 認証に必要な情報を渡す
+    required StringValue userData,
+  });
+}

@@ -1,0 +1,15 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../common_object/string_value.dart';
+
+part 'store_identify_data.freezed.dart';
+
+/// Firebase認証ユーザーオブジェクト
+@freezed
+class StoreIdentifyData with _$StoreIdentifyData {
+  factory StoreIdentifyData(String id) => StoreIdentifyData._(id: StringValue(id));
+
+  const factory StoreIdentifyData._({
+    required StringValue id,
+  }) = _StoreIdentifyData;
+}

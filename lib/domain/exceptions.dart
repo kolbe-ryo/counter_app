@@ -23,6 +23,26 @@ class ValidatorException extends DomainException {
     );
   }
 
+  /// Email
+  factory ValidatorException.invalidEmail([
+    String? target,
+  ]) {
+    return ValidatorException._(
+      'Invalid Email',
+      target,
+    );
+  }
+
+  /// Password
+  factory ValidatorException.invalidPassword([
+    String? target,
+  ]) {
+    return ValidatorException._(
+      'Please enter at least 6 alphanumeric characters.',
+      target,
+    );
+  }
+
   /// 対象
   final String? target;
 
