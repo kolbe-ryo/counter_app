@@ -13,8 +13,11 @@ class FirebaseFirestoreRepository implements CounterRepository {
   Stream<Counter> fetchCounters() {
     /// カウンターのStreamを取得する
     return client.get<Counter>(
-      responseBuilder: (data) async* {
-        yield Counter.init('test', CategoryInfo(), 1, null);
+      responseBuilder: (stream) async* {
+        await for (final data in stream) {
+          // TODO: dataを加工して、Counterに詰め替える
+          yield Counter.init('test', CategoryInfo(), 1, null);
+        }
       },
     );
   }
