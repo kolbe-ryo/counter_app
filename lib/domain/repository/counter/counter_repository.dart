@@ -9,7 +9,7 @@ final counterRepositoryProvider = Provider<CounterRepository>(
 /// カウンタRepository
 abstract class CounterRepository {
   /// カウンター一覧を取得する
-  Stream<Counter> fetchCounters();
+  Stream<Counter> fetchSnapshot();
 
   /// カウンターを保存する
   Future<void> saveCounter({

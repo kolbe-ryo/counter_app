@@ -1,16 +1,36 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:riverpod/riverpod.dart';
 
 import '../../domain/exceptions.dart';
 import '../../util/logger.dart';
 
+/// TODO Authenticateで取得したuserIdに置き換え
+final authenticatedUserIdProvider = Provider<String>(
+  (ref) => 'test_user_id',
+);
+
+/// Firebaseクライアントプロバイダー
+final firebaseProvider = Provider<FirebaseFirestore>(
+  (ref) => FirebaseFirestore.instance,
+);
+
+final firebaseClientProvider = Provider<FirebaseClient>(
+  (ref) => FirebaseClient(
+    userId: ref.watch(authenticatedUserIdProvider),
+    client: ref.watch(firebaseProvider),
+  ),
+);
+
 class FirebaseClient {
   const FirebaseClient({
     required this.userId,
+    required this.client,
   });
 
   final String userId;
+  final FirebaseFirestore client;
 
   static const _rootCollection = 'users';
   static const _counterCollection = 'user_counters';
