@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Counter {
   StringValue get name => throw _privateConstructorUsedError;
   CountValue get count => throw _privateConstructorUsedError;
+  CategoryInfo get categoryInfo => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   UpdatedDatetimeValue get lastUpdated => throw _privateConstructorUsedError;
 
@@ -33,11 +34,13 @@ abstract class $CounterCopyWith<$Res> {
   $Res call(
       {StringValue name,
       CountValue count,
+      CategoryInfo categoryInfo,
       String? description,
       UpdatedDatetimeValue lastUpdated});
 
   $StringValueCopyWith<$Res> get name;
   $CountValueCopyWith<$Res> get count;
+  $CategoryInfoCopyWith<$Res> get categoryInfo;
   $UpdatedDatetimeValueCopyWith<$Res> get lastUpdated;
 }
 
@@ -56,6 +59,7 @@ class _$CounterCopyWithImpl<$Res, $Val extends Counter>
   $Res call({
     Object? name = null,
     Object? count = null,
+    Object? categoryInfo = null,
     Object? description = freezed,
     Object? lastUpdated = null,
   }) {
@@ -68,6 +72,10 @@ class _$CounterCopyWithImpl<$Res, $Val extends Counter>
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as CountValue,
+      categoryInfo: null == categoryInfo
+          ? _value.categoryInfo
+          : categoryInfo // ignore: cast_nullable_to_non_nullable
+              as CategoryInfo,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -97,6 +105,14 @@ class _$CounterCopyWithImpl<$Res, $Val extends Counter>
 
   @override
   @pragma('vm:prefer-inline')
+  $CategoryInfoCopyWith<$Res> get categoryInfo {
+    return $CategoryInfoCopyWith<$Res>(_value.categoryInfo, (value) {
+      return _then(_value.copyWith(categoryInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $UpdatedDatetimeValueCopyWith<$Res> get lastUpdated {
     return $UpdatedDatetimeValueCopyWith<$Res>(_value.lastUpdated, (value) {
       return _then(_value.copyWith(lastUpdated: value) as $Val);
@@ -114,6 +130,7 @@ abstract class _$$_CounterCopyWith<$Res> implements $CounterCopyWith<$Res> {
   $Res call(
       {StringValue name,
       CountValue count,
+      CategoryInfo categoryInfo,
       String? description,
       UpdatedDatetimeValue lastUpdated});
 
@@ -121,6 +138,8 @@ abstract class _$$_CounterCopyWith<$Res> implements $CounterCopyWith<$Res> {
   $StringValueCopyWith<$Res> get name;
   @override
   $CountValueCopyWith<$Res> get count;
+  @override
+  $CategoryInfoCopyWith<$Res> get categoryInfo;
   @override
   $UpdatedDatetimeValueCopyWith<$Res> get lastUpdated;
 }
@@ -137,6 +156,7 @@ class __$$_CounterCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? count = null,
+    Object? categoryInfo = null,
     Object? description = freezed,
     Object? lastUpdated = null,
   }) {
@@ -149,6 +169,10 @@ class __$$_CounterCopyWithImpl<$Res>
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as CountValue,
+      categoryInfo: null == categoryInfo
+          ? _value.categoryInfo
+          : categoryInfo // ignore: cast_nullable_to_non_nullable
+              as CategoryInfo,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -167,6 +191,7 @@ class _$_Counter extends _Counter {
   const _$_Counter(
       {required this.name,
       required this.count,
+      required this.categoryInfo,
       this.description,
       required this.lastUpdated})
       : super._();
@@ -176,13 +201,15 @@ class _$_Counter extends _Counter {
   @override
   final CountValue count;
   @override
+  final CategoryInfo categoryInfo;
+  @override
   final String? description;
   @override
   final UpdatedDatetimeValue lastUpdated;
 
   @override
   String toString() {
-    return 'Counter(name: $name, count: $count, description: $description, lastUpdated: $lastUpdated)';
+    return 'Counter(name: $name, count: $count, categoryInfo: $categoryInfo, description: $description, lastUpdated: $lastUpdated)';
   }
 
   @override
@@ -192,6 +219,8 @@ class _$_Counter extends _Counter {
             other is _$_Counter &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.count, count) || other.count == count) &&
+            (identical(other.categoryInfo, categoryInfo) ||
+                other.categoryInfo == categoryInfo) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.lastUpdated, lastUpdated) ||
@@ -199,8 +228,8 @@ class _$_Counter extends _Counter {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, count, description, lastUpdated);
+  int get hashCode => Object.hash(
+      runtimeType, name, count, categoryInfo, description, lastUpdated);
 
   @JsonKey(ignore: true)
   @override
@@ -213,6 +242,7 @@ abstract class _Counter extends Counter {
   const factory _Counter(
       {required final StringValue name,
       required final CountValue count,
+      required final CategoryInfo categoryInfo,
       final String? description,
       required final UpdatedDatetimeValue lastUpdated}) = _$_Counter;
   const _Counter._() : super._();
@@ -221,6 +251,8 @@ abstract class _Counter extends Counter {
   StringValue get name;
   @override
   CountValue get count;
+  @override
+  CategoryInfo get categoryInfo;
   @override
   String? get description;
   @override
