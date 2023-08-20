@@ -33,75 +33,28 @@ class ValidatorException extends DomainException {
 ///
 /// リポジトリ実装がこの例外を投げたら、プレゼンテーション層
 /// で受け取って適切に表示すること。
-class NetworkException extends DomainException {
-  const NetworkException._([
-    super.message = 'network exception',
+class FirebaseNetworkException extends DomainException {
+  const FirebaseNetworkException([
+    super.message = 'firebase exception',
     String? code,
-  ]) : code = code ?? codeUnknown;
-
-  /// 1. 無効なJSONを送信すると、`400 Bad Request` レスポンスが返されます。
-  /// 2. 間違ったタイプの JSON 値を送信すると、`400 Bad Request` レスポンスが返されます。
-  factory NetworkException.badRequest() => const NetworkException._(
-        'Illegal request sent. (400)',
-        codeBadRequest,
-      );
-
-  /// 無効な認証情報で認証すると、`401 Unauthorized` が返されます。
-  factory NetworkException.badCredentials() => const NetworkException._(
-        'Illegal request sent. (401)',
-        codeBadCredentials,
-      );
-
-  /// API は、無効な認証情報を含むリクエストを短期間に複数回検出すると、`403 Forbidden` で、
-  /// そのユーザに対するすべての認証試行（有効な認証情報を含む）を一時的に拒否します。
-  factory NetworkException.maximumNumberOfLoginAttemptsExceeded() => const NetworkException._(
-        'Please wait a while and try again. (403)',
-        codeMaximumNumberOfLoginAttemptsExceeded,
-      );
-
-  /// `404 Not Found`
-  factory NetworkException.notFound() => const NetworkException._(
-        'No data found. (404)',
-        codeNotFound,
-      );
-
-  /// 無効なフィールドを送信すると、`422 Unprocessable Entity` レスポンスが返されます。
-  factory NetworkException.validationFailed() => const NetworkException._(
-        'Illegal request sent. (422)',
-        codeValidationFailed,
-      );
-
-  /// `503 Service Unavailable` サービス停止中
-  factory NetworkException.serviceUnavailable() => const NetworkException._(
-        'Please wait a while and try again.  (503)',
-        codeServiceUnavailable,
-      );
+    String? description,
+  ])  : code = code ?? _codeUnknown,
+        description = description ?? _descriptionUnknown;
 
   /// インターネット接続不可
-  factory NetworkException.noInternetConnection() => const NetworkException._(
-        'Please try again in a good communication environment. (-2)',
-        codeNoInternetConnection,
+  factory FirebaseNetworkException.noInternetConnection() => const FirebaseNetworkException(
+        _codeNoInternetConnection,
+        'Please try again in a good communication environment.',
       );
-
-  /// 不明なエラー
-  factory NetworkException.unknown() => const NetworkException._(
-        'An unknown error has occurred. (-1)',
-        codeUnknown,
-      );
-
-  // エラーコードの定義
-  static const codeBadRequest = 'bad-request';
-  static const codeBadCredentials = 'bad-credentials';
-  static const codeMaximumNumberOfLoginAttemptsExceeded = 'maximum-number-of-login-attempts-exceeded';
-  static const codeNotFound = 'not-found';
-  static const codeValidationFailed = 'validation-failed';
-  static const codeServiceUnavailable = 'service-unavailable';
-  static const codeNoInternetConnection = 'no-internet-connection';
-  static const codeUnknown = 'unknown';
 
   /// エラーコード
   final String code;
+  final String description;
+
+  static const _codeUnknown = 'unknown';
+  static const _descriptionUnknown = 'unknown';
+  static const _codeNoInternetConnection = 'no-internet-connection';
 
   @override
-  String toString() => 'NetworkException[$code]: $message';
+  String toString() => 'FirebaseNetworkException[$code]: $message';
 }
