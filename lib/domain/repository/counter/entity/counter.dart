@@ -23,13 +23,14 @@ class Counter with _$Counter {
   /// ユーザーによる初回作成時のカウンターモデル
   factory Counter.init(
     String name,
+    CategoryInfo category,
     int count,
     String? description,
   ) {
     return Counter(
       name: StringValue(name),
       count: CountValue(count),
-      categoryInfo: CategoryInfo(),
+      categoryInfo: category,
       description: description,
       lastUpdated: UpdatedDatetimeValue.now(),
     );

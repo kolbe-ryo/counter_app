@@ -15,13 +15,14 @@ class FirebaseClient {
   static const _rootCollection = 'users';
   static const _counterCollection = 'user_counters';
 
-  Stream<dynamic> snapShot() {
+  Stream<T> get<T>({
+    required Stream<T> Function(Stream<QuerySnapshot>) responseBuilder,
+  }) {
     try {
       logger.info('Get documents: user: $userId');
       final client = FirebaseFirestore.instance;
       final response = client.collection(_rootCollection).doc(userId).collection(_counterCollection).snapshots();
-      // TODO jsonを変換する
-      return response;
+      return responseBuilder(response);
     } on FirebaseException catch (error) {
       logger.info(error);
       throw FirebaseNetworkException(

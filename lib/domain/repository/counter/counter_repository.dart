@@ -9,13 +9,10 @@ final counterRepositoryProvider = Provider<CounterRepository>(
 /// カウンタRepository
 abstract class CounterRepository {
   /// カウンター一覧を取得する
-  Future<Counter> getCounters({
-    // TODO: 認証に必要な情報を渡す
-    required String ownerName,
-  });
+  Stream<Counter> fetchCounters();
 
-  Future<void> saveCounters({
-    // TODO: 認証に必要な情報を渡す
+  /// カウンターを保存する
+  Future<void> saveCounter({
     required Counter counter,
   });
 }
