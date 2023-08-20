@@ -1,4 +1,10 @@
+import 'package:riverpod/riverpod.dart';
+
 import 'entity/counter.dart';
+
+final counterRepositoryProvider = Provider<CounterRepository>(
+  (ref) => throw UnimplementedError('Provider was not initialized'),
+);
 
 /// カウンタRepository
 abstract class CounterRepository {

@@ -1,5 +1,11 @@
+import 'package:riverpod/riverpod.dart';
+
 import '../common_object/string_value.dart';
 import 'entity/authenticate_user_data.dart';
+
+final userDataRepositoryProvider = Provider<UserDataRepository>(
+  (ref) => throw UnimplementedError('Provider was not initialized'),
+);
 
 /// ユーザー認証リポジトリ
 abstract class UserDataRepository {
