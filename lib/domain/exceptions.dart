@@ -17,9 +17,7 @@ class ValidatorException extends DomainException {
 
   /// Email
   factory ValidatorException.invalidEmail() {
-    return const ValidatorException._(
-      'Invalid Email',
-    );
+    return const ValidatorException._('Invalid Email');
   }
 
   /// Password

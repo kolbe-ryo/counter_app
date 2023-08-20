@@ -6,7 +6,7 @@ import '../../common_object/string_value.dart';
 
 part 'authenticate_user_data.freezed.dart';
 
-/// Firebase認証ユーザーオブジェクト
+/// Firebase認証のためのユーザーオブジェクト
 /// emailはEmailValidatorでチェックするので、StringValueによるチェックは不要
 @freezed
 class AuthenticateUserData with _$AuthenticateUserData {
