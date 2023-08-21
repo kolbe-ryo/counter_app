@@ -3,6 +3,7 @@ import 'package:riverpod/riverpod.dart';
 import '../../../domain/repository/counter/counter_repository.dart';
 import '../../../domain/repository/counter/entity/category_info.dart';
 import '../../../domain/repository/counter/entity/counter.dart';
+import '../../../util/logger.dart';
 import '../firebase_client.dart';
 
 final firebaseFirestoreRepositoryProvider = Provider<FirebaseFirestoreRepository>(
@@ -25,6 +26,7 @@ class FirebaseFirestoreRepository implements CounterRepository {
       responseBuilder: (stream) async* {
         await for (final data in stream) {
           // TODO: dataを加工して、Counterに詰め替える
+          logger.info(data);
           yield Counter.init('test', CategoryInfo(), 1, null);
         }
       },
