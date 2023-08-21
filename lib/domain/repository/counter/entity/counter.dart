@@ -35,4 +35,10 @@ class Counter with _$Counter {
       lastUpdated: UpdatedDatetimeValue.now(),
     );
   }
+
+  /// カウントアップ
+  Counter get increment => copyWith(count: count.increment);
+
+  /// カウントダウン
+  Counter get decrement => copyWith(count: count.decrement);
 }
