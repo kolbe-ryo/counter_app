@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'inflastracture/firebase/counter/counter_repository.dart';
 import 'util/logger.dart';
 
 void main() {
@@ -37,13 +38,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  // void _incrementCounter() {
+  //   setState(() {
+  //     _counter++;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +68,29 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute<Widget>(
+            builder: (_) => const TestConsumer(),
+          ),
+        ),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class TestConsumer extends ConsumerWidget {
+  const TestConsumer({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => ref.watch(firebaseFirestoreRepositoryProvider).fetchSnapshot(),
+          child: const Text('Press'),
+        ),
       ),
     );
   }
