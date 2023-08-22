@@ -1,4 +1,4 @@
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/repository/counter/counter_repository.dart';
 import '../../../domain/repository/counter/entity/category_info.dart';

@@ -1,4 +1,4 @@
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../common_object/string_value.dart';
 import 'entity/authenticate_user_data.dart';
