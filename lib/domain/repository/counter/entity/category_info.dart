@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../exceptions.dart';
@@ -10,7 +9,10 @@ part 'category_info.freezed.dart';
 @freezed
 class CategoryInfo with _$CategoryInfo {
   factory CategoryInfo([
+    /// カテゴリ名
     @Default('') String name,
+
+    /// カテゴリカラー
     @Default(Colors.white) Color color,
   ]) = _CategoryInfo;
 

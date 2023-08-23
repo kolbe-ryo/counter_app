@@ -11,10 +11,19 @@ part 'counter.freezed.dart';
 @freezed
 class Counter with _$Counter {
   const factory Counter({
+    /// カウンター名
     required StringValue name,
+
+    /// カウント数
     required CountValue count,
+
+    /// カテゴリ情報
     required CategoryInfo categoryInfo,
+
+    /// 説明
     String? description,
+
+    /// 更新日時
     required UpdatedDatetimeValue lastUpdated,
   }) = _Counter;
 
