@@ -46,8 +46,8 @@ class Counter with _$Counter {
   }
 
   /// カウントアップ
-  Counter get increment => copyWith(count: count.increment);
+  Counter increment() => copyWith(count: count.increment());
 
   /// カウントダウン
-  Counter get decrement => copyWith(count: count.decrement);
+  Counter decrement() => copyWith(count: count.decrement());
 }

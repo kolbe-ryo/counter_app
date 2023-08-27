@@ -16,9 +16,9 @@ class CountValue with _$CountValue {
 
   /// 加算したCountValueを返却する
   /// 上限に達すると上限値を返却する
-  CountValue get increment => count == _upperLimit ? copyWith(count: _upperLimit) : copyWith(count: count + 1);
+  CountValue increment() => count == _upperLimit ? copyWith(count: _upperLimit) : copyWith(count: count + 1);
 
   /// 加算したCountValueを返却する
   /// 下限に達すると下限値を返却する
-  CountValue get decrement => count == _lowerLimit ? copyWith(count: _lowerLimit) : copyWith(count: count - 1);
+  CountValue decrement() => count == _lowerLimit ? copyWith(count: _lowerLimit) : copyWith(count: count - 1);
 }
