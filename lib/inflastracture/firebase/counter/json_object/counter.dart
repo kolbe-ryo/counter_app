@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../util/timestamp_converter.dart';
+
 part 'counter.freezed.dart';
 part 'counter.g.dart';
 
@@ -21,7 +23,7 @@ class CounterJsonObject with _$CounterJsonObject {
     String? description,
 
     /// 更新日時
-    @JsonKey(name: 'updatedAt') required Timestamp updatedAt,
+    @TimestampConverter() required Timestamp updatedAt,
   }) = _CounterJsonObject;
 
   factory CounterJsonObject.fromJson(Map<String, dynamic> json) => _$CounterJsonObjectFromJson(json);

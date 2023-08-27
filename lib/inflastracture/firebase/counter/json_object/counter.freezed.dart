@@ -36,7 +36,7 @@ mixin _$CounterJsonObject {
   String? get description => throw _privateConstructorUsedError;
 
   /// 更新日時
-  @JsonKey(name: 'updatedAt')
+  @TimestampConverter()
   Timestamp get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -56,7 +56,7 @@ abstract class $CounterJsonObjectCopyWith<$Res> {
       @JsonKey(name: 'count') int count,
       @JsonKey(name: 'cagegory') String category,
       String? description,
-      @JsonKey(name: 'updatedAt') Timestamp updatedAt});
+      @TimestampConverter() Timestamp updatedAt});
 }
 
 /// @nodoc
@@ -116,7 +116,7 @@ abstract class _$$_CounterJsonObjectCopyWith<$Res>
       @JsonKey(name: 'count') int count,
       @JsonKey(name: 'cagegory') String category,
       String? description,
-      @JsonKey(name: 'updatedAt') Timestamp updatedAt});
+      @TimestampConverter() Timestamp updatedAt});
 }
 
 /// @nodoc
@@ -169,7 +169,7 @@ class _$_CounterJsonObject implements _CounterJsonObject {
       @JsonKey(name: 'count') required this.count,
       @JsonKey(name: 'cagegory') required this.category,
       this.description,
-      @JsonKey(name: 'updatedAt') required this.updatedAt});
+      @TimestampConverter() required this.updatedAt});
 
   factory _$_CounterJsonObject.fromJson(Map<String, dynamic> json) =>
       _$$_CounterJsonObjectFromJson(json);
@@ -195,7 +195,7 @@ class _$_CounterJsonObject implements _CounterJsonObject {
 
   /// 更新日時
   @override
-  @JsonKey(name: 'updatedAt')
+  @TimestampConverter()
   final Timestamp updatedAt;
 
   @override
@@ -244,7 +244,7 @@ abstract class _CounterJsonObject implements CounterJsonObject {
           @JsonKey(name: 'count') required final int count,
           @JsonKey(name: 'cagegory') required final String category,
           final String? description,
-          @JsonKey(name: 'updatedAt') required final Timestamp updatedAt}) =
+          @TimestampConverter() required final Timestamp updatedAt}) =
       _$_CounterJsonObject;
 
   factory _CounterJsonObject.fromJson(Map<String, dynamic> json) =
@@ -272,7 +272,7 @@ abstract class _CounterJsonObject implements CounterJsonObject {
   @override
 
   /// 更新日時
-  @JsonKey(name: 'updatedAt')
+  @TimestampConverter()
   Timestamp get updatedAt;
   @override
   @JsonKey(ignore: true)
