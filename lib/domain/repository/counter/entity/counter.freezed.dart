@@ -16,10 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Counter {
+  /// カウンター名
   StringValue get name => throw _privateConstructorUsedError;
+
+  /// カウント数
   CountValue get count => throw _privateConstructorUsedError;
+
+  /// カテゴリ情報
   CategoryInfo get categoryInfo => throw _privateConstructorUsedError;
+
+  /// 説明
   String? get description => throw _privateConstructorUsedError;
+
+  /// 更新日時
   UpdatedDatetimeValue get lastUpdated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -196,14 +205,23 @@ class _$_Counter extends _Counter {
       required this.lastUpdated})
       : super._();
 
+  /// カウンター名
   @override
   final StringValue name;
+
+  /// カウント数
   @override
   final CountValue count;
+
+  /// カテゴリ情報
   @override
   final CategoryInfo categoryInfo;
+
+  /// 説明
   @override
   final String? description;
+
+  /// 更新日時
   @override
   final UpdatedDatetimeValue lastUpdated;
 
@@ -248,14 +266,24 @@ abstract class _Counter extends Counter {
   const _Counter._() : super._();
 
   @override
+
+  /// カウンター名
   StringValue get name;
   @override
+
+  /// カウント数
   CountValue get count;
   @override
+
+  /// カテゴリ情報
   CategoryInfo get categoryInfo;
   @override
+
+  /// 説明
   String? get description;
   @override
+
+  /// 更新日時
   UpdatedDatetimeValue get lastUpdated;
   @override
   @JsonKey(ignore: true)

@@ -1,32 +1,28 @@
-// Copyright 2022 susatthi All rights reserved.
-// Use of this source code is governed by a MIT license that can be
-// found in the LICENSE file.
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'counter.freezed.dart';
+part 'counter.g.dart';
 
+/// リポジトリJsonObject
+@freezed
+class CounterJsonObject with _$CounterJsonObject {
+  const factory CounterJsonObject({
+    /// カウンター名
+    @JsonKey(name: 'name') required String name,
 
-// part 'counter.freezed.dart';
-// part 'counter.g.dart';
+    /// カウント数
+    @JsonKey(name: 'count') required int count,
 
-// /// リポジトリJsonObject
-// @freezed
-// class CounterJsonObject with _$CounterJsonObject {
-//   const factory CounterJsonObject({
-//     required String name,
-//     @JsonKey(name: 'full_name') required String fullName,
-//     required OwnerJsonObject owner,
-//     required String? description,
-//     @JsonKey(name: 'stargazers_count') required int stargazersCount,
-//     @JsonKey(name: 'watchers_count') required int watchersCount,
-//     String? language,
-//     @JsonKey(name: 'forks_count') required int forksCount,
-//     @JsonKey(name: 'open_issues_count') required int openIssuesCount,
-//     @JsonKey(name: 'default_branch') required String defaultBranch,
-//     String? repoUrl,
-//     String? stargazersUrl,
-//     String? watchersUrl,
-//     String? forksUrl,
-//     String? issuesUrl,
-//   }) = _CounterJsonObject;
+    /// カテゴリ情報
+    @JsonKey(name: 'cagegory') required String category,
 
-//   factory CounterJsonObject.fromJson(Map<String, dynamic> json) => _$CounterJsonObjectFromJson(json);
-// }
+    /// 説明
+    String? description,
+
+    /// 更新日時
+    @JsonKey(name: 'updatedAt') required Timestamp updatedAt,
+  }) = _CounterJsonObject;
+
+  factory CounterJsonObject.fromJson(Map<String, dynamic> json) => _$CounterJsonObjectFromJson(json);
+}

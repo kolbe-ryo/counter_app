@@ -16,7 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CategoryInfo {
+  /// カテゴリ名
   String get name => throw _privateConstructorUsedError;
+
+  /// カテゴリカラー
   Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -105,9 +108,12 @@ class __$$_CategoryInfoCopyWithImpl<$Res>
 class _$_CategoryInfo extends _CategoryInfo {
   _$_CategoryInfo([this.name = '', this.color = Colors.white]) : super._();
 
+  /// カテゴリ名
   @override
   @JsonKey()
   final String name;
+
+  /// カテゴリカラー
   @override
   @JsonKey()
   final Color color;
@@ -142,8 +148,12 @@ abstract class _CategoryInfo extends CategoryInfo {
   _CategoryInfo._() : super._();
 
   @override
+
+  /// カテゴリ名
   String get name;
   @override
+
+  /// カテゴリカラー
   Color get color;
   @override
   @JsonKey(ignore: true)
