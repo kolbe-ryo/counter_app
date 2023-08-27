@@ -36,7 +36,6 @@ class FirebaseFirestoreClient {
   }) {
     try {
       logger.info('Get documents: user: $userId');
-      final client = FirebaseFirestore.instance;
       final response = client.collection(_rootCollection).doc(userId).collection(_counterCollection).snapshots();
       return responseBuilder(response);
     } on FirebaseException catch (error) {
