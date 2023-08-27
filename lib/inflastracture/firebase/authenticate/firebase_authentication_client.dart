@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// TODO Authenticateで取得したuserIdに置き換え
@@ -6,8 +7,8 @@ final authenticatedUserIdProvider = Provider<String>(
 );
 
 /// Firebaseクライアントプロバイダー
-final firebaseProvider = Provider<FirebaseFirestore>(
-  (ref) => FirebaseFirestore.instance,
+final firebaseAuthProvider = Provider<FirebaseAuth>(
+  (ref) => FirebaseAuth.instance,
 );
 
 class FirebaseClientAuthentication {

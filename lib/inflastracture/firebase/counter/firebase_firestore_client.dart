@@ -8,14 +8,14 @@ import '../../../util/logger.dart';
 import '../authenticate/firebase_authentication_client.dart';
 
 /// Firebaseクライアントプロバイダー
-final firebaseProvider = Provider<FirebaseFirestore>(
+final firebaseFirestoreProvider = Provider<FirebaseFirestore>(
   (ref) => FirebaseFirestore.instance,
 );
 
 final firebaseFirestoreClientProvider = Provider<FirebaseFirestoreClient>(
   (ref) => FirebaseFirestoreClient(
     userId: ref.watch(authenticatedUserIdProvider),
-    client: ref.watch(firebaseProvider),
+    client: ref.watch(firebaseFirestoreProvider),
   ),
 );
 
