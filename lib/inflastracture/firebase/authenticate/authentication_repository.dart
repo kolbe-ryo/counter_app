@@ -18,6 +18,11 @@ class FirebaseAuthRepository implements AuthenticationRepository {
   final FirebaseAuthClient client;
 
   @override
+  Future<void> signUp({required AuthenticateUserData userData}) async {
+    await client.signUp();
+  }
+
+  @override
   Future<void> signIn({required AuthenticateUserData userData}) async {
     await client.signIn();
   }
@@ -25,11 +30,6 @@ class FirebaseAuthRepository implements AuthenticationRepository {
   @override
   Future<void> signOut({required AuthenticateUserData userData}) async {
     await client.signOut();
-  }
-
-  @override
-  Future<void> signUp({required AuthenticateUserData userData}) async {
-    await client.signUp();
   }
 
   @override
