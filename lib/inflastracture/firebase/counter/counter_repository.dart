@@ -4,11 +4,11 @@ import '../../../domain/repository/counter/counter_repository.dart';
 import '../../../domain/repository/counter/entity/category_info.dart';
 import '../../../domain/repository/counter/entity/counter.dart';
 import '../../../util/logger.dart';
-import '../firebase_client.dart';
+import 'firebase_firestore_client.dart';
 
 final firebaseFirestoreRepositoryProvider = Provider<FirebaseFirestoreRepository>(
   (ref) => FirebaseFirestoreRepository(
-    client: ref.watch(firebaseClientProvider),
+    client: ref.watch(firebaseFirestoreClientProvider),
   ),
 );
 
@@ -16,7 +16,7 @@ final firebaseFirestoreRepositoryProvider = Provider<FirebaseFirestoreRepository
 class FirebaseFirestoreRepository implements CounterRepository {
   const FirebaseFirestoreRepository({required this.client});
 
-  final FirebaseClient client;
+  final FirebaseFirestoreClient client;
 
   @override
   Stream<Counter> fetchSnapshot() {
