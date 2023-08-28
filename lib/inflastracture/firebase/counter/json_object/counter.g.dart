@@ -6,7 +6,8 @@ part of 'counter.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CounterJsonObject _$$_CounterJsonObjectFromJson(Map<String, dynamic> json) => _$_CounterJsonObject(
+_$_CounterJsonObject _$$_CounterJsonObjectFromJson(Map<String, dynamic> json) =>
+    _$_CounterJsonObject(
       name: json['name'] as String,
       count: json['count'] as int,
       category: json['cagegory'] as String,
@@ -15,8 +16,7 @@ _$_CounterJsonObject _$$_CounterJsonObjectFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$_CounterJsonObjectToJson(
-  _$_CounterJsonObject instance,
-) =>
+        _$_CounterJsonObject instance) =>
     <String, dynamic>{
       'name': instance.name,
       'count': instance.count,
