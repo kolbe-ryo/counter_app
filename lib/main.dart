@@ -76,7 +76,7 @@ class TestConsumer extends ConsumerWidget {
     return Scaffold(
       body: Center(
         child: Lottie.asset(
-          'assets/animations/404.json',
+          'assets/animations/not_found.json',
           width: 150,
           height: 150,
         ),
