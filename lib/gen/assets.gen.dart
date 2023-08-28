@@ -12,11 +12,14 @@ import 'package:flutter/widgets.dart';
 class $AssetsAnimationsGen {
   const $AssetsAnimationsGen();
 
+  /// File path: assets/animations/authentication.json
+  String get authentication => 'assets/animations/authentication.json';
+
   /// File path: assets/animations/not_found.json
   String get notFound => 'assets/animations/not_found.json';
 
   /// List of all assets
-  List<String> get values => [notFound];
+  List<String> get values => [authentication, notFound];
 }
 
 class Assets {
