@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 import 'inflastracture/firebase/counter/counter_repository.dart';
 import 'util/logger.dart';
@@ -41,28 +42,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _counter = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widgKrent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: const Stack(
+        children: [
+          Center(
+            child: Text('test'),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).push(
@@ -84,10 +75,15 @@ class TestConsumer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => ref.watch(firebaseFirestoreRepositoryProvider).fetchSnapshot(),
-          child: const Text('Press'),
+        child: Lottie.asset(
+          'assets/animations/404.json',
+          width: 150,
+          height: 150,
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => ref.watch(firebaseFirestoreRepositoryProvider).fetchSnapshot(),
+        child: const Icon(Icons.add),
       ),
     );
   }

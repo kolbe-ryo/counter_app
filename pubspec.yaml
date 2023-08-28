@@ -19,6 +19,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   intl: ^0.18.1
   json_annotation: ^4.8.1
+  lottie: ^2.6.0
   simple_logger: ^1.9.0+2
   stacked_card_carousel: ^0.0.4
 
@@ -35,6 +36,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/animations/
 
 import_path_converter:
   relative: true
