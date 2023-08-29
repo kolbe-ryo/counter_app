@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/app_buttons.dart';
+import '../../common/routing_app_buttons.dart';
 
 class TopPage extends ConsumerWidget {
   const TopPage({super.key});
@@ -22,9 +22,9 @@ class TopPage extends ConsumerWidget {
             ),
             // ref.watch(lottieCache).load(Assets.animations.launchApp),
             const SizedBox(height: 60),
-            AppButtons.toSignUp(),
+            RoutingAppButtons.toSignUp(),
             const SizedBox(height: 30),
-            AppButtons.toSignIn(),
+            RoutingAppButtons.toSignIn(),
           ],
         ),
       ),

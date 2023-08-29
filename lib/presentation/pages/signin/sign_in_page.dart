@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/app_buttons.dart';
+import '../../common/routing_app_buttons.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
@@ -16,7 +16,7 @@ class SignInPage extends ConsumerWidget {
             child: Text('Sign in!'),
           ),
           const SizedBox(height: 60),
-          AppButtons.toTop(),
+          RoutingAppButtons.toTop(),
         ],
       ),
     );
