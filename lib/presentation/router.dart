@@ -36,6 +36,7 @@ final routerProvider = Provider<GoRouter>(
       ),
     ],
     redirect: (_, state) {
+      // TODO: ログインに成功したらリダイレクトできるよう通知する設定を行うこと
       // if (FirebaseAuth.instance.currentUser == null) {
       //   return state.matchedLocation == '/signin' ? null : '/';
       // }
