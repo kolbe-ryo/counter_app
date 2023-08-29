@@ -52,7 +52,7 @@ final routerProvider = Provider<GoRouter>(
 class TopPageRoute extends GoRouteData {
   const TopPageRoute();
 
-  static const name = '/top';
+  static const name = '/';
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
