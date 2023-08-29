@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'error/error_page.dart';
 import 'pages/main/main_page.dart';
 import 'pages/signin/sign_in_page.dart';
 import 'pages/signup/sign_up_page.dart';
@@ -20,9 +20,7 @@ final routerProvider = Provider<GoRouter>(
         routes: [
           GoRoute(
             path: 'signup',
-            builder: (BuildContext context, GoRouterState state) {
-              return const SignUpPage();
-            },
+            pageBuilder: (context, state) => const SignUpPageRoute().buildPage(context, state),
           ),
           GoRoute(
             path: 'signin',
@@ -40,14 +38,15 @@ final routerProvider = Provider<GoRouter>(
       ),
     ],
     redirect: (_, state) {
-      if (FirebaseAuth.instance.currentUser == null) {
-        return state.matchedLocation == '/signin' ? null : '/';
-      }
+      // if (FirebaseAuth.instance.currentUser == null) {
+      //   return state.matchedLocation == '/signin' ? null : '/';
+      // }
       return null;
     },
     // refreshListenable: ref.watch(ログイン状態の監視)
-    // エラー画面
-    // errorPageBuilder: (context, state) => ErrorRoute(state.error).buildPage(context, state),
+    /// エラー画面
+    /// routing内で不正なURL("/**/定義されていないURL")などにアクセスした場合に下記を表示する
+    errorPageBuilder: (context, state) => ErrorRoute(state.error).buildPage(context, state),
   ),
 );
 
@@ -55,13 +54,28 @@ final routerProvider = Provider<GoRouter>(
 class TopPageRoute extends GoRouteData {
   const TopPageRoute();
 
-  static const name = 'top';
+  static const name = '/top';
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return TransitionPage.fade(
       name: name,
       child: const TopPage(),
+    );
+  }
+}
+
+/// サインアップ画面
+class SignUpPageRoute extends GoRouteData {
+  const SignUpPageRoute();
+
+  static const name = '/signup';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return TransitionPage.fade(
+      name: name,
+      child: const SignUpPage(),
     );
   }
 }
@@ -112,22 +126,24 @@ class TopPageRoute extends GoRouteData {
 //       );
 // }
 
-// /// エラー画面
-// class ErrorRoute extends GoRouteData {
-//   const ErrorRoute(
-//     this.error,
-//   );
+/// エラー画面
+class ErrorRoute extends GoRouteData {
+  const ErrorRoute(
+    this.error,
+  );
 
-//   final Exception? error;
+  final Exception? error;
 
-//   static const name = 'error';
+  static const name = 'error';
 
-//   @override
-//   Page<void> buildPage(BuildContext context, GoRouterState state) => TransitionPage.fade(
-//         name: name,
-//         child: ErrorPage(error: error),
-//       );
-// }
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return TransitionPage.fade(
+      name: name,
+      child: ErrorPage(error),
+    );
+  }
+}
 
 /// デフォルトのTransitionPage
 class TransitionPage extends CustomTransitionPage<void> {
