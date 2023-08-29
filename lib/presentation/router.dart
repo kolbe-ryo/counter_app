@@ -24,9 +24,7 @@ final routerProvider = Provider<GoRouter>(
           ),
           GoRoute(
             path: 'signin',
-            builder: (BuildContext context, GoRouterState state) {
-              return const SignInPage();
-            },
+            pageBuilder: (context, state) => const SignInPageRoute().buildPage(context, state),
           ),
           GoRoute(
             path: 'main_page',
@@ -76,6 +74,21 @@ class SignUpPageRoute extends GoRouteData {
     return TransitionPage.fade(
       name: name,
       child: const SignUpPage(),
+    );
+  }
+}
+
+/// サインイン画面
+class SignInPageRoute extends GoRouteData {
+  const SignInPageRoute();
+
+  static const name = '/signin';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return TransitionPage.fade(
+      name: name,
+      child: const SignInPage(),
     );
   }
 }

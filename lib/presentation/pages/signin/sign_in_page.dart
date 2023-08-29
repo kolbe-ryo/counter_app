@@ -6,8 +6,9 @@ class SignInPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(title: const Text('Sign In')),
+      body: const Center(
         child: Text('Sign in!'),
       ),
     );
