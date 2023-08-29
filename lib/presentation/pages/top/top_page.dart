@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../gen/assets.gen.dart';
-import '../../common/lottie_cache.dart';
-
 class TopPage extends ConsumerWidget {
   const TopPage({super.key});
 
@@ -21,7 +18,7 @@ class TopPage extends ConsumerWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            ref.watch(lottieCache).load(Assets.animations.authentication),
+            // ref.watch(lottieCache).load(Assets.animations.launchApp),
             const SizedBox(height: 60),
             _AuthenticationButton.signUp(),
             const SizedBox(height: 30),

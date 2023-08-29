@@ -24,7 +24,7 @@ class LottieCache {
         composition: composition,
         width: _topPageAnimaitonSize.width,
         height: _topPageAnimaitonSize.height,
-        repeat: false,
+        // repeat: false,
       );
     } else {
       add(assetName);
@@ -32,7 +32,7 @@ class LottieCache {
         assetName,
         width: _topPageAnimaitonSize.width,
         height: _topPageAnimaitonSize.height,
-        repeat: false,
+        // repeat: false,
       );
     }
   }
