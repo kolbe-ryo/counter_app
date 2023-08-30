@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../router.dart';
-import 'app_button.dart';
+import 'button/app_button.dart';
+import 'button/app_only_text_button.dart';
 
 class RoutingAppButtons extends ConsumerWidget {
   const RoutingAppButtons._({
@@ -41,8 +42,8 @@ class RoutingAppButtons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AppButton(
-      style: AppNormalButton(
+    return AppButton.largeWidth(
+      appButtonStyle: AppOnlyTextButton(
         backgroundColor: backgroundColor,
         buttonName: buttonName,
         function: () => ref.watch(routerProvider).go(routing),
