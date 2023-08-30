@@ -21,6 +21,7 @@ class TopPage extends ConsumerWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
+            const SizedBox(height: 30),
             const TopPageImage(),
             const SizedBox(height: 60),
             RoutingAppButtons.toSignUp(),

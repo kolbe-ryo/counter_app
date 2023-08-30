@@ -10,7 +10,7 @@ class BackAppButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AppButton.mediumWidth(
+    return AppButton.largeWidth(
       appButtonStyle: AppOnlyTextButton(
         backgroundColor: Colors.blueGrey,
         buttonName: 'Go Back',

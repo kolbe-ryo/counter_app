@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constant_value.dart';
 import 'app_button.dart';
 import 'app_button_interface.dart';
 
@@ -8,16 +9,21 @@ class AppIconButton implements AppButtonInterface {
     required this.backgroundColor,
     required this.buttonName,
     required this.function,
+    required this.iconData,
   });
 
   final Color backgroundColor;
   final String buttonName;
   final void Function() function;
+  final IconData iconData;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      icon: const Icon(Icons.account_box),
+      icon: Icon(
+        iconData,
+        size: 30,
+      ),
       onPressed: function,
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
@@ -31,7 +37,10 @@ class AppIconButton implements AppButtonInterface {
           fontWeight: FontWeight.bold,
         ),
       ),
-      label: Text(buttonName),
+      label: Padding(
+        padding: const EdgeInsets.only(left: kPadding),
+        child: Text(buttonName),
+      ),
     );
   }
 }

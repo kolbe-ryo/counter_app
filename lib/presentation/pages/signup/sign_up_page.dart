@@ -27,7 +27,7 @@ class SignUpPage extends ConsumerWidget {
             AppAuthenticationButtons.apple(),
             const SizedBox(height: 30),
             AppAuthenticationButtons.google(),
-            const SizedBox(height: 30),
+            const SizedBox(height: 60),
             const BackAppButton(),
           ],
         ),
