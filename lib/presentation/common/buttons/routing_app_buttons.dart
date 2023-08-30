@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../router.dart';
-import 'button/app_button.dart';
-import 'button/app_only_text_button.dart';
+import '../../router.dart';
+import 'app_button.dart';
+import 'app_only_text_button.dart';
 
 class RoutingAppButtons extends ConsumerWidget {
   const RoutingAppButtons._({

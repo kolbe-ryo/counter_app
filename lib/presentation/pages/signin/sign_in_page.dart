@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/app_authentication_buttons.dart';
+import '../../common/buttons/app_authentication_buttons.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});

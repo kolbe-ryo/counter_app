@@ -8,6 +8,15 @@ class AppButton extends StatelessWidget {
     required this.buttonWidthRate,
   });
 
+  factory AppButton.mediumWidth({
+    required AppButtonInterface appButtonStyle,
+  }) {
+    return AppButton._(
+      appButtonStyle: appButtonStyle,
+      buttonWidthRate: 0.5,
+    );
+  }
+
   factory AppButton.largeWidth({
     required AppButtonInterface appButtonStyle,
   }) {
