@@ -42,9 +42,11 @@ class RoutingAppButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppButton(
-      backgroundColor: backgroundColor,
-      buttonName: buttonName,
-      function: () => ref.watch(routerProvider).go(routing),
+      style: AppNormalButton(
+        backgroundColor: backgroundColor,
+        buttonName: buttonName,
+        function: () => ref.watch(routerProvider).go(routing),
+      ),
     );
   }
 }
