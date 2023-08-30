@@ -16,14 +16,14 @@ class AppButton extends StatelessWidget {
     return SizedBox(
       height: _buttonHeight,
       width: MediaQuery.of(context).size.width * _buttonWidthRate,
-      child: style.generate(context),
+      child: style.build(context),
     );
   }
 }
 
 // TODO: ストラテジーパターンで、アイコンボタンとテキストボタンを実装する
 abstract class AppButtonStyle {
-  Widget generate(BuildContext context);
+  Widget build(BuildContext context);
 }
 
 class AppIconButton implements AppButtonStyle {
@@ -38,7 +38,7 @@ class AppIconButton implements AppButtonStyle {
   final void Function() function;
 
   @override
-  Widget generate(BuildContext context) {
+  Widget build(BuildContext context) {
     return ElevatedButton.icon(
       icon: const Icon(Icons.account_box),
       onPressed: function,
@@ -71,7 +71,7 @@ class AppNormalButton implements AppButtonStyle {
   final void Function() function;
 
   @override
-  Widget generate(BuildContext context) {
+  Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: function,
       style: ElevatedButton.styleFrom(
