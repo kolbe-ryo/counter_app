@@ -15,7 +15,7 @@ class SignUpPage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Create Account',
+              'Select Authentication!',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w500,
