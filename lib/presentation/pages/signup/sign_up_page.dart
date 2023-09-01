@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../common/animation_image.dart';
 import '../../common/buttons/app_authentication_buttons.dart';
 import '../../common/buttons/back_app_button.dart';
 
@@ -21,6 +22,8 @@ class SignUpPage extends ConsumerWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
+            const SizedBox(height: 30),
+            AnimationImage.signUp(),
             const SizedBox(height: 60),
             AppAuthenticationButtons.email(),
             const SizedBox(height: 30),
