@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/animation_image.dart';
+import '../../common/buttons/app_button.dart';
 import '../../common/buttons/routing_app_buttons.dart';
 
 class TopPage extends ConsumerWidget {
@@ -10,10 +11,13 @@ class TopPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 6,
+              width: double.infinity,
+            ),
             const Text(
               'Launch App!',
               style: TextStyle(
@@ -21,12 +25,12 @@ class TopPage extends ConsumerWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 30),
             AnimationImage.launchApp(),
-            const SizedBox(height: 60),
+            const SizedBox(height: 90 + AppButton.buttonHeight),
             RoutingAppButtons.toSignUp(),
             const SizedBox(height: 30),
             RoutingAppButtons.toSignIn(),
+            const SizedBox(height: 30),
           ],
         ),
       ),

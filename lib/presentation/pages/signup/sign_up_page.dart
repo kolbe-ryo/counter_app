@@ -11,10 +11,13 @@ class SignUpPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 6,
+              width: double.infinity,
+            ),
             const Text(
               'Select Authentication!',
               style: TextStyle(
@@ -22,7 +25,6 @@ class SignUpPage extends ConsumerWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 30),
             AnimationImage.signUp(),
             const SizedBox(height: 60),
             AppAuthenticationButtons.email(),
@@ -32,6 +34,7 @@ class SignUpPage extends ConsumerWidget {
             AppAuthenticationButtons.google(),
             const SizedBox(height: 60),
             const BackAppButton(),
+            const SizedBox(height: 30),
           ],
         ),
       ),
