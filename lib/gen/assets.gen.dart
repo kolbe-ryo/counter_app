@@ -18,11 +18,14 @@ class $AssetsAnimationsGen {
   /// File path: assets/animations/not_found.json
   String get notFound => 'assets/animations/not_found.json';
 
+  /// File path: assets/animations/sign_in.json
+  String get signIn => 'assets/animations/sign_in.json';
+
   /// File path: assets/animations/sign_up.json
   String get signUp => 'assets/animations/sign_up.json';
 
   /// List of all assets
-  List<String> get values => [launchApp, notFound, signUp];
+  List<String> get values => [launchApp, notFound, signIn, signUp];
 }
 
 class Assets {

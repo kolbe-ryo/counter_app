@@ -19,12 +19,13 @@ class SignUpPage extends ConsumerWidget {
               width: double.infinity,
             ),
             const Text(
-              'Select Authentication!',
+              'Create Account!',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w500,
               ),
             ),
+            const SizedBox(height: 30),
             AnimationImage.signUp(),
             const SizedBox(height: 60),
             AppAuthenticationButtons.email(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../common/animation_image.dart';
 import '../../common/buttons/app_authentication_buttons.dart';
 import '../../common/buttons/back_app_button.dart';
 
@@ -10,17 +11,33 @@ class SignInPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Center(
-            child: Text('Sign in!'),
-          ),
-          const SizedBox(height: 60),
-          AppAuthenticationButtons.email(),
-          const SizedBox(height: 30),
-          const BackAppButton(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 6,
+              width: double.infinity,
+            ),
+            const Text(
+              'Sign In!',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 30),
+            AnimationImage.signIn(),
+            const SizedBox(height: 60),
+            AppAuthenticationButtons.email(),
+            const SizedBox(height: 30),
+            AppAuthenticationButtons.apple(),
+            const SizedBox(height: 30),
+            AppAuthenticationButtons.google(),
+            const SizedBox(height: 60),
+            const BackAppButton(),
+            const SizedBox(height: 30),
+          ],
+        ),
       ),
     );
   }

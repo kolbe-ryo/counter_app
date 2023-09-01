@@ -15,6 +15,10 @@ class AnimationImage extends ConsumerWidget {
     return AnimationImage._(Assets.animations.signUp);
   }
 
+  factory AnimationImage.signIn() {
+    return AnimationImage._(Assets.animations.signIn);
+  }
+
   final String assets;
 
   @override
