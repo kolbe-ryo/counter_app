@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../common/animation_image.dart';
 import '../../common/buttons/routing_app_buttons.dart';
-import 'top_page_image.dart';
 
 class TopPage extends ConsumerWidget {
   const TopPage({super.key});
@@ -22,7 +22,7 @@ class TopPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 30),
-            const TopPageImage(),
+            AnimationImage.launchApp(),
             const SizedBox(height: 60),
             RoutingAppButtons.toSignUp(),
             const SizedBox(height: 30),
