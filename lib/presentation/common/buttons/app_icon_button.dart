@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constant_value.dart';
 import 'app_button.dart';
@@ -20,9 +21,9 @@ class AppIconButton implements AppButtonInterface {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      icon: Icon(
+      icon: FaIcon(
         iconData,
-        size: 30,
+        size: 25,
       ),
       onPressed: function,
       style: ElevatedButton.styleFrom(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'app_button.dart';
 import 'app_icon_button.dart';
@@ -16,7 +17,7 @@ class AppAuthenticationButtons extends StatelessWidget {
       backgroundColor: Colors.lightBlue,
       buttonName: 'Email',
       function: () => {},
-      iconData: Icons.email,
+      iconData: FontAwesomeIcons.envelope,
     );
   }
 
@@ -25,7 +26,7 @@ class AppAuthenticationButtons extends StatelessWidget {
       backgroundColor: Colors.cyan,
       buttonName: 'Apple',
       function: () => {},
-      iconData: Icons.apple,
+      iconData: FontAwesomeIcons.apple,
     );
   }
 
@@ -34,7 +35,7 @@ class AppAuthenticationButtons extends StatelessWidget {
       backgroundColor: Colors.deepOrangeAccent,
       buttonName: 'Google',
       function: () => {},
-      iconData: Icons.g_mobiledata,
+      iconData: FontAwesomeIcons.google,
     );
   }
 

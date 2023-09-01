@@ -28,17 +28,35 @@ class SignInPage extends ConsumerWidget {
             const SizedBox(height: 30),
             AnimationImage.signIn(),
             const SizedBox(height: 60),
-            AppAuthenticationButtons.email(),
-            const SizedBox(height: 30),
-            AppAuthenticationButtons.apple(),
-            const SizedBox(height: 30),
-            AppAuthenticationButtons.google(),
-            const SizedBox(height: 60),
-            const BackAppButton(),
+            const _SignInButtons(),
             const SizedBox(height: 30),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _SignInButtons extends StatefulWidget {
+  const _SignInButtons();
+
+  @override
+  State<_SignInButtons> createState() => __SignInButtonsState();
+}
+
+class __SignInButtonsState extends State<_SignInButtons> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AppAuthenticationButtons.email(),
+        const SizedBox(height: 30),
+        AppAuthenticationButtons.apple(),
+        const SizedBox(height: 30),
+        AppAuthenticationButtons.google(),
+        const SizedBox(height: 60),
+        const BackAppButton(),
+      ],
     );
   }
 }
