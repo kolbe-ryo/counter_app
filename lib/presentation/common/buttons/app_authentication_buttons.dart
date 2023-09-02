@@ -39,6 +39,15 @@ class AppAuthenticationButtons extends StatelessWidget {
     );
   }
 
+  factory AppAuthenticationButtons.anonymous() {
+    return AppAuthenticationButtons._(
+      backgroundColor: Colors.green,
+      buttonName: 'Anonymous',
+      function: () => {},
+      iconData: FontAwesomeIcons.check,
+    );
+  }
+
   final Color backgroundColor;
   final String buttonName;
   final void Function() function;
