@@ -44,6 +44,7 @@ class _SignInButtons extends StatefulWidget {
   State<_SignInButtons> createState() => __SignInButtonsState();
 }
 
+// TODO: ボタンのタップ時の出し隠しをアニメーションにする
 class __SignInButtonsState extends State<_SignInButtons> {
   @override
   Widget build(BuildContext context) {
