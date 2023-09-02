@@ -35,7 +35,8 @@ class FirebaseAuthClient {
   final String password;
   final FirebaseAuth client;
 
-  Future<void> signUp() async {
+  /// Sign Up
+  Future<void> signUpWithEmail() async {
     try {
       await client.createUserWithEmailAndPassword(
         email: email,
@@ -54,6 +55,9 @@ class FirebaseAuthClient {
     }
   }
 
+  Future<void> signUpWithGoogle() async {}
+
+  /// Sign In
   Future<void> signIn() async {
     try {
       await client.signInWithEmailAndPassword(
