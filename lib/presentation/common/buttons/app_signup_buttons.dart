@@ -4,53 +4,44 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'app_button.dart';
 import 'app_icon_button.dart';
 
-class AppAuthenticationButtons extends StatelessWidget {
-  const AppAuthenticationButtons._({
+class AppSignUpButtons extends StatelessWidget {
+  const AppSignUpButtons._({
     required this.backgroundColor,
     required this.buttonName,
-    required this.function,
+    required this.onPressed,
     required this.iconData,
   });
 
-  factory AppAuthenticationButtons.email() {
-    return AppAuthenticationButtons._(
+  factory AppSignUpButtons.email() {
+    return AppSignUpButtons._(
       backgroundColor: Colors.lightBlue,
       buttonName: 'Email',
-      function: () => {},
+      onPressed: () => {},
       iconData: FontAwesomeIcons.envelope,
     );
   }
 
-  factory AppAuthenticationButtons.apple() {
-    return AppAuthenticationButtons._(
+  factory AppSignUpButtons.apple() {
+    return AppSignUpButtons._(
       backgroundColor: Colors.cyan,
       buttonName: 'Apple',
-      function: () => {},
+      onPressed: () => {},
       iconData: FontAwesomeIcons.apple,
     );
   }
 
-  factory AppAuthenticationButtons.google() {
-    return AppAuthenticationButtons._(
+  factory AppSignUpButtons.google() {
+    return AppSignUpButtons._(
       backgroundColor: Colors.deepOrangeAccent,
       buttonName: 'Google',
-      function: () => {},
+      onPressed: () => {},
       iconData: FontAwesomeIcons.google,
-    );
-  }
-
-  factory AppAuthenticationButtons.anonymous() {
-    return AppAuthenticationButtons._(
-      backgroundColor: Colors.green,
-      buttonName: 'Anonymous',
-      function: () => {},
-      iconData: FontAwesomeIcons.check,
     );
   }
 
   final Color backgroundColor;
   final String buttonName;
-  final void Function() function;
+  final void Function() onPressed;
   final IconData iconData;
 
   @override
@@ -59,7 +50,7 @@ class AppAuthenticationButtons extends StatelessWidget {
       appButtonStyle: AppIconButton(
         backgroundColor: backgroundColor,
         buttonName: buttonName,
-        function: function,
+        onPressed: onPressed,
         iconData: iconData,
       ),
     );

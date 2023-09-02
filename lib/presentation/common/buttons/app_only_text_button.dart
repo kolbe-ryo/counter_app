@@ -7,17 +7,17 @@ class AppOnlyTextButton implements AppButtonInterface {
   const AppOnlyTextButton({
     required this.backgroundColor,
     required this.buttonName,
-    required this.function,
+    required this.onPressed,
   });
 
   final Color backgroundColor;
   final String buttonName;
-  final void Function() function;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: function,
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
         shape: const RoundedRectangleBorder(

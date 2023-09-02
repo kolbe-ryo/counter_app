@@ -14,7 +14,7 @@ class BackAppButton extends ConsumerWidget {
       appButtonStyle: AppOnlyTextButton(
         backgroundColor: Colors.blueGrey,
         buttonName: 'Go Back',
-        function: () => ref.watch(routerProvider).go(TopPageRoute.name),
+        onPressed: () => ref.watch(routerProvider).go(TopPageRoute.name),
       ),
     );
   }

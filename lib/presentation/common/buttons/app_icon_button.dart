@@ -9,13 +9,13 @@ class AppIconButton implements AppButtonInterface {
   const AppIconButton({
     required this.backgroundColor,
     required this.buttonName,
-    required this.function,
+    required this.onPressed,
     required this.iconData,
   });
 
   final Color backgroundColor;
   final String buttonName;
-  final void Function() function;
+  final void Function() onPressed;
   final IconData iconData;
 
   @override
@@ -25,7 +25,7 @@ class AppIconButton implements AppButtonInterface {
         iconData,
         size: 25,
       ),
-      onPressed: function,
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
         shape: const RoundedRectangleBorder(

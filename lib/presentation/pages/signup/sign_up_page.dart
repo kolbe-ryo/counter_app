@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/animation_image.dart';
-import '../../common/buttons/app_authentication_buttons.dart';
+import '../../common/buttons/app_signup_buttons.dart';
 import '../../common/buttons/back_app_button.dart';
 
 class SignUpPage extends ConsumerWidget {
@@ -50,11 +50,11 @@ class __SignUpButtonsState extends State<_SignUpButtons> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppAuthenticationButtons.email(),
+        AppSignUpButtons.email(),
         const SizedBox(height: 30),
-        AppAuthenticationButtons.apple(),
+        AppSignUpButtons.apple(),
         const SizedBox(height: 30),
-        AppAuthenticationButtons.google(),
+        AppSignUpButtons.google(),
         const SizedBox(height: 60),
         const BackAppButton(),
       ],

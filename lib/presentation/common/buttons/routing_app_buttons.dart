@@ -46,7 +46,7 @@ class RoutingAppButtons extends ConsumerWidget {
       appButtonStyle: AppOnlyTextButton(
         backgroundColor: backgroundColor,
         buttonName: buttonName,
-        function: () => ref.watch(routerProvider).go(routing),
+        onPressed: () => ref.watch(routerProvider).go(routing),
       ),
     );
   }

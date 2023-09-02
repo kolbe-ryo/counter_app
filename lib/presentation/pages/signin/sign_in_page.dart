@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/animation_image.dart';
-import '../../common/buttons/app_authentication_buttons.dart';
+import '../../common/buttons/app_signin_buttons.dart';
 import '../../common/buttons/back_app_button.dart';
 
 class SignInPage extends ConsumerWidget {
@@ -50,13 +50,13 @@ class __SignInButtonsState extends State<_SignInButtons> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppAuthenticationButtons.email(),
+        AppSignInButtons.email(),
         const SizedBox(height: 30),
-        AppAuthenticationButtons.apple(),
+        AppSignInButtons.apple(),
         const SizedBox(height: 30),
-        AppAuthenticationButtons.google(),
+        AppSignInButtons.google(),
         const SizedBox(height: 30),
-        AppAuthenticationButtons.anonymous(),
+        AppSignInButtons.anonymous(),
         const SizedBox(height: 60),
         const BackAppButton(),
       ],
