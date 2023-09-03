@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/animation_image.dart';
 import '../../common/buttons/app_button.dart';
 import '../../common/buttons/routing_app_buttons.dart';
+import '../../common/image/animation_image.dart';
 
 class TopPage extends ConsumerWidget {
   const TopPage({super.key});

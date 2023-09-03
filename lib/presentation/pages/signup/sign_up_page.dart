@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/animation_image.dart';
 import '../../common/buttons/app_signup_buttons.dart';
 import '../../common/buttons/back_app_button.dart';
+import '../../common/image/animation_image.dart';
 
 class SignUpPage extends ConsumerWidget {
   const SignUpPage({super.key});

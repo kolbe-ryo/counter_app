@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../gen/assets.gen.dart';
+import '../../../gen/assets.gen.dart';
 import 'lottie_cache.dart';
 
 class AnimationImage extends ConsumerWidget {
