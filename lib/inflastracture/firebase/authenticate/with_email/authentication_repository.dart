@@ -7,7 +7,7 @@ import '../firebase_authentication_client.dart';
 
 final firebaseAuthRepositoryWithEmailProvider = Provider<FirebaseAuthRepositoryWithEmail>(
   (ref) => FirebaseAuthRepositoryWithEmail(
-    client: ref.watch(firebaseAuthClientProvider),
+    client: ref.watch(firebaseAuthClientWithEmailProvider),
   ),
 );
 
@@ -16,11 +16,11 @@ final firebaseAuthRepositoryWithEmailProvider = Provider<FirebaseAuthRepositoryW
 class FirebaseAuthRepositoryWithEmail implements AuthenticationRepository {
   const FirebaseAuthRepositoryWithEmail({required this.client});
 
-  final FirebaseAuthClient client;
+  final FirebaseAuthClientWithEmail client;
 
   @override
   Future<void> signUp({required AuthenticateUserData userData}) async {
-    await client.signUpWithEmail();
+    await client.signUp();
   }
 
   // TODO: 以下のメソッドを全て変更する

@@ -5,27 +5,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/exceptions.dart';
 import '../../../util/logger.dart';
+import 'clients.dart';
 
 /// TODO Authenticateで取得したuserIdに置き換え
 final authenticatedUserIdProvider = Provider<String>(
   (ref) => 'test_user_id',
 );
 
-/// Firebaseクライアントプロバイダー
-final firebaseAuthProvider = Provider<FirebaseAuth>(
-  (ref) => FirebaseAuth.instance,
-);
-
-final firebaseAuthClientProvider = Provider<FirebaseAuthClient>(
-  (ref) => FirebaseAuthClient(
+final firebaseAuthClientWithEmailProvider = Provider<FirebaseAuthClientWithEmail>(
+  (ref) => FirebaseAuthClientWithEmail(
     email: '',
     password: '',
     client: ref.watch(firebaseAuthProvider),
   ),
 );
 
-class FirebaseAuthClient {
-  const FirebaseAuthClient({
+class FirebaseAuthClientWithEmail {
+  const FirebaseAuthClientWithEmail({
     required this.email,
     required this.password,
     required this.client,
@@ -35,8 +31,7 @@ class FirebaseAuthClient {
   final String password;
   final FirebaseAuth client;
 
-  /// Sign Up
-  Future<void> signUpWithEmail() async {
+  Future<void> signUp() async {
     try {
       await client.createUserWithEmailAndPassword(
         email: email,
@@ -55,9 +50,6 @@ class FirebaseAuthClient {
     }
   }
 
-  Future<void> signUpWithGoogle() async {}
-
-  /// Sign In
   Future<void> signIn() async {
     try {
       await client.signInWithEmailAndPassword(
