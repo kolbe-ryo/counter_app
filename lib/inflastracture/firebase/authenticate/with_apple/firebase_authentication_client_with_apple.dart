@@ -47,6 +47,9 @@ class FirebaseAuthClientWithGoogle {
       await client.signInWithCredential(oauthCredential);
 
       logger.info('success sign in!');
+    } on SignInWithAppleException catch (error) {
+      logger.info(error);
+      // TODO: Exceptionを作成しスローする
     } on FirebaseException catch (error) {
       logger.info(error);
       throw FirebaseNetworkException(

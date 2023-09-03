@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../domain/exceptions.dart';
 import '../../../../util/logger.dart';
@@ -9,18 +10,20 @@ import '../clients.dart';
 
 final firebaseAuthClientWithAppleProvider = Provider<FirebaseAuthClientWithApple>(
   (ref) => FirebaseAuthClientWithApple(
-    client: ref.watch(firebaseAuthProvider),
+    firebaseClient: ref.watch(firebaseAuthProvider),
+    googleClient: ref.watch(googleAuthenticatorProvider),
   ),
 );
 
 class FirebaseAuthClientWithApple {
   const FirebaseAuthClientWithApple({
-    required this.client,
+    required this.firebaseClient,
+    required this.googleClient,
   });
 
-  final FirebaseAuth client;
+  final FirebaseAuth firebaseClient;
 
-  static const _appleAuthDomain = 'apple.com';
+  final GoogleSignIn googleClient;
 
   Future<void> signUp() async {
     // TODO: Google ID登録の外部遷移
@@ -29,15 +32,10 @@ class FirebaseAuthClientWithApple {
 
   Future<void> signIn() async {
     try {
-      final googleLogin = GoogleSignIn(
-        scopes: [
-          'email',
-          'https://www.googleapis.com/auth/contacts.readonly',
-        ],
-      );
-
-      final signinAccount = await googleLogin.signIn();
-      if (signinAccount == null) return;
+      final signinAccount = await googleClient.signIn();
+      if (signinAccount == null) {
+        return;
+      }
 
       final auth = await signinAccount.authentication;
       final credential = GoogleAuthProvider.credential(
@@ -61,7 +59,7 @@ class FirebaseAuthClientWithApple {
 
   Future<void> signOut() async {
     try {
-      await client.signOut();
+      await firebaseClient.signOut();
       logger.info('success sign out!');
     } on FirebaseException catch (error) {
       logger.info(error);
