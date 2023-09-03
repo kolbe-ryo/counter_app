@@ -19,16 +19,19 @@ class FirebaseAuthRepositoryWithEmail implements AuthenticationRepository, Reset
   @override
   Future<void> signUp({required AuthenticateUserData userData}) async {
     await client.signUp();
+    // TODO: 認証情報の永続化
   }
 
   @override
   Future<void> signIn({required AuthenticateUserData userData}) async {
     await client.signIn();
+    // TODO: 認証情報の永続化
   }
 
   @override
   Future<void> signOut({required AuthenticateUserData userData}) async {
     await client.signOut();
+    // TODO: 認証情報の削除
   }
 
   @override

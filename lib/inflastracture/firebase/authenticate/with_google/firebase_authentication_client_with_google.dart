@@ -8,14 +8,14 @@ import '../../../../domain/exceptions.dart';
 import '../../../../util/logger.dart';
 import '../clients.dart';
 
-final firebaseAuthClientWithGoogleProvider = Provider<FirebaseAuthClientWithGoogle>(
-  (ref) => FirebaseAuthClientWithGoogle(
+final firebaseAuthClientWithAppleProvider = Provider<FirebaseAuthClientWithApple>(
+  (ref) => FirebaseAuthClientWithApple(
     client: ref.watch(firebaseAuthProvider),
   ),
 );
 
-class FirebaseAuthClientWithGoogle {
-  const FirebaseAuthClientWithGoogle({
+class FirebaseAuthClientWithApple {
+  const FirebaseAuthClientWithApple({
     required this.client,
   });
 
@@ -55,7 +55,6 @@ class FirebaseAuthClientWithGoogle {
         rawNonce: rawNonce,
       );
 
-      // TODO: この値を返却して永続化のリポジトリに通知する方法を検討する
       await client.signInWithCredential(oauthCredential);
 
       logger.info('success sign in!');
@@ -73,7 +72,6 @@ class FirebaseAuthClientWithGoogle {
 
   Future<void> signOut() async {
     try {
-      // TODO: この値を返却して永続化のリポジトリに通知する方法を検討する（削除）
       await client.signOut();
       logger.info('success sign out!');
     } on FirebaseException catch (error) {

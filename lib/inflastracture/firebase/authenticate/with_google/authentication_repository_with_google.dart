@@ -2,23 +2,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../domain/repository/authentication/authentication_repository.dart';
 import '../../../../domain/repository/authentication/entity/authenticate_user_data.dart';
-import 'firebase_authentication_client_with_apple.dart';
+import 'firebase_authentication_client_with_google.dart';
 
-final firebaseAuthRepositoryWithGoogleProvider = Provider<FirebaseAuthRepositoryWithGoogle>(
-  (ref) => FirebaseAuthRepositoryWithGoogle(
-    client: ref.watch(firebaseAuthClientWithGoogleProvider),
+final firebaseAuthRepositoryWithAppleProvider = Provider<FirebaseAuthRepositoryWithApple>(
+  (ref) => FirebaseAuthRepositoryWithApple(
+    client: ref.watch(firebaseAuthClientWithAppleProvider),
   ),
 );
 
 // TODO: FirebaseAuthRepositoryをFirebaseAuthRepositoryWithGoogleなどを用意すること
 /// Apple版リポジトリRepository
-class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
-  const FirebaseAuthRepositoryWithGoogle({required this.client});
+class FirebaseAuthRepositoryWithApple implements AuthenticationRepository {
+  const FirebaseAuthRepositoryWithApple({required this.client});
 
-  final FirebaseAuthClientWithGoogle client;
+  final FirebaseAuthClientWithApple client;
 
   @override
   Future<void> signUp({required AuthenticateUserData userData}) async {
+    // TODO: 他に処理がある場合はクライアントではなくこちらに記載すること
     await client.signUp();
   }
 
