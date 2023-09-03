@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../common_object/string_value.dart';
 import 'entity/authenticate_user_data.dart';
 
 final userDataRepositoryProvider = Provider<AuthenticationRepository>(
@@ -26,10 +25,12 @@ abstract class AuthenticationRepository {
     // TODO: 認証に必要な情報を渡す
     required AuthenticateUserData userData,
   });
+}
 
-  /// Passwordのリセット案内をEmailに送信する
+abstract class ResetPasswordRepository {
+  /// パスワードのリセット
   Future<void> resetPassword({
     // TODO: 認証に必要な情報を渡す
-    required StringValue userData,
+    required AuthenticateUserData userData,
   });
 }

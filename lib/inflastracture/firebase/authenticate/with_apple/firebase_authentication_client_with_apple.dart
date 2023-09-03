@@ -3,25 +3,20 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../domain/exceptions.dart';
-import '../../../util/logger.dart';
-import 'clients.dart';
+import '../../../../domain/exceptions.dart';
+import '../../../../util/logger.dart';
+import '../clients.dart';
 
-/// TODO Authenticateで取得したuserIdに置き換え
-final authenticatedUserIdProvider = Provider<String>(
-  (ref) => 'test_user_id',
-);
-
-final firebaseAuthClientWithEmailProvider = Provider<FirebaseAuthClientWithEmail>(
-  (ref) => FirebaseAuthClientWithEmail(
+final firebaseAuthClientWithAppleProvider = Provider<FirebaseAuthClientWithApple>(
+  (ref) => FirebaseAuthClientWithApple(
     email: '',
     password: '',
     client: ref.watch(firebaseAuthProvider),
   ),
 );
 
-class FirebaseAuthClientWithEmail {
-  const FirebaseAuthClientWithEmail({
+class FirebaseAuthClientWithApple {
+  const FirebaseAuthClientWithApple({
     required this.email,
     required this.password,
     required this.client,

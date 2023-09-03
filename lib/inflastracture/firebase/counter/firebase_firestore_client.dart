@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/exceptions.dart';
 import '../../../util/logger.dart';
-import '../authenticate/firebase_authentication_client.dart';
+import '../authenticate/with_email/firebase_authentication_client_with_email.dart';
 
 /// Firebaseクライアントプロバイダー
 final firebaseFirestoreProvider = Provider<FirebaseFirestore>(
