@@ -24,24 +24,12 @@ class FirebaseAuthClientWithGoogle {
   static const _appleAuthDomain = 'apple.com';
 
   Future<void> signUp() async {
-    try {
-      // TODO: Apple ID登録の外部遷移
-      logger.info('To external browser for signinig up Apple');
-    } on FirebaseException catch (error) {
-      logger.info(error);
-      throw FirebaseNetworkException(
-        error.code,
-        error.message,
-      );
-    } on SocketException catch (error) {
-      logger.info(error);
-      throw FirebaseNetworkException.noInternetConnection();
-    }
+    // TODO: Apple ID登録の外部遷移
+    logger.info('To external browser for signinig up Apple');
   }
 
   Future<void> signIn() async {
     try {
-      // TODO: Apple SignIn
       final rawNonce = generateNonce();
       final appleCredential = await SignInWithApple.getAppleIDCredential(
         scopes: [

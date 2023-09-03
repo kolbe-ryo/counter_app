@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../../../domain/exceptions.dart';
 import '../../../../util/logger.dart';
@@ -24,38 +23,28 @@ class FirebaseAuthClientWithApple {
   static const _appleAuthDomain = 'apple.com';
 
   Future<void> signUp() async {
-    try {
-      // TODO: Apple ID登録の外部遷移
-      logger.info('To external browser for signinig up Apple');
-    } on FirebaseException catch (error) {
-      logger.info(error);
-      throw FirebaseNetworkException(
-        error.code,
-        error.message,
-      );
-    } on SocketException catch (error) {
-      logger.info(error);
-      throw FirebaseNetworkException.noInternetConnection();
-    }
+    // TODO: Google ID登録の外部遷移
+    logger.info('To external browser for signinig up Google');
   }
 
   Future<void> signIn() async {
     try {
-      // TODO: Apple SignIn
-      final rawNonce = generateNonce();
-      final appleCredential = await SignInWithApple.getAppleIDCredential(
+      final googleLogin = GoogleSignIn(
         scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
+          'email',
+          'https://www.googleapis.com/auth/contacts.readonly',
         ],
       );
 
-      final oauthCredential = OAuthProvider(_appleAuthDomain).credential(
-        idToken: appleCredential.identityToken,
-        rawNonce: rawNonce,
-      );
+      final signinAccount = await googleLogin.signIn();
+      if (signinAccount == null) return;
 
-      await client.signInWithCredential(oauthCredential);
+      final auth = await signinAccount.authentication;
+      final credential = GoogleAuthProvider.credential(
+        idToken: auth.idToken,
+        accessToken: auth.accessToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
 
       logger.info('success sign in!');
     } on FirebaseException catch (error) {
