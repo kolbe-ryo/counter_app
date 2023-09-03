@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../domain/repository/authentication/authentication_repository.dart';
 import '../../../../domain/repository/authentication/entity/authenticate_user_data.dart';
-import '../../../../domain/repository/common_object/string_value.dart';
 import 'firebase_authentication_client_with_apple.dart';
 
 final firebaseAuthRepositoryWithAppleProvider = Provider<FirebaseAuthRepositoryWithApple>(
@@ -34,8 +33,8 @@ class FirebaseAuthRepositoryWithApple implements AuthenticationRepository {
   }
 
   @override
-  Future<void> resetPassword({required StringValue userData}) async {
-    // TODO: implement resetPassword
+  Future<void> checkAuthState({required AuthenticateUserData userData}) {
+    // TODO: implement checkAuthState
     throw UnimplementedError();
   }
 }

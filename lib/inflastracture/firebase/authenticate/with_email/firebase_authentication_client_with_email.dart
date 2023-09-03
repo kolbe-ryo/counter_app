@@ -33,6 +33,7 @@ class FirebaseAuthClientWithEmail {
 
   Future<void> signUp() async {
     try {
+      // TODO: この値を返却して永続化のリポジトリに通知する方法を検討する
       await client.createUserWithEmailAndPassword(
         email: email,
         password: password,
@@ -52,6 +53,7 @@ class FirebaseAuthClientWithEmail {
 
   Future<void> signIn() async {
     try {
+      // TODO: この値を返却して永続化のリポジトリに通知する方法を検討する
       await client.signInWithEmailAndPassword(
         email: email,
         password: password,
@@ -71,6 +73,7 @@ class FirebaseAuthClientWithEmail {
 
   Future<void> signOut() async {
     try {
+      // TODO: この値を返却して永続化のリポジトリに通知する方法を検討する（削除）
       await client.signOut();
       logger.info('success sign out!');
     } on FirebaseException catch (error) {

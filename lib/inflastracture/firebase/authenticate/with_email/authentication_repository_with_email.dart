@@ -36,4 +36,10 @@ class FirebaseAuthRepositoryWithEmail implements AuthenticationRepository, Reset
     // TODO: implement resetPassword
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> checkAuthState({required AuthenticateUserData userData}) {
+    // TODO: implement checkAuthState
+    throw UnimplementedError();
+  }
 }

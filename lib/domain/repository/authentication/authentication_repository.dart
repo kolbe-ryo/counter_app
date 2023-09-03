@@ -8,20 +8,23 @@ final userDataRepositoryProvider = Provider<AuthenticationRepository>(
 
 /// ユーザー認証リポジトリ
 abstract class AuthenticationRepository {
-  /// Emailで利用登録を行う
   Future<void> signUp({
     // TODO: 認証に必要な情報を渡す
     required AuthenticateUserData userData,
   });
 
-  /// Emailでサインインする
   Future<void> signIn({
     // TODO: 認証に必要な情報を渡す
     required AuthenticateUserData userData,
   });
 
-  /// サインアウトする
   Future<void> signOut({
+    // TODO: 認証に必要な情報を渡す
+    required AuthenticateUserData userData,
+  });
+
+  /// 認証状態を確認する
+  Future<void> checkAuthState({
     // TODO: 認証に必要な情報を渡す
     required AuthenticateUserData userData,
   });
