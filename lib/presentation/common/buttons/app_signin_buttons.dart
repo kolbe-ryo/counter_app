@@ -45,7 +45,9 @@ class AppSignInButtons extends StatelessWidget {
       backgroundColor: Colors.green,
       buttonName: 'Anonymous',
       onPressed: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => const MainPage()),
+        MaterialPageRoute(
+          builder: (_) => const MainPage(),
+        ),
       ),
       iconData: FontAwesomeIcons.check,
     );
