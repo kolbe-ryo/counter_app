@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
+// TODO: 初期に全てのアニメーションを読み込む処理にする
 final lottieCache = Provider<LottieCache>(
   (ref) => LottieCache(),
 );
