@@ -11,6 +11,7 @@ class MainPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Center(
+        // TODO: Sliverでの実装を検討すること
         child: StackedCardCarousel(
           items: _cards,
         ),
