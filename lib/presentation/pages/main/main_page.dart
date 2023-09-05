@@ -56,11 +56,11 @@ class _StackedCardListState extends State<_StackedCardList> {
         child: CustomScrollView(
           controller: _scrollController,
           slivers: <Widget>[
-            const SliverToBoxAdapter(
-              child: Placeholder(
-                fallbackHeight: 100,
-              ),
-            ),
+            // const SliverToBoxAdapter(
+            //   child: Placeholder(
+            //     fallbackHeight: 100,
+            //   ),
+            // ),
             const SliverAppBar(
               automaticallyImplyLeading: false,
               title: Text(
@@ -77,7 +77,7 @@ class _StackedCardListState extends State<_StackedCardList> {
                   final character = testCharacters[index];
 
                   // hacky, we don't know the position of the SliverList
-                  const scrollAtLeast = 200;
+                  const scrollAtLeast = 100;
                   const animationRegion = 98;
 
                   final position = index * 100;
