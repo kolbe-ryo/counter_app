@@ -7,7 +7,9 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const _StackedCardList();
+    return const Scaffold(
+      body: _StackedCardList(),
+    );
   }
 }
 
@@ -19,19 +21,20 @@ class _StackedCardList extends StatefulWidget {
 }
 
 class _StackedCardListState extends State<_StackedCardList> {
-  late ScrollController _scrollController;
+  late final ScrollController _scrollController;
 
-  double _offset = 0;
+  // 現在のスクロール位置からどれだけOffsetされたか
+  var _offset = 0.0;
+
+  // アニメーション（TransitionとOpacity）が発動する範囲 0~XXを定める
+  static const _scrollAtLeast = 100;
+
+  static const _unwrapCardArea = 100.0;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      setState(() {
-        _offset = _scrollController.position.pixels;
-      });
-    });
+    _scrollController = ScrollController()..addListener(_listener);
   }
 
   @override
@@ -40,103 +43,102 @@ class _StackedCardListState extends State<_StackedCardList> {
     super.dispose();
   }
 
+  // Listener for scroll controller
+  void _listener() => setState(() => _offset = _scrollController.position.pixels);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-        child: CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            // TODO: デザインを反映する
-            const SliverAppBar(
-              automaticallyImplyLeading: false,
-              title: Text(
-                'My Characters',
-                style: TextStyle(color: Colors.black),
-              ),
-              pinned: true,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: [
+        // TODO: デザインを反映する
+        const SliverAppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Category',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 30,
+              fontWeight: FontWeight.w500,
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final character = testCharacters[index];
-                  const scrollAtLeast = 100;
-                  const animationRegion = 98;
+          ),
+          pinned: true,
+          // backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        const SliverPadding(padding: EdgeInsets.only(bottom: 50)),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              final character = testCharacters[index];
 
-                  final position = index * 100;
-                  final distanceTopTop = position - _offset + scrollAtLeast;
-                  var translate = Offset.zero;
-                  if (distanceTopTop < animationRegion) {
-                    translate = Offset(0, -distanceTopTop + animationRegion);
-                  }
+              final position = index * _unwrapCardArea;
+              final distanceTopTop = position - _offset + _scrollAtLeast;
+              var translate = Offset.zero;
+              if (distanceTopTop < _scrollAtLeast) {
+                translate = Offset(0, -distanceTopTop + _scrollAtLeast);
+              }
 
-                  final double fadeAnimationValue = min(1, max(0, distanceTopTop / animationRegion));
+              final double fadeAnimationValue = min(1, max(0, distanceTopTop / _scrollAtLeast));
 
-                  return Transform.translate(
-                    offset: translate,
-                    child: Opacity(
-                      opacity: fadeAnimationValue,
-                      child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            left: (1 - fadeAnimationValue) * 60,
-                            right: (1 - fadeAnimationValue) * 60,
-                          ),
-                          child: SizedBox(
-                            height: 100,
-                            child: Stack(
-                              fit: StackFit.passthrough,
-                              children: [
-                                Transform.translate(
-                                  offset: const Offset(0, 20),
-                                  child: OverflowBox(
-                                    minHeight: 140,
-                                    maxHeight: 140,
-                                    child: Card(
-                                      clipBehavior: Clip.none,
-                                      elevation: 1,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      color: Color(character.color!),
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(20),
-                                              child: Text(
-                                                character.title!,
-                                                style: const TextStyle(fontSize: 20, color: Colors.white),
-                                              ),
-                                            ),
-                                          ),
-                                          const Padding(
-                                            padding: EdgeInsets.only(top: 8, right: 8),
-                                            child: Text('Image'),
-                                          ),
-                                        ],
+              return Transform.translate(
+                offset: translate,
+                child: Opacity(
+                  opacity: fadeAnimationValue,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: (1 - fadeAnimationValue) * 60,
+                        right: (1 - fadeAnimationValue) * 60,
+                      ),
+                      child: SizedBox(
+                        height: _unwrapCardArea,
+                        child: Stack(
+                          fit: StackFit.passthrough,
+                          children: [
+                            OverflowBox(
+                              minHeight: 140,
+                              maxHeight: 140,
+                              child: Card(
+                                clipBehavior: Clip.none,
+                                elevation: 1,
+                                shape: RoundedRectangleBorder(
+                                  // BorderRadius.onlyからこちらに変更するとリストのレンダリングが爆速化する
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                color: Color(character.color!),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Text(
+                                          character.title!,
+                                          style: const TextStyle(fontSize: 20, color: Colors.white),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    const Padding(
+                                      padding: EdgeInsets.only(top: 8, right: 8),
+                                      child: Text('Image'),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ),
-                  );
-                },
-                childCount: testCharacters.length,
-              ),
-            ),
-          ],
+                  ),
+                ),
+              );
+            },
+            childCount: testCharacters.length,
+          ),
         ),
-      ),
+      ],
     );
   }
 }
