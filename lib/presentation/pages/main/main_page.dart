@@ -98,11 +98,8 @@ class _StackedCardListState extends State<_StackedCardList> {
                                     child: Card(
                                       clipBehavior: Clip.none,
                                       elevation: 1,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20),
-                                        ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
                                       color: Color(character.color!),
                                       child: Row(
