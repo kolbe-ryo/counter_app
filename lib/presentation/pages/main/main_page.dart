@@ -7,9 +7,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: _StackedCardList(),
-    );
+    return const _StackedCardList();
   }
 }
 
@@ -44,23 +42,13 @@ class _StackedCardListState extends State<_StackedCardList> {
 
   @override
   Widget build(BuildContext context) {
-    final testCharacters = [
-      ...characters,
-      ...characters,
-      ...characters,
-      ...characters,
-    ];
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
         child: CustomScrollView(
           controller: _scrollController,
-          slivers: <Widget>[
-            // const SliverToBoxAdapter(
-            //   child: Placeholder(
-            //     fallbackHeight: 100,
-            //   ),
-            // ),
+          slivers: [
+            // TODO: デザインを反映する
             const SliverAppBar(
               automaticallyImplyLeading: false,
               title: Text(
@@ -75,8 +63,6 @@ class _StackedCardListState extends State<_StackedCardList> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final character = testCharacters[index];
-
-                  // hacky, we don't know the position of the SliverList
                   const scrollAtLeast = 100;
                   const animationRegion = 98;
 
@@ -157,6 +143,13 @@ class _StackedCardListState extends State<_StackedCardList> {
     );
   }
 }
+
+final testCharacters = [
+  ...characters,
+  ...characters,
+  ...characters,
+  ...characters,
+];
 
 class Character {
   Character({
