@@ -11,8 +11,11 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: _StackedCardList(),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: const Scaffold(
+        body: _StackedCardList(),
+      ),
     );
   }
 }
@@ -149,23 +152,27 @@ class _StackedCardListState extends State<_StackedCardList> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 color: Color(character.color!),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20),
-                                        child: Text(
-                                          character.title!,
-                                          style: const TextStyle(fontSize: 20, color: Colors.white),
+                                child: InkWell(
+                                  onTap: () => logger.info('inkwell'),
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20),
+                                          child: Text(
+                                            character.title!,
+                                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const Padding(
-                                      padding: EdgeInsets.only(top: 8, right: 8),
-                                      child: Text('Image'),
-                                    ),
-                                  ],
+                                      const Padding(
+                                        padding: EdgeInsets.only(top: 8, right: 8),
+                                        child: Text('Image'),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
