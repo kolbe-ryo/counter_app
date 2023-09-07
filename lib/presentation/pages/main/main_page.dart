@@ -66,7 +66,9 @@ class _StackedCardListState extends State<_StackedCardList> {
           // backgroundColor: Colors.transparent,
           elevation: 0,
         ),
-        const SliverPadding(padding: EdgeInsets.only(bottom: 50)),
+        const SliverPadding(
+          padding: EdgeInsets.only(bottom: 50),
+        ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
