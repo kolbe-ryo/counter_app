@@ -6,4 +6,9 @@ class TextStyles {
     fontSize: 30,
     fontWeight: FontWeight.bold,
   );
+
+  static const TextStyle middleFontStyle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
 }

@@ -81,11 +81,8 @@ class _StackedCardListState extends State<_StackedCardList> {
                 Tab(text: 'COKE'),
               ],
               indicatorColor: Colors.white,
-              unselectedLabelColor: Colors.black26,
-              labelStyle: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              unselectedLabelColor: Colors.grey,
+              labelStyle: TextStyles.middleFontStyle,
             ),
           ),
         ),
