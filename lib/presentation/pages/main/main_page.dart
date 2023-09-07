@@ -69,7 +69,6 @@ class _StackedCardListState extends State<_StackedCardList> {
             ),
             bottom: TabBar(
               isScrollable: true,
-              dividerColor: Colors.blue,
               labelColor: Colors.cyan,
               onTap: logger.info,
               tabs: const [
