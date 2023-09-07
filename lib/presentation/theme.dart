@@ -17,7 +17,6 @@ final themeProvider = Provider<ThemeData>(
         ),
       ),
     ),
-    highlightColor: Colors.transparent,
     splashColor: Colors.transparent,
   ),
 );
