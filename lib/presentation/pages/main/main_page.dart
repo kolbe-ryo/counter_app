@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../../util/logger.dart';
+import '../../../util/text_styles.dart';
+
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
@@ -51,23 +54,44 @@ class _StackedCardListState extends State<_StackedCardList> {
     return CustomScrollView(
       controller: _scrollController,
       slivers: [
-        // TODO: デザインを反映する
-        const SliverAppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Category',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 30,
-              fontWeight: FontWeight.w500,
+        DefaultTabController(
+          length: 7,
+          child: SliverAppBar(
+            automaticallyImplyLeading: false,
+            pinned: true,
+            elevation: 0,
+            title: const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'COUNTERS',
+                style: TextStyles.largeFontStyle,
+              ),
+            ),
+            bottom: TabBar(
+              isScrollable: true,
+              dividerColor: Colors.blue,
+              labelColor: Colors.cyan,
+              onTap: logger.info,
+              tabs: const [
+                Tab(text: 'ALL'),
+                Tab(text: 'BREAD'),
+                Tab(text: 'EGG'),
+                Tab(text: 'SPONGE'),
+                Tab(text: 'NOTE'),
+                Tab(text: 'BEER'),
+                Tab(text: 'COKE'),
+              ],
+              indicatorColor: Colors.white,
+              unselectedLabelColor: Colors.black26,
+              labelStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          pinned: true,
-          // backgroundColor: Colors.transparent,
-          elevation: 0,
         ),
         const SliverPadding(
-          padding: EdgeInsets.only(bottom: 50),
+          padding: EdgeInsets.only(bottom: 20),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
