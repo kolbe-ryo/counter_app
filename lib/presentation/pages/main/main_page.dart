@@ -30,13 +30,24 @@ class _StackedCardList extends StatefulWidget {
 class _StackedCardListState extends State<_StackedCardList> {
   late final ScrollController _scrollController;
 
-  // 現在のスクロール位置からどれだけOffsetされたか
+  bool isTapCard = false;
+
+  int cardIndex = 0;
+
+  /// 現在のスクロール位置からどれだけOffsetされたか
   var _offset = 0.0;
 
-  // アニメーション（TransitionとOpacity）が発動する範囲 0~XXを定める
-  static const _scrollAtLeast = 100;
+  /// アニメーション（TransitionとOpacity）が発動する範囲 0~XXを定める
+  static const _scrollEffectDistance = 100;
 
+  /// カードの実エリア
   static const _unwrapCardArea = 100.0;
+
+  /// カードの上下オーバーフローエリア
+  static const _wrapCardArea = 40;
+
+  /// カードの上下オーバーフローエリア
+  static const _cardReductionRate = 60;
 
   @override
   void initState() {
@@ -110,21 +121,24 @@ class _StackedCardListState extends State<_StackedCardList> {
           ),
         ),
         const SliverPadding(
-          padding: EdgeInsets.only(bottom: 20),
+          padding: EdgeInsets.only(bottom: 30),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              final character = testCharacters[index];
-
+              // それぞれのカートのホームポジション
               final position = index * _unwrapCardArea;
-              final distanceTopTop = position - _offset + _scrollAtLeast;
+
+              // 最上部（タブバー）からの距離に
+              final distanceFromTop = position - _offset + _scrollEffectDistance;
               var translate = Offset.zero;
-              if (distanceTopTop < _scrollAtLeast) {
-                translate = Offset(0, -distanceTopTop + _scrollAtLeast);
+
+              // カードが_scrollEffectDistanceよりも最上部（タブバー）に近くなったら、それ以上上にスクロールしないように下方向にOffsetする
+              if (distanceFromTop < _scrollEffectDistance) {
+                translate = Offset(0, -distanceFromTop + _scrollEffectDistance);
               }
 
-              final double fadeAnimationValue = min(1, max(0, distanceTopTop / _scrollAtLeast));
+              final double fadeAnimationValue = min(1, max(0, distanceFromTop / _scrollEffectDistance));
 
               return Transform.translate(
                 offset: translate,
@@ -132,9 +146,8 @@ class _StackedCardListState extends State<_StackedCardList> {
                   opacity: fadeAnimationValue,
                   child: Center(
                     child: Padding(
-                      padding: EdgeInsets.only(
-                        left: (1 - fadeAnimationValue) * 60,
-                        right: (1 - fadeAnimationValue) * 60,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: (1 - fadeAnimationValue) * _cardReductionRate,
                       ),
                       child: SizedBox(
                         height: _unwrapCardArea,
@@ -142,8 +155,8 @@ class _StackedCardListState extends State<_StackedCardList> {
                           fit: StackFit.passthrough,
                           children: [
                             OverflowBox(
-                              minHeight: 140,
-                              maxHeight: 140,
+                              minHeight: _unwrapCardArea + _wrapCardArea,
+                              maxHeight: _unwrapCardArea + _wrapCardArea,
                               child: Card(
                                 clipBehavior: Clip.none,
                                 elevation: 1,
@@ -151,9 +164,12 @@ class _StackedCardListState extends State<_StackedCardList> {
                                   // BorderRadius.onlyからこちらに変更するとリストのレンダリングが爆速化する
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                color: Color(character.color!),
+                                color: Color(testCharacters[index].color!),
                                 child: InkWell(
-                                  onTap: () => logger.info('inkwell'),
+                                  onTap: () => setState(() {
+                                    isTapCard = true;
+                                    cardIndex = index;
+                                  }),
                                   borderRadius: BorderRadius.circular(20),
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,14 +178,14 @@ class _StackedCardListState extends State<_StackedCardList> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(20),
                                           child: Text(
-                                            character.title!,
-                                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                                            testCharacters[index].title!,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      const Padding(
-                                        padding: EdgeInsets.only(top: 8, right: 8),
-                                        child: Text('Image'),
                                       ),
                                     ],
                                   ),
@@ -215,34 +231,34 @@ class Character {
 //source: https://www.giantbomb.com/dragon-ball-z/3025-159/characters/
 final characters = <Character>[
   Character(
-    title: 'Goku',
+    title: 'GOKU',
     description:
         'Goku is the main protagonist in the Dragon Ball franchise and one of the strongest fighters in the universe. He is a Saiyan warrior whose original name was Kakarot, son of Bardock. He is the husband of Chi Chi, and the father of Gohan and Goten. He is also Grandfather to Pan.',
     // avatar: 'assets/goku.png',
     color: 0xFFE83835,
   ),
   Character(
-    title: 'Vegeta',
+    title: 'VEGETA',
     description:
         'The Prince of all Saiyans, Vegeta is an incredibly strong elite Saiyan warrior. In his constant struggle to surpass his eternal rival Goku, he has become one of the most powerful fighters in the universe.',
     // avatar: 'assets/vegeta.png',
     color: 0xFF238BD0,
   ),
   Character(
-    title: 'Gohan',
+    title: 'GOHAN',
     description:
         "Gohan is Goku's son and one of the heroes in the Dragon Ball Z universe. He is also the protagonist of the Cell Saga, where he is the first to reach the Super Saiyan 2 form, through immense anger and emotion. In his later Ultimate form, he is considered the most powerful warrior in Dragon Ball Z. He is Goten's older brother and the father of Pan. His wife is Videl and his grandfathers are Ox-king and Bardock, respectively.",
     // avatar: 'assets/gohan.png',
     color: 0xFF354C6C,
   ),
   Character(
-    title: 'Frieza',
+    title: 'FRIEZA',
     description: 'In the Dragon Ball Z universe, Frieza is one of the first villains to really test Goku.',
     // avatar: 'assets/frieza.png',
     color: 0xFF6F2B62,
   ),
   Character(
-    title: 'Cell',
+    title: 'CELL',
     description:
         'Cell is an android constructed from cells taken from various fighters of the Dragon Ball Z universe. He is the main antagonist of the Android Saga of Dragon Ball.',
     // avatar: 'assets/cell.png',
@@ -256,7 +272,7 @@ final characters = <Character>[
     color: 0xFFE7668E,
   ),
   Character(
-    title: 'Broly',
+    title: 'BROLY',
     description:
         "The Legendary Super Saiyan from myth, Broly is one of the Dragon Ball Z franchise's most powerful and destructive Saiyan villains.",
     // avatar: 'assets/broly.png',
