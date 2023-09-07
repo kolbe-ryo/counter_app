@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../util/logger.dart';
 import '../../../util/text_styles.dart';
+import '../../constant_value.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -69,7 +70,7 @@ class _StackedCardListState extends State<_StackedCardList> {
             ),
             bottom: TabBar(
               isScrollable: true,
-              labelColor: Colors.cyan,
+              labelColor: Colors.pinkAccent,
               onTap: logger.info,
               tabs: const [
                 Tab(text: 'ALL'),
@@ -80,10 +81,29 @@ class _StackedCardListState extends State<_StackedCardList> {
                 Tab(text: 'BEER'),
                 Tab(text: 'COKE'),
               ],
-              indicatorColor: Colors.white,
+              indicatorColor: Colors.transparent,
               unselectedLabelColor: Colors.grey,
               labelStyle: TextStyles.middleFontStyle,
             ),
+            actions: [
+              IconButton(
+                onPressed: () => logger.info('Add'),
+                icon: const Icon(
+                  Icons.add_circle,
+                  size: 40,
+                  color: Colors.black,
+                ),
+              ),
+              IconButton(
+                onPressed: () => logger.info('Menu'),
+                icon: const Icon(
+                  Icons.menu,
+                  size: 40,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(width: kPadding),
+            ],
           ),
         ),
         const SliverPadding(
