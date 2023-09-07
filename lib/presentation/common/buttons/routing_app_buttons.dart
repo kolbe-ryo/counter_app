@@ -36,6 +36,14 @@ class RoutingAppButtons extends ConsumerWidget {
     );
   }
 
+  factory RoutingAppButtons.toMain() {
+    return const RoutingAppButtons._(
+      backgroundColor: Colors.redAccent,
+      buttonName: 'Main Page',
+      routing: MainPageRoute.name,
+    );
+  }
+
   final Color backgroundColor;
   final String buttonName;
   final String routing;

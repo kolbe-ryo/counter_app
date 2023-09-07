@@ -27,7 +27,7 @@ final routerProvider = Provider<GoRouter>(
             pageBuilder: (context, state) => const SignInPageRoute().buildPage(context, state),
           ),
           GoRoute(
-            path: 'main_page',
+            path: 'main',
             pageBuilder: (context, state) => const MainPageRoute().buildPage(context, state),
           ),
         ],
@@ -43,7 +43,8 @@ final routerProvider = Provider<GoRouter>(
     // refreshListenable: ref.watch(ログイン状態の監視)
     /// エラー画面
     /// routing内で不正なURL("/**/定義されていないURL")などにアクセスした場合に下記を表示する
-    errorPageBuilder: (context, state) => ErrorRoute(state.error).buildPage(context, state),
+    // TODO: エラーページを用意すること
+    // errorPageBuilder: (context, state) => ErrorRoute(state.error).buildPage(context, state),
   ),
 );
 

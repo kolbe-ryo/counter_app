@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/buttons/app_signin_buttons.dart';
 import '../../common/buttons/back_app_button.dart';
+import '../../common/buttons/routing_app_buttons.dart';
 import '../../common/image/animation_image.dart';
 
 class SignInPage extends ConsumerWidget {
@@ -56,7 +57,7 @@ class __SignInButtonsState extends State<_SignInButtons> {
         const SizedBox(height: 30),
         AppSignInButtons.google(),
         const SizedBox(height: 30),
-        AppSignInButtons.anonymous(context),
+        RoutingAppButtons.toMain(),
         const SizedBox(height: 60),
         const BackAppButton(),
       ],

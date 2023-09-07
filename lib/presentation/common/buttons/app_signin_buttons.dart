@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../pages/main/main_page.dart';
 import 'app_button.dart';
 import 'app_icon_button.dart';
 
@@ -37,19 +36,6 @@ class AppSignInButtons extends StatelessWidget {
       buttonName: 'Google',
       onPressed: () => {},
       iconData: FontAwesomeIcons.google,
-    );
-  }
-
-  factory AppSignInButtons.anonymous(BuildContext context) {
-    return AppSignInButtons._(
-      backgroundColor: Colors.green,
-      buttonName: 'Anonymous',
-      onPressed: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) => const MainPage(),
-        ),
-      ),
-      iconData: FontAwesomeIcons.check,
     );
   }
 
