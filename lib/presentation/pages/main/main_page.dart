@@ -43,10 +43,10 @@ class _StackedCardListState extends State<_StackedCardList> {
   /// カードの実エリア
   static const _unwrapCardArea = 100.0;
 
-  /// カードの上下オーバーフローエリア
-  static const _wrapCardArea = 40;
+  /// カードの下方向へのオーバーフローエリア
+  static const _wrapCardArea = 100.0;
 
-  /// カードの上下オーバーフローエリア
+  /// フェード時のカードの左右割合
   static const _cardReductionRate = 60;
 
   @override
@@ -120,9 +120,9 @@ class _StackedCardListState extends State<_StackedCardList> {
             ],
           ),
         ),
-        const SliverPadding(
-          padding: EdgeInsets.only(bottom: 30),
-        ),
+        // const SliverPadding(
+        //   padding: EdgeInsets.only(bottom: 50),
+        // ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
@@ -132,67 +132,78 @@ class _StackedCardListState extends State<_StackedCardList> {
               // 最上部（タブバー）からの距離に
               final distanceFromTop = position - _offset + _scrollEffectDistance;
               var translate = Offset.zero;
+              var translate2 = Offset.zero;
 
-              // カードが_scrollEffectDistanceよりも最上部（タブバー）に近くなったら、それ以上上にスクロールしないように下方向にOffsetする
+              // カードが_scrollEffectDistanceより最上部（タブバー）に近くなったら、上にスクロールしないように下方向にOffset
+              // TODO: 半透明の状態ではタップさせない制御
               if (distanceFromTop < _scrollEffectDistance) {
                 translate = Offset(0, -distanceFromTop + _scrollEffectDistance);
               }
 
               final double fadeAnimationValue = min(1, max(0, distanceFromTop / _scrollEffectDistance));
 
-              return Transform.translate(
-                offset: translate,
-                child: Opacity(
-                  opacity: fadeAnimationValue,
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: (1 - fadeAnimationValue) * _cardReductionRate,
-                      ),
-                      child: SizedBox(
-                        height: _unwrapCardArea,
-                        child: Stack(
-                          fit: StackFit.passthrough,
-                          children: [
-                            OverflowBox(
-                              minHeight: _unwrapCardArea + _wrapCardArea,
-                              maxHeight: _unwrapCardArea + _wrapCardArea,
-                              child: Card(
-                                clipBehavior: Clip.none,
-                                elevation: 1,
-                                shape: RoundedRectangleBorder(
-                                  // BorderRadius.onlyからこちらに変更するとリストのレンダリングが爆速化する
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                color: Color(testCharacters[index].color!),
-                                child: InkWell(
-                                  onTap: () => setState(() {
-                                    isTapCard = true;
-                                    cardIndex = index;
-                                  }),
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(20),
-                                          child: Text(
-                                            testCharacters[index].title!,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
+              if (isTapCard && index > cardIndex) {
+                translate2 = const Offset(0, 0.2);
+              }
+
+              return AnimatedSlide(
+                offset: translate2,
+                duration: const Duration(milliseconds: 200),
+                child: Transform.translate(
+                  offset: translate,
+                  child: Opacity(
+                    opacity: fadeAnimationValue,
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: (1 - fadeAnimationValue) * _cardReductionRate,
+                        ),
+                        child: SizedBox(
+                          height: (isTapCard && index == cardIndex) ? _unwrapCardArea + _wrapCardArea : _unwrapCardArea,
+                          child: Stack(
+                            fit: StackFit.passthrough,
+                            children: [
+                              OverflowBox(
+                                alignment: Alignment.topCenter,
+                                minHeight: _unwrapCardArea + _wrapCardArea,
+                                maxHeight: _unwrapCardArea + _wrapCardArea,
+                                child: Card(
+                                  clipBehavior: Clip.none,
+                                  elevation: 1,
+                                  shape: RoundedRectangleBorder(
+                                    // BorderRadius.onlyからこちらに変更するとリストのレンダリングが爆速化する
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  color: Color(testCharacters[index].color!),
+                                  child: InkWell(
+                                    onTap: () => setState(() {
+                                      isTapCard = !isTapCard;
+                                      cardIndex = index;
+                                    }),
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(20),
+                                            child: Text(
+                                              testCharacters[index].title!,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
