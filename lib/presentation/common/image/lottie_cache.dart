@@ -2,13 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../gen/assets.gen.dart';
+
 // TODO: 初期に全てのアニメーションを読み込む処理にする
 final lottieCache = Provider<LottieCache>(
   (ref) => LottieCache(),
 );
 
 class LottieCache {
-  LottieCache();
+  LottieCache() {
+    _assets.forEach(add);
+  }
+
+  final _assets = [
+    Assets.animations.launchApp,
+    Assets.animations.signUp,
+    Assets.animations.signIn,
+  ];
 
   final Map<String, LottieComposition> _compositions = {};
 
@@ -25,7 +35,6 @@ class LottieCache {
         composition: composition,
         width: _topPageAnimaitonSize.width,
         height: _topPageAnimaitonSize.height,
-        // repeat: false,
       );
     } else {
       add(assetName);
