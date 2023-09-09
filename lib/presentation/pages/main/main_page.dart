@@ -72,7 +72,7 @@ class _StackedCardListState extends State<_StackedCardList> {
         _activateCardIndex = index;
       });
 
-  // TODO: Tupple3でdelegateメソッドを作成する
+  // SliverDelegate内の計算ロジックメソッド
   Tuple3<Offset, Offset, bool> _sliverDelegateFunction() {
     return const Tuple3(Offset.zero, Offset.zero, true);
   }
