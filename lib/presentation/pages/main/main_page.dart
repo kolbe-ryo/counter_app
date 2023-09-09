@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:tuple/tuple.dart';
 
 import '../../../domain/mock/mock_data.dart';
 import 'main_page_header.dart';
+import 'strategy/sliver_list_delegate_service.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -28,9 +26,6 @@ class _StackedCardList extends StatefulWidget {
 }
 
 class _StackedCardListState extends State<_StackedCardList> {
-  /// アニメーション（TransitionとOpacity）が発動する範囲 0~XXを定める
-  static const _scrollEffectDistance = 100;
-
   /// カードの実エリア
   static const _unwrapCardArea = 100.0;
 
@@ -40,42 +35,41 @@ class _StackedCardListState extends State<_StackedCardList> {
   /// フェード時のカードの左右割合
   static const _cardReductionRate = 60;
 
-  /// カードタップ時の他のカードのOffset
-  static const _onTapOffset = Offset(0, 0.2);
-
   late final ScrollController _scrollController;
 
-  var _offset = 0.0;
+  var _offsetY = 0.0;
 
-  bool isTapCard = false;
+  var _activateCardIndex = 0;
 
-  int _activateCardIndex = 0;
+  bool _isTapCard = false;
+
+  late final SliverListDelegateService _sliverListDelegateService;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController()..addListener(_listener);
+    _sliverListDelegateService = SliverListDelegateService(
+      unwrapCardArea: _unwrapCardArea,
+      wrapCardArea: _wrapCardArea,
+    );
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _sliverListDelegateService.dispose();
     super.dispose();
   }
 
   // スクロールした分を検知し、現在のスクロール位置からどれだけ動かしたか
-  void _listener() => setState(() => _offset = _scrollController.position.pixels);
+  void _listener() => setState(() => _offsetY = _scrollController.position.pixels);
 
   // カードタップ時のlistener
   void _tapCard(int index) => setState(() {
-        isTapCard = !isTapCard;
+        _isTapCard = !_isTapCard;
         _activateCardIndex = index;
       });
-
-  // SliverDelegate内の計算ロジックメソッド
-  Tuple3<Offset, Offset, bool> _sliverDelegateFunction() {
-    return const Tuple3(Offset.zero, Offset.zero, true);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,36 +82,59 @@ class _StackedCardListState extends State<_StackedCardList> {
           delegate: SliverChildBuilderDelegate(
             childCount: testCharacters.length,
             (context, index) {
-              // （タブバーからの距離）=（カードのホームポジション）-(スクロール距離）+（アニメーション範囲）
-              final distanceFromTop = index * _unwrapCardArea - _offset + _scrollEffectDistance;
+              final fadeOutTranslation = _sliverListDelegateService.fadeOutTranslation(
+                index: index,
+                offsetY: _offsetY,
+              );
 
-              // 基本は何もしないが、カードがアニメーション範囲に達した場合、カードを横方向に圧縮しながらOpacityを強める
-              final fadeAnimationValue = min(1, max(0, distanceFromTop / _scrollEffectDistance)).toDouble();
+              final cardTapTranslation = _sliverListDelegateService.cardTapTransition(
+                index: index,
+                isTapCard: _isTapCard,
+                activeCardIndex: _activateCardIndex,
+              );
 
-              // カードの固有変数
-              var fadeOutTranslation = Offset.zero;
-              var cardTapTranslation = Offset.zero;
-              var tapDetection = true;
+              final fadeAnimationValue = _sliverListDelegateService.fadeAnimationValue(
+                index: index,
+                offsetY: _offsetY,
+              );
 
-              // カードがアニメーション範囲に到達したら、上にスクロールしないようにカードを下方向に少しずつOffset
-              if (distanceFromTop < _scrollEffectDistance) {
-                fadeOutTranslation = Offset(0, _scrollEffectDistance - distanceFromTop);
-                tapDetection = false;
-              } else {
-                tapDetection = true;
-              }
+              final tapDetection = _sliverListDelegateService.tapDetection;
 
-              if (isTapCard && index > _activateCardIndex) {
-                cardTapTranslation = _onTapOffset;
-              }
+              final cardHeight = _sliverListDelegateService.cardHeightCalculate(
+                index: index,
+                isTapCard: _isTapCard,
+                activeCardIndex: _activateCardIndex,
+              );
 
-              final activeCard = isTapCard && index == _activateCardIndex;
+              // // （タブバーからの距離）=（カードのホームポジション）-(スクロール距離）+（アニメーション範囲）
+              // final distanceFromTop = index * _unwrapCardArea - _offsetY + _scrollEffectDistance;
 
-              _sliverDelegateFunction();
+              // // 基本は何もしないが、カードがアニメーション範囲に達した場合、カードを横方向に圧縮しながらOpacityを強める
+              // final fadeAnimationValue = min(1, max(0, distanceFromTop / _scrollEffectDistance)).toDouble();
+
+              // // カードの固有変数
+              // var fadeOutTranslation = Offset.zero;
+              // var cardTapTranslation = Offset.zero;
+              // var tapDetection = true;
+
+              // // カードがアニメーション範囲に到達したら、上にスクロールしないようにカードを下方向に少しずつOffset
+              // if (distanceFromTop < _scrollEffectDistance) {
+              //   fadeOutTranslation = Offset(0, _scrollEffectDistance - distanceFromTop);
+              //   tapDetection = false;
+              // } else {
+              //   tapDetection = true;
+              // }
+
+              // if (_isTapCard && index > _activateCardIndex) {
+              //   cardTapTranslation = _onTapOffset;
+              // }
+
+              // final activeCard = _isTapCard && index == _activateCardIndex;
 
               return AnimatedSlide(
                 offset: cardTapTranslation,
-                duration: const Duration(milliseconds: 300),
+                curve: Curves.ease,
+                duration: const Duration(milliseconds: 500),
                 child: Transform.translate(
                   offset: fadeOutTranslation,
                   child: Opacity(
@@ -128,9 +145,8 @@ class _StackedCardListState extends State<_StackedCardList> {
                           horizontal: (1 - fadeAnimationValue) * _cardReductionRate,
                         ),
                         child: SizedBox(
-                          height: (isTapCard && index == _activateCardIndex)
-                              ? _unwrapCardArea + _wrapCardArea
-                              : _unwrapCardArea,
+                          // TODO: ここをタップ時に増加させているせいでアニメーションが少し変になっている問題の解消
+                          height: cardHeight,
                           width: double.infinity,
                           child: Stack(
                             fit: StackFit.passthrough,
@@ -181,6 +197,7 @@ class _StackedCardListState extends State<_StackedCardList> {
                   ),
                 ),
               );
+              return null;
             },
           ),
         ),
