@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 
 import '../../../domain/mock/mock_data.dart';
 import 'main_page_header.dart';
@@ -72,6 +73,9 @@ class _StackedCardListState extends State<_StackedCardList> {
       });
 
   // TODO: Tupple3でdelegateメソッドを作成する
+  Tuple3<Offset, Offset, bool> _sliverDelegateFunction() {
+    return const Tuple3(Offset.zero, Offset.zero, true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +112,8 @@ class _StackedCardListState extends State<_StackedCardList> {
               }
 
               final activeCard = isTapCard && index == _activateCardIndex;
+
+              _sliverDelegateFunction();
 
               return AnimatedSlide(
                 offset: cardTapTranslation,
