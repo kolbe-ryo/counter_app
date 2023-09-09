@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/mock/mock_data.dart';
 import '../../../util/logger.dart';
 import '../../../util/text_styles.dart';
 import '../../constant_value.dart';
+import 'strategy/header_icon_interface.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -29,15 +31,6 @@ class _StackedCardList extends StatefulWidget {
 }
 
 class _StackedCardListState extends State<_StackedCardList> {
-  late final ScrollController _scrollController;
-
-  bool isTapCard = false;
-
-  int cardIndex = 0;
-
-  /// 現在のスクロール位置からどれだけOffsetされたか
-  var _offset = 0.0;
-
   /// アニメーション（TransitionとOpacity）が発動する範囲 0~XXを定める
   static const _scrollEffectDistance = 100;
 
@@ -49,6 +42,14 @@ class _StackedCardListState extends State<_StackedCardList> {
 
   /// フェード時のカードの左右割合
   static const _cardReductionRate = 60;
+
+  late final ScrollController _scrollController;
+
+  var _offset = 0.0;
+
+  bool isTapCard = false;
+
+  int _activateCardIndex = 0;
 
   @override
   void initState() {
@@ -62,100 +63,57 @@ class _StackedCardListState extends State<_StackedCardList> {
     super.dispose();
   }
 
-  // Listener for scroll controller
+  // スクロールした分を検知し、現在のスクロール位置からどれだけ動かしたか
   void _listener() => setState(() => _offset = _scrollController.position.pixels);
+
+  // カードタップ時のlistener
+  void _tapCard(int index) => setState(() {
+        isTapCard = !isTapCard;
+        _activateCardIndex = index;
+      });
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       controller: _scrollController,
       slivers: [
-        DefaultTabController(
-          length: 7,
-          child: SliverAppBar(
-            automaticallyImplyLeading: false,
-            pinned: true,
-            elevation: 0,
-            title: const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'COUNTERS',
-                style: TextStyles.largeFontStyle,
-              ),
-            ),
-            bottom: TabBar(
-              isScrollable: true,
-              labelColor: Colors.pinkAccent,
-              onTap: logger.info,
-              tabs: const [
-                Tab(text: 'ALL'),
-                Tab(text: 'BREAD'),
-                Tab(text: 'EGG'),
-                Tab(text: 'SPONGE'),
-                Tab(text: 'NOTE'),
-                Tab(text: 'BEER'),
-                Tab(text: 'COKE'),
-              ],
-              indicatorColor: Colors.transparent,
-              unselectedLabelColor: Colors.grey,
-              labelStyle: TextStyles.middleFontStyle,
-            ),
-            actions: [
-              IconButton(
-                onPressed: () => logger.info('Add'),
-                icon: const Icon(
-                  Icons.add_circle,
-                  size: 40,
-                  color: Colors.black,
-                ),
-              ),
-              IconButton(
-                onPressed: () => logger.info('Menu'),
-                icon: const Icon(
-                  Icons.menu,
-                  size: 40,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(width: kPadding),
-            ],
-          ),
-        ),
+        const _Header(),
         const SliverPadding(
           padding: EdgeInsets.only(bottom: 10),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
+            childCount: testCharacters.length,
             (context, index) {
-              // それぞれのカートのホームポジション
-              final position = index * _unwrapCardArea;
+              // （タブバーからの距離）=（カードのホームポジション）-(スクロール距離）+（アニメーション範囲）
+              final distanceFromTop = index * _unwrapCardArea - _offset + _scrollEffectDistance;
 
-              // 最上部（タブバー）からの距離に
-              final distanceFromTop = position - _offset + _scrollEffectDistance;
-              var translate = Offset.zero;
-              var translate2 = Offset.zero;
+              var fadeOutTranslation = Offset.zero;
+              var cardTapTranslation = Offset.zero;
+              var tapDetection = true;
 
-              var isNotTap = false;
-
-              // カードが_scrollEffectDistanceより最上部（タブバー）に近くなったら、上にスクロールしないように下方向にOffset
+              // カードがアニメーション範囲に到達したら、上にスクロールしないようにカードを下方向に少しずつOffset
               if (distanceFromTop < _scrollEffectDistance) {
-                translate = Offset(0, -distanceFromTop + _scrollEffectDistance);
-                isNotTap = true;
+                fadeOutTranslation = Offset(0, _scrollEffectDistance - distanceFromTop);
+                tapDetection = false;
               } else {
-                isNotTap = false;
+                tapDetection = true;
               }
 
-              final double fadeAnimationValue = min(1, max(0, distanceFromTop / _scrollEffectDistance));
+              // 基本は何もしないが、カードがアニメーション範囲に達した場合、カードを横方向に圧縮しながらOpacityを強める
+              final fadeAnimationValue = min(1, max(0, distanceFromTop / _scrollEffectDistance)).toDouble();
 
-              if (isTapCard && index > cardIndex) {
-                translate2 = const Offset(0, 0.2);
+              if (isTapCard && index > _activateCardIndex) {
+                cardTapTranslation = const Offset(0, 0.2);
               }
+
+              final activeCard = isTapCard && index == _activateCardIndex;
 
               return AnimatedSlide(
-                offset: translate2,
+                offset: cardTapTranslation,
                 duration: const Duration(milliseconds: 300),
                 child: Transform.translate(
-                  offset: translate,
+                  offset: fadeOutTranslation,
                   child: Opacity(
                     opacity: fadeAnimationValue,
                     child: Center(
@@ -164,7 +122,10 @@ class _StackedCardListState extends State<_StackedCardList> {
                           horizontal: (1 - fadeAnimationValue) * _cardReductionRate,
                         ),
                         child: SizedBox(
-                          height: (isTapCard && index == cardIndex) ? _unwrapCardArea + _wrapCardArea : _unwrapCardArea,
+                          height: (isTapCard && index == _activateCardIndex)
+                              ? _unwrapCardArea + _wrapCardArea
+                              : _unwrapCardArea,
+                          width: double.infinity,
                           child: Stack(
                             fit: StackFit.passthrough,
                             children: [
@@ -182,28 +143,22 @@ class _StackedCardListState extends State<_StackedCardList> {
                                   color: Color(testCharacters[index].color!),
                                   child: InkWell(
                                     onTap: () {
-                                      if (isNotTap) {
-                                        return;
+                                      if (tapDetection) {
+                                        _tapCard(index);
                                       }
-                                      setState(() {
-                                        isTapCard = !isTapCard;
-                                        cardIndex = index;
-                                      });
                                     },
                                     borderRadius: BorderRadius.circular(20),
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(20),
-                                            child: Text(
-                                              testCharacters[index].title!,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(20),
+                                          child: Text(
+                                            testCharacters[index].title!,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
@@ -221,10 +176,91 @@ class _StackedCardListState extends State<_StackedCardList> {
                 ),
               );
             },
-            childCount: testCharacters.length,
           ),
         ),
       ],
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header();
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 7,
+      child: SliverAppBar(
+        automaticallyImplyLeading: false,
+        pinned: true,
+        elevation: 0,
+        title: const Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'COUNTERS',
+            style: TextStyles.largeFontStyle,
+          ),
+        ),
+        bottom: TabBar(
+          isScrollable: true,
+          labelColor: Colors.pinkAccent,
+          onTap: logger.info,
+          tabs: const [
+            Tab(text: 'ALL'),
+            Tab(text: 'BREAD'),
+            Tab(text: 'EGG'),
+            Tab(text: 'SPONGE'),
+            Tab(text: 'NOTE'),
+            Tab(text: 'BEER'),
+            Tab(text: 'COKE'),
+          ],
+          indicatorColor: Colors.transparent,
+          unselectedLabelColor: Colors.grey,
+          labelStyle: TextStyles.middleFontStyle,
+        ),
+        actions: [
+          _HeaderIcon.add(onTap: AddIconAction()),
+          _HeaderIcon.menu(onTap: MenuIconAction()),
+          const SizedBox(width: kPadding),
+        ],
+      ),
+    );
+  }
+}
+
+class _HeaderIcon extends ConsumerWidget {
+  const _HeaderIcon._(
+    this._headerIconInterface,
+    this._iconData,
+  );
+
+  factory _HeaderIcon.add({required HeaderIconInterface onTap}) {
+    return _HeaderIcon._(
+      onTap,
+      Icons.add_circle,
+    );
+  }
+
+  factory _HeaderIcon.menu({required HeaderIconInterface onTap}) {
+    return _HeaderIcon._(
+      onTap,
+      Icons.menu,
+    );
+  }
+
+  final HeaderIconInterface _headerIconInterface;
+
+  final IconData _iconData;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return IconButton(
+      onPressed: () => _headerIconInterface.onTap(ref),
+      icon: Icon(
+        _iconData,
+        size: 40,
+        color: Colors.black,
+      ),
     );
   }
 }
