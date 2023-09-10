@@ -106,31 +106,6 @@ class _StackedCardListState extends State<_StackedCardList> {
                 activeCardIndex: _activateCardIndex,
               );
 
-              // // （タブバーからの距離）=（カードのホームポジション）-(スクロール距離）+（アニメーション範囲）
-              // final distanceFromTop = index * _unwrapCardArea - _offsetY + _scrollEffectDistance;
-
-              // // 基本は何もしないが、カードがアニメーション範囲に達した場合、カードを横方向に圧縮しながらOpacityを強める
-              // final fadeAnimationValue = min(1, max(0, distanceFromTop / _scrollEffectDistance)).toDouble();
-
-              // // カードの固有変数
-              // var fadeOutTranslation = Offset.zero;
-              // var cardTapTranslation = Offset.zero;
-              // var tapDetection = true;
-
-              // // カードがアニメーション範囲に到達したら、上にスクロールしないようにカードを下方向に少しずつOffset
-              // if (distanceFromTop < _scrollEffectDistance) {
-              //   fadeOutTranslation = Offset(0, _scrollEffectDistance - distanceFromTop);
-              //   tapDetection = false;
-              // } else {
-              //   tapDetection = true;
-              // }
-
-              // if (_isTapCard && index > _activateCardIndex) {
-              //   cardTapTranslation = _onTapOffset;
-              // }
-
-              // final activeCard = _isTapCard && index == _activateCardIndex;
-
               return AnimatedSlide(
                 offset: cardTapTranslation,
                 curve: Curves.ease,
