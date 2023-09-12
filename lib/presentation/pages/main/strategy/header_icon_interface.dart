@@ -2,18 +2,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../util/logger.dart';
 
-abstract class HeaderIconInterface {
+abstract class IconInterface {
   void onTap(WidgetRef ref);
 }
 
-class AddIconAction implements HeaderIconInterface {
+class AddIconAction implements IconInterface {
   @override
   void onTap(WidgetRef ref) {
     logger.info('ADD');
   }
 }
 
-class MenuIconAction implements HeaderIconInterface {
+class MenuIconAction implements IconInterface {
   @override
   void onTap(WidgetRef ref) {
     logger.info('MENU');

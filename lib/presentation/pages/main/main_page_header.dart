@@ -53,32 +53,32 @@ class MainPageHeader extends StatelessWidget {
 
 class _HeaderIcon extends ConsumerWidget {
   const _HeaderIcon._(
-    this._headerIconInterface,
+    this._conInterface,
     this._iconData,
   );
 
-  factory _HeaderIcon.add({required HeaderIconInterface onTap}) {
+  factory _HeaderIcon.add({required IconInterface onTap}) {
     return _HeaderIcon._(
       onTap,
       Icons.add_circle,
     );
   }
 
-  factory _HeaderIcon.menu({required HeaderIconInterface onTap}) {
+  factory _HeaderIcon.menu({required IconInterface onTap}) {
     return _HeaderIcon._(
       onTap,
       Icons.menu,
     );
   }
 
-  final HeaderIconInterface _headerIconInterface;
+  final IconInterface _conInterface;
 
   final IconData _iconData;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
-      onPressed: () => _headerIconInterface.onTap(ref),
+      onPressed: () => _conInterface.onTap(ref),
       icon: Icon(
         _iconData,
         size: 40,

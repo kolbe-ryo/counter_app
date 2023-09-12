@@ -6,7 +6,7 @@ import 'main_page_header.dart';
 import 'strategy/sliver_list_delegate_service.dart';
 
 /// カードの実エリア
-const unwrapCardArea = 100.0;
+const unwrapCardArea = 80.0;
 
 /// カードの下方向へのオーバーフローエリア
 const wrapCardArea = 200.0;
@@ -137,22 +137,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                                       _tapCard(index);
                                     }
                                   },
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(20),
-                                        child: Text(
-                                          testCharacters[index].title!,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  child: _CardContent(index: index),
                                 ),
                               ),
                             ),
@@ -167,6 +152,33 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _CardContent extends StatelessWidget {
+  const _CardContent({required this.index});
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            testCharacters[index].title!,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Row(),
+        ],
+      ),
     );
   }
 }
