@@ -133,7 +133,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(20),
                                   onTap: () {
-                                    if (tapDetection) {
+                                    if (tapDetection || _isTapCard) {
                                       _tapCard(index);
                                     }
                                   },
