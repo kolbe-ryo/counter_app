@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/mock/mock_data.dart';
 import 'main_page_header.dart';
+import 'strategy/icon_interface.dart';
 import 'strategy/sliver_list_delegate_service.dart';
 
 /// カードの実エリア
@@ -165,19 +166,78 @@ class _CardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          Text(
-            testCharacters[index].title!,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                testCharacters[index].title!,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Row(
+                children: [
+                  _ActionIcon.add(),
+                  _ActionIcon.minus(),
+                ],
+              ),
+            ],
+          ),
+          const Align(
+            alignment: Alignment.topCenter,
+            child: Text(
+              '10',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          const Row(),
         ],
+      ),
+    );
+  }
+}
+
+class _ActionIcon extends ConsumerWidget {
+  const _ActionIcon._(
+    this._conInterface,
+    this._iconData,
+  );
+
+  factory _ActionIcon.add() {
+    return _ActionIcon._(
+      AddIconAction(),
+      Icons.add,
+    );
+  }
+
+  factory _ActionIcon.minus() {
+    return _ActionIcon._(
+      MinusIconAction(),
+      Icons.remove,
+    );
+  }
+
+  final IconInterface _conInterface;
+
+  final IconData _iconData;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return IconButton(
+      padding: EdgeInsets.zero,
+      onPressed: () => _conInterface.onTap(ref),
+      icon: Icon(
+        _iconData,
+        size: 40,
+        color: Colors.white,
       ),
     );
   }

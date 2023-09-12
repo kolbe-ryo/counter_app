@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../util/logger.dart';
 import '../../../util/text_styles.dart';
 import '../../constant_value.dart';
-import 'strategy/header_icon_interface.dart';
+import 'strategy/icon_interface.dart';
 
 class MainPageHeader extends StatelessWidget {
   const MainPageHeader({super.key});
@@ -42,8 +42,8 @@ class MainPageHeader extends StatelessWidget {
           labelStyle: TextStyles.middleFontStyle,
         ),
         actions: [
-          _HeaderIcon.add(onTap: AddHeaderIconAction()),
-          _HeaderIcon.menu(onTap: MenuHeaderIconAction()),
+          _HeaderIcon.add(),
+          _HeaderIcon.menu(),
           const SizedBox(width: kPadding),
         ],
       ),
@@ -57,16 +57,16 @@ class _HeaderIcon extends ConsumerWidget {
     this._iconData,
   );
 
-  factory _HeaderIcon.add({required IconInterface onTap}) {
+  factory _HeaderIcon.add() {
     return _HeaderIcon._(
-      onTap,
+      AddHeaderIconAction(),
       Icons.add_circle,
     );
   }
 
-  factory _HeaderIcon.menu({required IconInterface onTap}) {
+  factory _HeaderIcon.menu() {
     return _HeaderIcon._(
-      onTap,
+      MenuHeaderIconAction(),
       Icons.menu,
     );
   }
