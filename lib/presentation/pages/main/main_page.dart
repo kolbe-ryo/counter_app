@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../domain/mock/mock_data.dart';
 import '../../constant_value.dart';
 import 'main_page_header.dart';
-import 'strategy/icon_interface.dart';
+import 'main_page_icon_button.dart';
 import 'strategy/sliver_list_delegate_service.dart';
 
 /// カードの実エリア
@@ -186,8 +186,8 @@ class _CardContent extends StatelessWidget {
               ),
               Row(
                 children: [
-                  _ActionIcon.add(),
-                  _ActionIcon.minus(),
+                  MainPageIconButton.addCount(),
+                  MainPageIconButton.minusCount(),
                 ],
               ),
             ],
@@ -207,44 +207,6 @@ class _CardContent extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ActionIcon extends ConsumerWidget {
-  const _ActionIcon._(
-    this._conInterface,
-    this._iconData,
-  );
-
-  factory _ActionIcon.add() {
-    return _ActionIcon._(
-      AddIconAction(),
-      Icons.add,
-    );
-  }
-
-  factory _ActionIcon.minus() {
-    return _ActionIcon._(
-      MinusIconAction(),
-      Icons.remove,
-    );
-  }
-
-  final IconInterface _conInterface;
-
-  final IconData _iconData;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return IconButton(
-      padding: EdgeInsets.zero,
-      onPressed: () => _conInterface.onTap(ref),
-      icon: Icon(
-        _iconData,
-        size: 40,
-        color: Colors.white,
       ),
     );
   }
