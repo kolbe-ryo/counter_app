@@ -1,20 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// final sliverListDelegateServiceProvider = Provider<SliverListDelegateService>((ref) {
-//   return SliverListDelegateService();
-// });
+import '../main_page.dart';
+
+final sliverListDelegateServiceProvider = Provider.autoDispose<SliverListDelegateService>(
+  (ref) => SliverListDelegateService(),
+);
 
 class SliverListDelegateService {
-  SliverListDelegateService({
-    required double unwrapCardArea,
-    required double wrapCardArea,
-  })  : _unwrapCardArea = unwrapCardArea,
-        _wrapCardArea = wrapCardArea;
-
-  final double _unwrapCardArea;
-  final double _wrapCardArea;
+  SliverListDelegateService();
 
   bool _tapDetection = true;
 
@@ -31,7 +27,7 @@ class SliverListDelegateService {
     // カードの固有変数
     var fadeOutTranslation = Offset.zero;
     // （タブバーからの距離）=（カードのホームポジション）-(スクロール距離）+（アニメーション範囲）
-    final distanceFromTop = index * _unwrapCardArea - offsetY + _scrollEffectDistance;
+    final distanceFromTop = index * unwrapCardArea - offsetY + _scrollEffectDistance;
 
     // カードがアニメーション範囲に到達したら、上にスクロールしないようにカードを下方向に少しずつOffset
     if (distanceFromTop < _scrollEffectDistance) {
@@ -49,7 +45,7 @@ class SliverListDelegateService {
     required double offsetY,
   }) {
     // （タブバーからの距離）=（カードのホームポジション）-(スクロール距離）+（アニメーション範囲）
-    final distanceFromTop = index * _unwrapCardArea - offsetY + _scrollEffectDistance;
+    final distanceFromTop = index * unwrapCardArea - offsetY + _scrollEffectDistance;
     // 基本は何もしないが、カードがアニメーション範囲に達した場合、カードを横方向に圧縮しながらOpacityを強める
     final fadeAnimationValue = min(1, max(0, distanceFromTop / _scrollEffectDistance)).toDouble();
     return fadeAnimationValue;
@@ -59,7 +55,7 @@ class SliverListDelegateService {
     required int index,
     required bool isTapThisCard,
   }) {
-    return isTapThisCard ? _unwrapCardArea + _wrapCardArea : _unwrapCardArea;
+    return isTapThisCard ? unwrapCardArea + wrapCardArea : unwrapCardArea;
   }
 
   void dispose() => dispose();
