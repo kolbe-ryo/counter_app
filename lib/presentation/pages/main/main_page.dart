@@ -63,7 +63,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
         _isTapCard = false;
       });
 
-  // カードタップ時のlistener
+  // カードタップ状態の変更と現在タップしたカードのインデックス更新
   void _tapCard(int index) => setState(() {
         _isTapCard = !_isTapCard;
         _activateCardIndex = index;
