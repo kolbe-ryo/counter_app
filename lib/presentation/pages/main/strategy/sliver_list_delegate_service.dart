@@ -18,7 +18,7 @@ class SliverListDelegateService {
   static const _scrollEffectDistance = 100;
 
   /// カードタップ時の他のカードのOffset
-  static const _onTapOffset = Offset(0, 0.2);
+  static const _onTapOffset = Offset(0, 0.5);
 
   bool get tapDetection => _tapDetection;
 
@@ -71,10 +71,9 @@ class SliverListDelegateService {
 
   double cardHeightCalculate({
     required int index,
-    required bool isTapCard,
-    required int activeCardIndex,
+    required bool isTapThisCard,
   }) {
-    return isTapCard && index == activeCardIndex ? _unwrapCardArea + _wrapCardArea : _unwrapCardArea;
+    return isTapThisCard ? _unwrapCardArea + _wrapCardArea : _unwrapCardArea;
   }
 
   void dispose() => dispose();

@@ -82,6 +82,8 @@ class _StackedCardListState extends State<_StackedCardList> {
           delegate: SliverChildBuilderDelegate(
             childCount: testCharacters.length,
             (context, index) {
+              final isTapThisCard = _isTapCard && index == _activateCardIndex;
+
               final fadeOutTranslation = _sliverListDelegateService.fadeOutTranslation(
                 index: index,
                 offsetY: _offsetY,
@@ -102,14 +104,13 @@ class _StackedCardListState extends State<_StackedCardList> {
 
               final cardHeight = _sliverListDelegateService.cardHeightCalculate(
                 index: index,
-                isTapCard: _isTapCard,
-                activeCardIndex: _activateCardIndex,
+                isTapThisCard: isTapThisCard,
               );
 
               return AnimatedSlide(
                 offset: cardTapTranslation,
                 curve: Curves.ease,
-                duration: const Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 300),
                 child: Transform.translate(
                   offset: fadeOutTranslation,
                   child: Opacity(
@@ -120,7 +121,6 @@ class _StackedCardListState extends State<_StackedCardList> {
                           horizontal: (1 - fadeAnimationValue) * _cardReductionRate,
                         ),
                         child: SizedBox(
-                          // TODO: ここをタップ時に増加させているせいでアニメーションが少し変になっている問題の解消
                           height: cardHeight,
                           width: double.infinity,
                           child: Stack(
@@ -139,12 +139,12 @@ class _StackedCardListState extends State<_StackedCardList> {
                                   ),
                                   color: Color(testCharacters[index].color!),
                                   child: InkWell(
+                                    borderRadius: BorderRadius.circular(20),
                                     onTap: () {
                                       if (tapDetection) {
                                         _tapCard(index);
                                       }
                                     },
-                                    borderRadius: BorderRadius.circular(20),
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -172,7 +172,6 @@ class _StackedCardListState extends State<_StackedCardList> {
                   ),
                 ),
               );
-              return null;
             },
           ),
         ),
