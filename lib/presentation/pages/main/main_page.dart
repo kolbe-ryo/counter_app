@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/mock/mock_data.dart';
+import '../../constant_value.dart';
 import 'main_page_header.dart';
 import 'strategy/icon_interface.dart';
 import 'strategy/sliver_list_delegate_service.dart';
@@ -172,12 +173,15 @@ class _CardContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                testCharacters[index].title!,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(top: kPadding / 2),
+                child: Text(
+                  testCharacters[index].title!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Row(
@@ -190,12 +194,15 @@ class _CardContent extends StatelessWidget {
           ),
           const Align(
             alignment: Alignment.topCenter,
-            child: Text(
-              '10',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: EdgeInsets.only(top: kPadding / 2),
+              child: Text(
+                '10',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
