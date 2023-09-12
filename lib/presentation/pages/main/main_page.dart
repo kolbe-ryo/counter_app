@@ -27,10 +27,10 @@ class _StackedCardList extends StatefulWidget {
 
 class _StackedCardListState extends State<_StackedCardList> {
   /// カードの実エリア
-  static const _unwrapCardArea = 100.0;
+  static const unwrapCardArea = 100.0;
 
   /// カードの下方向へのオーバーフローエリア
-  static const _wrapCardArea = 100.0;
+  static const wrapCardArea = 200.0;
 
   /// フェード時のカードの左右割合
   static const _cardReductionRate = 60;
@@ -50,8 +50,8 @@ class _StackedCardListState extends State<_StackedCardList> {
     super.initState();
     _scrollController = ScrollController()..addListener(_listener);
     _sliverListDelegateService = SliverListDelegateService(
-      unwrapCardArea: _unwrapCardArea,
-      wrapCardArea: _wrapCardArea,
+      unwrapCardArea: unwrapCardArea,
+      wrapCardArea: wrapCardArea,
     );
   }
 
@@ -89,12 +89,6 @@ class _StackedCardListState extends State<_StackedCardList> {
                 offsetY: _offsetY,
               );
 
-              final cardTapTranslation = _sliverListDelegateService.cardTapTransition(
-                index: index,
-                isTapCard: _isTapCard,
-                activeCardIndex: _activateCardIndex,
-              );
-
               final fadeAnimationValue = _sliverListDelegateService.fadeAnimationValue(
                 index: index,
                 offsetY: _offsetY,
@@ -107,19 +101,19 @@ class _StackedCardListState extends State<_StackedCardList> {
                 isTapThisCard: isTapThisCard,
               );
 
-              return AnimatedSlide(
-                offset: cardTapTranslation,
-                curve: Curves.ease,
-                duration: const Duration(milliseconds: 300),
-                child: Transform.translate(
-                  offset: fadeOutTranslation,
-                  child: Opacity(
-                    opacity: fadeAnimationValue,
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: (1 - fadeAnimationValue) * _cardReductionRate,
-                        ),
+              return Transform.translate(
+                offset: fadeOutTranslation,
+                child: Opacity(
+                  opacity: fadeAnimationValue,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: (1 - fadeAnimationValue) * _cardReductionRate,
+                      ),
+                      child: AnimatedSize(
+                        alignment: Alignment.topCenter,
+                        curve: Curves.ease,
+                        duration: const Duration(milliseconds: 300),
                         child: SizedBox(
                           height: cardHeight,
                           width: double.infinity,
@@ -128,8 +122,8 @@ class _StackedCardListState extends State<_StackedCardList> {
                             children: [
                               OverflowBox(
                                 alignment: Alignment.topCenter,
-                                minHeight: _unwrapCardArea + _wrapCardArea,
-                                maxHeight: _unwrapCardArea + _wrapCardArea,
+                                minHeight: unwrapCardArea + wrapCardArea,
+                                maxHeight: unwrapCardArea + wrapCardArea,
                                 child: Card(
                                   clipBehavior: Clip.none,
                                   elevation: 1,

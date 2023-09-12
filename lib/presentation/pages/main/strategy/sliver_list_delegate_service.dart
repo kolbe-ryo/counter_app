@@ -2,6 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+// final sliverListDelegateServiceProvider = Provider<SliverListDelegateService>((ref) {
+//   return SliverListDelegateService();
+// });
+
 class SliverListDelegateService {
   SliverListDelegateService({
     required double unwrapCardArea,
@@ -16,9 +20,6 @@ class SliverListDelegateService {
 
   /// アニメーション（TransitionとOpacity）が発動する範囲 0~XXを定める
   static const _scrollEffectDistance = 100;
-
-  /// カードタップ時の他のカードのOffset
-  static const _onTapOffset = Offset(0, 0.5);
 
   bool get tapDetection => _tapDetection;
 
@@ -40,21 +41,6 @@ class SliverListDelegateService {
       _tapDetection = true;
     }
     return fadeOutTranslation;
-  }
-
-  // カードがタップされた時、そのカードより下にあるカードをOffsetしてずらすアニメーション計算ロジック
-  Offset cardTapTransition({
-    required int index,
-    required bool isTapCard,
-    required int activeCardIndex,
-  }) {
-    // カードの固有変数
-    var cardTapTranslation = Offset.zero;
-
-    if (isTapCard && index > activeCardIndex) {
-      cardTapTranslation = _onTapOffset;
-    }
-    return cardTapTranslation;
   }
 
   // カードが最上部付近までスクロールされた時点で横幅が圧縮され、Opacityで消えていくアニメーション計算ロジック
