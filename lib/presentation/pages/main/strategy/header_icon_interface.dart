@@ -6,6 +6,20 @@ abstract class IconInterface {
   void onTap(WidgetRef ref);
 }
 
+class AddHeaderIconAction implements IconInterface {
+  @override
+  void onTap(WidgetRef ref) {
+    logger.info('ADD Header');
+  }
+}
+
+class MenuHeaderIconAction implements IconInterface {
+  @override
+  void onTap(WidgetRef ref) {
+    logger.info('MENU Header');
+  }
+}
+
 class AddIconAction implements IconInterface {
   @override
   void onTap(WidgetRef ref) {
@@ -13,9 +27,9 @@ class AddIconAction implements IconInterface {
   }
 }
 
-class MenuIconAction implements IconInterface {
+class MinusIconAction implements IconInterface {
   @override
   void onTap(WidgetRef ref) {
-    logger.info('MENU');
+    logger.info('MINUS');
   }
 }

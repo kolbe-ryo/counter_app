@@ -42,8 +42,8 @@ class MainPageHeader extends StatelessWidget {
           labelStyle: TextStyles.middleFontStyle,
         ),
         actions: [
-          _HeaderIcon.add(onTap: AddIconAction()),
-          _HeaderIcon.menu(onTap: MenuIconAction()),
+          _HeaderIcon.add(onTap: AddHeaderIconAction()),
+          _HeaderIcon.menu(onTap: MenuHeaderIconAction()),
           const SizedBox(width: kPadding),
         ],
       ),
