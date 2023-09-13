@@ -45,16 +45,16 @@ class MainPageIconButton extends ConsumerWidget {
   factory MainPageIconButton.edit() {
     return MainPageIconButton._(
       EditIconAction(),
-      Icons.remove,
-      Colors.white,
+      Icons.edit,
+      Colors.black54,
     );
   }
 
   factory MainPageIconButton.remove() {
     return MainPageIconButton._(
       RemoveIconAction(),
-      Icons.remove,
-      Colors.white,
+      Icons.delete,
+      Colors.black54,
     );
   }
 
