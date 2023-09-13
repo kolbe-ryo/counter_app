@@ -19,28 +19,26 @@ final routerProvider = Provider<GoRouter>(
       GoRoute(
         path: '/',
         pageBuilder: (context, state) => const TopPageRoute().buildPage(context, state),
+      ),
+      GoRoute(
+        path: '/signup',
+        pageBuilder: (context, state) => const SignUpPageRoute().buildPage(context, state),
+      ),
+      GoRoute(
+        path: '/signin',
+        pageBuilder: (context, state) => const SignInPageRoute().buildPage(context, state),
+      ),
+      GoRoute(
+        path: '/main',
+        pageBuilder: (context, state) => const MainPageRoute().buildPage(context, state),
         routes: [
           GoRoute(
-            path: 'signup',
-            pageBuilder: (context, state) => const SignUpPageRoute().buildPage(context, state),
+            path: 'edit',
+            pageBuilder: (context, state) => const EditPageRoute().buildPage(context, state),
           ),
           GoRoute(
-            path: 'signin',
-            pageBuilder: (context, state) => const SignInPageRoute().buildPage(context, state),
-          ),
-          GoRoute(
-            path: 'main',
-            pageBuilder: (context, state) => const MainPageRoute().buildPage(context, state),
-            routes: [
-              GoRoute(
-                path: 'edit',
-                pageBuilder: (context, state) => const EditPageRoute().buildPage(context, state),
-              ),
-              GoRoute(
-                path: 'other',
-                pageBuilder: (context, state) => const OtherPageRoute().buildPage(context, state),
-              ),
-            ],
+            path: 'other',
+            pageBuilder: (context, state) => const OtherPageRoute().buildPage(context, state),
           ),
         ],
       ),
@@ -124,7 +122,7 @@ class MainPageRoute extends GoRouteData {
 class EditPageRoute extends GoRouteData {
   const EditPageRoute();
 
-  static const name = '/edit';
+  static const name = '/main/edit';
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
@@ -139,7 +137,7 @@ class EditPageRoute extends GoRouteData {
 class OtherPageRoute extends GoRouteData {
   const OtherPageRoute();
 
-  static const name = '/other';
+  static const name = '/main/other';
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
