@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../util/logger.dart';
+import '../../../router.dart';
 
 abstract class IconInterface {
   void onTap(WidgetRef ref);
@@ -16,7 +17,7 @@ class AddHeaderIconAction implements IconInterface {
 class MenuHeaderIconAction implements IconInterface {
   @override
   void onTap(WidgetRef ref) {
-    logger.info('MENU Header');
+    ref.watch(routerProvider).go(OtherPageRoute.name);
   }
 }
 

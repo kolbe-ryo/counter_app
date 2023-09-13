@@ -42,7 +42,7 @@ class MainPageHeader extends StatelessWidget {
         ),
         actions: [
           MainPageIconButton.addNewCard(),
-          MainPageIconButton.minusCount(),
+          MainPageIconButton.menu(),
           const SizedBox(width: kPadding),
         ],
       ),
