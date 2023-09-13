@@ -38,7 +38,7 @@ class MinusIconAction implements IconInterface {
 class EditIconAction implements IconInterface {
   @override
   void onTap(WidgetRef ref) {
-    logger.info('EDIT');
+    ref.watch(routerProvider).go(EditPageRoute.name);
   }
 }
 
