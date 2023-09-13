@@ -169,25 +169,37 @@ class _CardContent extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Stack(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: kPadding / 2),
-                child: Text(
-                  testCharacters[index].title!,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: kPadding / 2),
+                    child: Text(
+                      testCharacters[index].title!,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
+                  Row(
+                    children: [
+                      MainPageIconButton.addCount(),
+                      MainPageIconButton.minusCount(),
+                    ],
+                  ),
+                ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  MainPageIconButton.addCount(),
-                  MainPageIconButton.minusCount(),
+                  MainPageIconButton.edit(),
+                  MainPageIconButton.remove(),
                 ],
               ),
             ],
