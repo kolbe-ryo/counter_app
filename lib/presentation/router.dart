@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'error/error_page.dart';
+import 'pages/edit/edit_page.dart';
 import 'pages/main/main_page.dart';
 import 'pages/other/other_page.dart';
 import 'pages/signin/sign_in_page.dart';
@@ -31,6 +32,10 @@ final routerProvider = Provider<GoRouter>(
             path: 'main',
             pageBuilder: (context, state) => const MainPageRoute().buildPage(context, state),
             routes: [
+              GoRoute(
+                path: 'edit',
+                pageBuilder: (context, state) => const EditPageRoute().buildPage(context, state),
+              ),
               GoRoute(
                 path: 'other',
                 pageBuilder: (context, state) => const OtherPageRoute().buildPage(context, state),
@@ -111,6 +116,21 @@ class MainPageRoute extends GoRouteData {
     return TransitionPage.fade(
       name: name,
       child: const MainPage(),
+    );
+  }
+}
+
+/// 編集画面
+class EditPageRoute extends GoRouteData {
+  const EditPageRoute();
+
+  static const name = '/edit';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return TransitionPage.fade(
+      name: name,
+      child: const EditPage(),
     );
   }
 }
