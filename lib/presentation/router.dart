@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'error/error_page.dart';
 import 'pages/main/main_page.dart';
+import 'pages/other/other_page.dart';
 import 'pages/signin/sign_in_page.dart';
 import 'pages/signup/sign_up_page.dart';
 import 'pages/top/top_page.dart';
@@ -29,6 +30,12 @@ final routerProvider = Provider<GoRouter>(
           GoRoute(
             path: 'main',
             pageBuilder: (context, state) => const MainPageRoute().buildPage(context, state),
+            routes: [
+              GoRoute(
+                path: 'other',
+                pageBuilder: (context, state) => const OtherPageRoute().buildPage(context, state),
+              ),
+            ],
           ),
         ],
       ),
@@ -104,6 +111,21 @@ class MainPageRoute extends GoRouteData {
     return TransitionPage.fade(
       name: name,
       child: const MainPage(),
+    );
+  }
+}
+
+/// その他画面
+class OtherPageRoute extends GoRouteData {
+  const OtherPageRoute();
+
+  static const name = '/other';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return TransitionPage.fade(
+      name: name,
+      child: const OtherPage(),
     );
   }
 }
