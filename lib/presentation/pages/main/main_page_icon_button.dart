@@ -42,6 +42,22 @@ class MainPageIconButton extends ConsumerWidget {
     );
   }
 
+  factory MainPageIconButton.edit() {
+    return MainPageIconButton._(
+      EditIconAction(),
+      Icons.remove,
+      Colors.white,
+    );
+  }
+
+  factory MainPageIconButton.remove() {
+    return MainPageIconButton._(
+      RemoveIconAction(),
+      Icons.remove,
+      Colors.white,
+    );
+  }
+
   final IconInterface _conInterface;
 
   final IconData _iconData;

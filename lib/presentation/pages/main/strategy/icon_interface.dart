@@ -34,3 +34,17 @@ class MinusIconAction implements IconInterface {
     logger.info('MINUS');
   }
 }
+
+class EditIconAction implements IconInterface {
+  @override
+  void onTap(WidgetRef ref) {
+    logger.info('EDIT');
+  }
+}
+
+class RemoveIconAction implements IconInterface {
+  @override
+  void onTap(WidgetRef ref) {
+    logger.info('REMOVE');
+  }
+}
