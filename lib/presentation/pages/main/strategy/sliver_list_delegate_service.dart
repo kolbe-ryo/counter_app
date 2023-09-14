@@ -17,6 +17,7 @@ class SliverListDelegateService {
   /// アニメーション（TransitionとOpacity）が発動する範囲 0~XXを定める
   static const _scrollEffectDistance = 100;
 
+  /// カードがタップ可能かを制御するフラグ
   bool get tapDetection => _tapDetection;
 
   // カードが最上部付近までスクロールされた時点で下方向にOffsetするアニメーション計算ロジック

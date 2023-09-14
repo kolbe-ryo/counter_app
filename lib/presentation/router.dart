@@ -135,7 +135,7 @@ class EditPageRoute extends GoRouteData {
           child: SlideTransition(
             position: animation.drive(
               Tween<Offset>(
-                begin: const Offset(0, 0.2),
+                begin: const Offset(0, 0.3),
                 end: Offset.zero,
               ).chain(
                 CurveTween(curve: Curves.easeInOut),
