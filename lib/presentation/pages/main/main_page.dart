@@ -102,6 +102,8 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                 isTapThisCard: isTapThisCard,
               );
 
+              final isLastCard = index == testCharacters.length - 1;
+
               return Transform.translate(
                 offset: fadeOutTranslation,
                 child: Opacity(
@@ -115,7 +117,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                       curve: Curves.ease,
                       duration: const Duration(milliseconds: 300),
                       child: SizedBox(
-                        height: cardHeight,
+                        height: isLastCard ? unwrapCardArea + wrapCardArea : cardHeight,
                         width: double.infinity,
                         child: Stack(
                           fit: StackFit.passthrough,

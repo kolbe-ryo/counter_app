@@ -16,7 +16,7 @@ class EditPageHeader extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            'TITLE',
+            'EDIT',
             style: TextStyles.largeFontStyle,
           ),
           TextButton(

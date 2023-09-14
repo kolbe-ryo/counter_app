@@ -19,26 +19,28 @@ final routerProvider = Provider<GoRouter>(
       GoRoute(
         path: '/',
         pageBuilder: (context, state) => const TopPageRoute().buildPage(context, state),
-      ),
-      GoRoute(
-        path: '/signup',
-        pageBuilder: (context, state) => const SignUpPageRoute().buildPage(context, state),
-      ),
-      GoRoute(
-        path: '/signin',
-        pageBuilder: (context, state) => const SignInPageRoute().buildPage(context, state),
-      ),
-      GoRoute(
-        path: '/main',
-        pageBuilder: (context, state) => const MainPageRoute().buildPage(context, state),
         routes: [
           GoRoute(
-            path: 'edit',
-            pageBuilder: (context, state) => const EditPageRoute().buildPage(context, state),
+            path: 'signup',
+            pageBuilder: (context, state) => const SignUpPageRoute().buildPage(context, state),
           ),
           GoRoute(
-            path: 'other',
-            pageBuilder: (context, state) => const OtherPageRoute().buildPage(context, state),
+            path: 'signin',
+            pageBuilder: (context, state) => const SignInPageRoute().buildPage(context, state),
+          ),
+          GoRoute(
+            path: 'main',
+            pageBuilder: (context, state) => const MainPageRoute().buildPage(context, state),
+            routes: [
+              GoRoute(
+                path: 'edit',
+                pageBuilder: (context, state) => const EditPageRoute().buildPage(context, state),
+              ),
+              GoRoute(
+                path: 'other',
+                pageBuilder: (context, state) => const OtherPageRoute().buildPage(context, state),
+              ),
+            ],
           ),
         ],
       ),
