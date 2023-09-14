@@ -5,23 +5,19 @@ import '../../../util/logger.dart';
 import '../../constant_value.dart';
 import '../../router.dart';
 import '../main/main_page_icon_button.dart';
+import 'edit_page_header.dart';
 
-class EditPage extends ConsumerWidget {
+class EditPage extends StatelessWidget {
   const EditPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+  Widget build(BuildContext context) {
+    return const Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            const _EditCard(),
-            Center(
-              child: TextButton(
-                onPressed: () => ref.watch(routerProvider).go(MainPageRoute.name),
-                child: const Text('Edit Page'),
-              ),
-            ),
+            EditPageHeader(),
+            _EditCard(),
           ],
         ),
       ),
@@ -32,6 +28,7 @@ class EditPage extends ConsumerWidget {
 class _EditCard extends ConsumerWidget {
   const _EditCard();
 
+  // TODO:  Cardを共通化する
   Widget _child(BuildContext context) => SizedBox(
         height: 300,
         width: MediaQuery.of(context).size.width,
