@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../util/logger.dart';
 import '../../constant_value.dart';
 import '../../router.dart';
 import '../main/main_page_icon_button.dart';
 
-class EditPage extends ConsumerStatefulWidget {
+class EditPage extends ConsumerWidget {
   const EditPage({super.key});
 
   @override
-  EditPageState createState() => EditPageState();
-}
-
-class EditPageState extends ConsumerState<EditPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -33,7 +29,7 @@ class EditPageState extends ConsumerState<EditPage> {
   }
 }
 
-class _EditCard extends StatelessWidget {
+class _EditCard extends ConsumerWidget {
   const _EditCard();
 
   Widget _child(BuildContext context) => SizedBox(
@@ -111,14 +107,20 @@ class _EditCard extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final limitedSlidable = MediaQuery.of(context).size.height / 3;
     return Draggable(
       axis: Axis.vertical,
-      // ドラッグ開始と同時にchildを削除する
-      onDragStarted: () => {},
       // ドラッグ終了と同時にOffset量に応じて画面を閉じたり何もしなかったりする
-      onDragEnd: (_) => {},
+      onDragEnd: (detail) {
+        logger.info('onEnd');
+        if (limitedSlidable > detail.offset.dy && detail.offset.dy > 0) {
+          return;
+        }
+        ref.watch(routerProvider).go(MainPageRoute.name);
+      },
       feedback: _child(context),
+      childWhenDragging: const SizedBox.shrink(),
       child: _child(context),
     );
   }
