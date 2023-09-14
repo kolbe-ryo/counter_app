@@ -128,7 +128,6 @@ class EditPageRoute extends GoRouteData {
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return CustomTransitionPage<void>(
       child: const EditPage(),
-      transitionDuration: const Duration(milliseconds: 500),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation,
