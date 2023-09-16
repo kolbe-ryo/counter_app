@@ -83,7 +83,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
         const SliverPadding(padding: EdgeInsets.only(bottom: 10)),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            childCount: testCharacters.length,
+            childCount: mockData.length,
             (context, index) {
               final isTapThisCard = _isTapCard && index == _activateCardIndex;
 
@@ -104,7 +104,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                 isTapThisCard: isTapThisCard,
               );
 
-              final isLastCard = index == testCharacters.length - 1;
+              final isLastCard = index == mockData.length - 1;
 
               return Transform.translate(
                 offset: fadeOutTranslation,
@@ -135,7 +135,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                                   // BorderRadius.onlyからこちらに変更するとリストのレンダリングが爆速化する
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                color: Color(testCharacters[index].color!),
+                                color: mockData[index].categoryInfo.color,
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(20),
                                   onTap: () async {
@@ -183,7 +183,7 @@ class _CardContent extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: kPadding / 2),
                     child: Text(
-                      testCharacters[index].title!,
+                      mockData[index].name.value,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22,
