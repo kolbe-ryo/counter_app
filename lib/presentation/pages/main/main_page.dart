@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/mock/mock_data.dart';
-import '../../constant_value.dart';
+import '../../common/counter_card.dart';
 import 'main_page_header.dart';
-import 'main_page_icon_button.dart';
 import 'strategy/sliver_list_delegate_service.dart';
 
 /// カードの実エリア
@@ -119,7 +118,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                       curve: Curves.ease,
                       duration: const Duration(milliseconds: 300),
                       child: SizedBox(
-                        height: isLastCard ? unwrapCardArea + wrapCardArea : cardHeight,
+                        height: isLastCard ? unwrapCardArea + wrapCardArea + 100 : cardHeight,
                         width: double.infinity,
                         child: Stack(
                           fit: StackFit.passthrough,
@@ -128,23 +127,13 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                               alignment: Alignment.topCenter,
                               minHeight: unwrapCardArea + wrapCardArea,
                               maxHeight: unwrapCardArea + wrapCardArea,
-                              child: Card(
-                                clipBehavior: Clip.none,
-                                elevation: 1,
-                                shape: RoundedRectangleBorder(
-                                  // BorderRadius.onlyからこちらに変更するとリストのレンダリングが爆速化する
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                color: mockData[index].categoryInfo.color,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(20),
-                                  onTap: () async {
-                                    if (tapDetection || _isTapCard) {
-                                      await _tapCard(index);
-                                    }
-                                  },
-                                  child: _CardContent(index: index),
-                                ),
+                              child: CounterCard(
+                                index: index,
+                                onTap: () async {
+                                  if (tapDetection || _isTapCard) {
+                                    await _tapCard(index);
+                                  }
+                                },
                               ),
                             ),
                           ],
@@ -158,72 +147,6 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _CardContent extends StatelessWidget {
-  const _CardContent({required this.index});
-
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: kPadding / 2),
-                    child: Text(
-                      mockData[index].name.value,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      MainPageIconButton.addCount(),
-                      MainPageIconButton.minusCount(),
-                    ],
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  MainPageIconButton.edit(),
-                  MainPageIconButton.remove(),
-                ],
-              ),
-            ],
-          ),
-          const Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: EdgeInsets.only(top: kPadding / 2),
-              child: Text(
-                '10',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
