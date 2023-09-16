@@ -26,6 +26,7 @@ dependencies:
   intl: ^0.18.1
   json_annotation: ^4.8.1
   lottie: ^2.6.0
+  modal_bottom_sheet: ^3.0.0-pre
   sign_in_with_apple: ^5.0.0
   simple_logger: ^1.9.0+2
   stacked_card_carousel: ^0.0.4
