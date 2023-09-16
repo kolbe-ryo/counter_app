@@ -66,10 +66,12 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
       });
 
   // カードタップ状態の変更と現在タップしたカードのインデックス更新
-  void _tapCard(int index) => setState(() {
-        _isTapCard = !_isTapCard;
-        _activateCardIndex = index;
-      });
+  Future<void> _tapCard(int index) async {
+    setState(() {
+      _isTapCard = !_isTapCard;
+      _activateCardIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,9 +138,9 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                                 color: Color(testCharacters[index].color!),
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(20),
-                                  onTap: () {
+                                  onTap: () async {
                                     if (tapDetection || _isTapCard) {
-                                      _tapCard(index);
+                                      await _tapCard(index);
                                     }
                                   },
                                   child: _CardContent(index: index),

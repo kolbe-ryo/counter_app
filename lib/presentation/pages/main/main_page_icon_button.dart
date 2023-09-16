@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../edit/strategy/edit_page_icon_action.dart';
 import 'strategy/icon_interface.dart';
+import 'strategy/main_page_icon_action.dart';
 
 class MainPageIconButton extends ConsumerWidget {
   const MainPageIconButton._(

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../util/text_styles.dart';
 import '../../constant_value.dart';
-import '../../router.dart';
 
 class EditPageHeader extends ConsumerWidget {
   const EditPageHeader({super.key});
@@ -20,7 +19,7 @@ class EditPageHeader extends ConsumerWidget {
             style: TextStyles.largeFontStyle,
           ),
           TextButton(
-            onPressed: () => ref.watch(routerProvider).go(MainPageRoute.name),
+            onPressed: () => Navigator.of(context).pop(true),
             child: const Text(
               'Done',
               style: TextStyle(
