@@ -21,7 +21,7 @@ final mockData = <Counter>[
     'Apple',
     CategoryInfo('Fruit', Colors.amber),
     1,
-    'Food for lunch',
+    'TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest',
   ),
   Counter.init(
     'Beer',
