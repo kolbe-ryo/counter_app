@@ -127,7 +127,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                               alignment: Alignment.topCenter,
                               minHeight: unwrapCardArea + wrapCardArea,
                               maxHeight: unwrapCardArea + wrapCardArea,
-                              child: CounterCard(
+                              child: CounterCard.forMain(
                                 index: index,
                                 onTap: () async {
                                   if (tapDetection || _isTapCard) {
