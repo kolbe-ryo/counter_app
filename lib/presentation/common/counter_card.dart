@@ -10,7 +10,10 @@ class CounterCard extends ConsumerWidget {
   const CounterCard._(
     this._counter,
     this._onTap,
-    this._bottomActionWidgets,
+    this._addButton,
+    this._minusButton,
+    this._editButton,
+    this._removeButton,
   );
 
   factory CounterCard.forMain({
@@ -20,13 +23,10 @@ class CounterCard extends ConsumerWidget {
     return CounterCard._(
       mockData[index],
       onTap,
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          MainPageIconButton.edit(),
-          MainPageIconButton.remove(),
-        ],
-      ),
+      MainPageIconButton.addCount(),
+      MainPageIconButton.minusCount(),
+      MainPageIconButton.edit(),
+      MainPageIconButton.remove(),
     );
   }
 
@@ -37,6 +37,9 @@ class CounterCard extends ConsumerWidget {
       counter,
       null,
       const SizedBox.shrink(),
+      const SizedBox.shrink(),
+      const SizedBox.shrink(),
+      const SizedBox.shrink(),
     );
   }
 
@@ -44,7 +47,10 @@ class CounterCard extends ConsumerWidget {
 
   final void Function()? _onTap;
 
-  final Widget _bottomActionWidgets;
+  final Widget _addButton;
+  final Widget _minusButton;
+  final Widget _editButton;
+  final Widget _removeButton;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -83,13 +89,33 @@ class CounterCard extends ConsumerWidget {
                       ),
                       Row(
                         children: [
-                          MainPageIconButton.addCount(),
-                          MainPageIconButton.minusCount(),
+                          _addButton,
+                          _minusButton,
                         ],
                       ),
                     ],
                   ),
-                  _bottomActionWidgets,
+                  SizedBox(
+                    height: 100,
+                    width: double.infinity,
+                    child: Text(
+                      _counter.description ?? 'No description',
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.fade,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      _editButton,
+                      _removeButton,
+                    ],
+                  ),
                 ],
               ),
               Align(
