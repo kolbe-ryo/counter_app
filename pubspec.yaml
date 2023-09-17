@@ -29,6 +29,7 @@ dependencies:
   modal_bottom_sheet: ^3.0.0-pre
   sign_in_with_apple: ^5.0.0
   simple_logger: ^1.9.0+2
+  stack_trace: ^1.11.0
   stacked_card_carousel: ^0.0.4
 
 dev_dependencies:
