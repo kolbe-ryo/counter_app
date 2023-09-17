@@ -45,6 +45,15 @@ class Counter with _$Counter {
     );
   }
 
+  factory Counter.empty() {
+    return Counter(
+      name: StringValue(),
+      count: const CountValue(),
+      categoryInfo: CategoryInfo(),
+      lastUpdated: UpdatedDatetimeValue.now(),
+    );
+  }
+
   /// カウントアップ
   Counter increment() => copyWith(count: count.increment());
 
