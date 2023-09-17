@@ -2,19 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/mock/mock_data.dart';
+import '../../domain/repository/counter/entity/counter.dart';
 import '../constant_value.dart';
 import '../pages/main/main_page_icon_button.dart';
 
 class CounterCard extends ConsumerWidget {
-  const CounterCard({
+  const CounterCard._(
+    this._counter,
+    this._onTap,
+    this._bottomActionWidgets,
+  );
+
+  factory CounterCard.forMain({
     required int index,
     required void Function()? onTap,
-    super.key,
-  })  : _index = index,
-        _onTap = onTap;
+  }) {
+    return CounterCard._(
+      mockData[index],
+      onTap,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          MainPageIconButton.edit(),
+          MainPageIconButton.remove(),
+        ],
+      ),
+    );
+  }
 
-  final int _index;
+  factory CounterCard.forEdit({
+    required Counter counter,
+  }) {
+    return CounterCard._(
+      counter,
+      null,
+      const SizedBox.shrink(),
+    );
+  }
+
+  final Counter _counter;
+
   final void Function()? _onTap;
+
+  final Widget _bottomActionWidgets;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +55,7 @@ class CounterCard extends ConsumerWidget {
         borderRadius: BorderRadius.circular(20),
         side: const BorderSide(color: Colors.white),
       ),
-      color: mockData[_index].categoryInfo.color,
+      color: _counter.categoryInfo.color,
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
         onTap: _onTap,
@@ -43,7 +73,7 @@ class CounterCard extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: kPadding / 2),
                         child: Text(
-                          mockData[_index].name.value,
+                          _counter.name.value,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 22,
@@ -59,13 +89,7 @@ class CounterCard extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      MainPageIconButton.edit(),
-                      MainPageIconButton.remove(),
-                    ],
-                  ),
+                  _bottomActionWidgets,
                 ],
               ),
               Align(
@@ -73,7 +97,7 @@ class CounterCard extends ConsumerWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: kPadding / 2),
                   child: Text(
-                    mockData[_index].count.count.toString(),
+                    _counter.count.count.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
