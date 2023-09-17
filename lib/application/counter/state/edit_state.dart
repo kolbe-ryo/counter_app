@@ -2,12 +2,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/repository/counter/entity/counter.dart';
 
-final editCardStateNotifierNotifierProvider = StateNotifierProvider.autoDispose<EditCardStateNotifier, Counter>(
+final editCardStateNotifierProvider = StateNotifierProvider<EditCardStateNotifier, Counter>(
   (ref) => EditCardStateNotifier(),
 );
 
 class EditCardStateNotifier extends StateNotifier<Counter> {
   EditCardStateNotifier() : super(Counter.empty());
+
+  // ignore: use_setters_to_change_properties
+  void updateState(Counter counter) {
+    state = counter;
+  }
 
   /// 名前を変更する
   void changeCounterName(String name) {

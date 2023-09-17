@@ -11,7 +11,7 @@ class EditCounterService {
 
   /// 名前を変更する
   void changeCounterName({required String name}) {
-    ref.read(editCardStateNotifierNotifierProvider.notifier).changeCounterName(name);
+    ref.read(editCardStateNotifierProvider.notifier).changeCounterName(name);
   }
 
   /// カテゴリを変更する
