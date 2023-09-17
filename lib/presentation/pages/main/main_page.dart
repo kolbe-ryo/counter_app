@@ -67,6 +67,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
 
   // カードタップ状態の変更と現在タップしたカードのインデックス更新
   Future<void> _tapCard(int index) async {
+    ref.read(editCardStateNotifierProvider.notifier).updateState(mockData[index]);
     setState(() {
       _isTapCard = !_isTapCard;
       _activateCardIndex = index;
@@ -132,9 +133,6 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                                 index: index,
                                 onTap: () async {
                                   if (tapDetection || _isTapCard) {
-                                    ref.read(editCardStateNotifierProvider.notifier).updateState(
-                                          mockData[index],
-                                        );
                                     await _tapCard(index);
                                   }
                                 },
