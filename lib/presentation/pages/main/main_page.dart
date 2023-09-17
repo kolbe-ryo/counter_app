@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../application/counter/state/edit_state.dart';
 import '../../../domain/mock/mock_data.dart';
 import '../../common/counter_card.dart';
 import 'main_page_header.dart';
@@ -131,6 +132,9 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                                 index: index,
                                 onTap: () async {
                                   if (tapDetection || _isTapCard) {
+                                    ref.read(editCardStateNotifierProvider.notifier).updateState(
+                                          mockData[index],
+                                        );
                                     await _tapCard(index);
                                   }
                                 },

@@ -47,9 +47,9 @@ class Counter with _$Counter {
 
   factory Counter.empty() {
     return Counter(
-      name: StringValue(),
+      name: StringValue('empty'),
       count: const CountValue(),
-      categoryInfo: CategoryInfo(),
+      categoryInfo: CategoryInfo('empty'),
       lastUpdated: UpdatedDatetimeValue.now(),
     );
   }

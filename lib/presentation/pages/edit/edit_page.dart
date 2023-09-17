@@ -28,7 +28,7 @@ class _EditCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final counter = ref.watch(editCardStateNotifierNotifierProvider);
+    final counter = ref.watch(editCardStateNotifierProvider);
     return SizedBox(
       height: 300,
       width: MediaQuery.of(context).size.width,
