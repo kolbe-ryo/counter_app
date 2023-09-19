@@ -49,7 +49,7 @@ class Counter with _$Counter {
     return Counter(
       name: StringValue('empty'),
       count: const CountValue(),
-      categoryInfo: CategoryInfo('empty'),
+      categoryInfo: CategoryInfo(name: 'empty'),
       lastUpdated: UpdatedDatetimeValue.now(),
     );
   }

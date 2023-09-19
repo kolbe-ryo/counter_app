@@ -91,11 +91,11 @@ class __$$_CategoryInfoCopyWithImpl<$Res>
     Object? color = null,
   }) {
     return _then(_$_CategoryInfo(
-      null == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      null == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
@@ -106,7 +106,7 @@ class __$$_CategoryInfoCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CategoryInfo extends _CategoryInfo {
-  _$_CategoryInfo([this.name = '', this.color = Colors.white]) : super._();
+  _$_CategoryInfo({this.name = '', this.color = Colors.white}) : super._();
 
   /// カテゴリ名
   @override
@@ -143,7 +143,7 @@ class _$_CategoryInfo extends _CategoryInfo {
 }
 
 abstract class _CategoryInfo extends CategoryInfo {
-  factory _CategoryInfo([final String name, final Color color]) =
+  factory _CategoryInfo({final String name, final Color color}) =
       _$_CategoryInfo;
   _CategoryInfo._() : super._();
 

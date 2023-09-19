@@ -8,13 +8,13 @@ part 'category_info.freezed.dart';
 /// カテゴリオブジェクト
 @freezed
 class CategoryInfo with _$CategoryInfo {
-  factory CategoryInfo([
+  factory CategoryInfo({
     /// カテゴリ名
     @Default('') String name,
 
     /// カテゴリカラー
     @Default(Colors.white) Color color,
-  ]) = _CategoryInfo;
+  }) = _CategoryInfo;
 
   CategoryInfo._() {
     // 前後に空白があったらエラーにする
