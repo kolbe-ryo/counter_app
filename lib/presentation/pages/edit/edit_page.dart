@@ -169,12 +169,12 @@ class __TextFormFieldState extends ConsumerState<_TextFormField> {
         decoration: InputDecoration(
           labelText: widget._labelText,
           labelStyle: const TextStyle(
-            color: Colors.black26,
+            color: Colors.black38,
             fontSize: 24,
           ),
           hintText: widget._hintText,
           hintStyle: const TextStyle(
-            color: Colors.black26,
+            color: Colors.black38,
             fontSize: 24,
           ),
           errorText: widget._errorText,
@@ -198,7 +198,7 @@ class _CategorySelector extends ConsumerWidget {
         const Text(
           'Category',
           style: TextStyle(
-            color: Colors.black26,
+            color: Colors.black38,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -216,9 +216,29 @@ class _CategorySelector extends ConsumerWidget {
 }
 
 class _CategoryElement extends StatelessWidget {
-  const _CategoryElement(this._categoryInfo);
+  const _CategoryElement._(
+    this._categoryInfo,
+    this._buttonStyle,
+    this._textStyle,
+  );
+
+  factory _CategoryElement.nonSelect(CategoryInfo categoryInfo) {
+    return _CategoryElement._(
+      categoryInfo,
+    );
+  }
+
+  factory _CategoryElement.select(CategoryInfo categoryInfo) {
+    return _CategoryElement._(
+      categoryInfo,
+    );
+  }
 
   final CategoryInfo _categoryInfo;
+
+  final ButtonStyle _buttonStyle;
+
+  final TextStyle _textStyle;
 
   @override
   Widget build(BuildContext context) {
