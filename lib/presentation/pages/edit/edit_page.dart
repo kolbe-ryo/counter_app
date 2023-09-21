@@ -222,12 +222,14 @@ class _CategoryElement extends StatelessWidget {
     this._textStyle,
   );
 
+  // TODO 選択されていないスタイルのボタン
   factory _CategoryElement.nonSelect(CategoryInfo categoryInfo) {
     return _CategoryElement._(
       categoryInfo,
     );
   }
 
+  // TODO 選択されているスタイルのボタン
   factory _CategoryElement.select(CategoryInfo categoryInfo) {
     return _CategoryElement._(
       categoryInfo,
