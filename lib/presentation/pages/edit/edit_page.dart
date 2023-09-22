@@ -206,9 +206,7 @@ class _CategorySelector extends ConsumerWidget {
         const SizedBox(height: kPadding),
         Wrap(
           spacing: kPadding / 2,
-          children: categoryData.map((categoryInfo) {
-            return _CategoryElement(categoryInfo);
-          }).toList(),
+          children: categoryData.map(_CategoryElement.select).toList(),
         ),
       ],
     );
@@ -222,21 +220,37 @@ class _CategoryElement extends StatelessWidget {
     this._textStyle,
   );
 
-  // TODO 選択されていないスタイルのボタン
   factory _CategoryElement.nonSelect(CategoryInfo categoryInfo) {
     return _CategoryElement._(
       categoryInfo,
-      const ButtonStyle(),
-      TextStyles(),
+      OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.black45),
+        splashFactory: NoSplash.splashFactory,
+      ),
+      const TextStyle(
+        color: Colors.black26,
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
-  // TODO 選択されているスタイルのボタン
   factory _CategoryElement.select(CategoryInfo categoryInfo) {
     return _CategoryElement._(
       categoryInfo,
-      const ButtonStyle(),
-      TextStyles(),
+      OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        shape: const StadiumBorder(),
+        side: const BorderSide(color: Colors.pinkAccent),
+        splashFactory: NoSplash.splashFactory,
+      ),
+      const TextStyle(
+        color: Colors.pinkAccent,
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
@@ -249,22 +263,13 @@ class _CategoryElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.black,
-        shape: const StadiumBorder(),
-        side: const BorderSide(color: Colors.black45),
-        splashFactory: NoSplash.splashFactory,
-      ),
+      style: _buttonStyle,
       onPressed: () {
         logger.info(_categoryInfo.name);
       },
       child: Text(
         _categoryInfo.name,
-        style: const TextStyle(
-          color: Colors.black26,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+        style: _textStyle,
       ),
     );
   }
