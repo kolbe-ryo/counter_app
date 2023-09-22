@@ -226,6 +226,8 @@ class _CategoryElement extends StatelessWidget {
   factory _CategoryElement.nonSelect(CategoryInfo categoryInfo) {
     return _CategoryElement._(
       categoryInfo,
+      const ButtonStyle(),
+      TextStyles(),
     );
   }
 
@@ -233,6 +235,8 @@ class _CategoryElement extends StatelessWidget {
   factory _CategoryElement.select(CategoryInfo categoryInfo) {
     return _CategoryElement._(
       categoryInfo,
+      const ButtonStyle(),
+      TextStyles(),
     );
   }
 
