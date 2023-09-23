@@ -6,6 +6,7 @@ import '../../../util/text_styles.dart';
 import '../../common/buttons/back_app_button.dart';
 import '../../constant_value.dart';
 import 'menu_card.dart';
+import 'other_page_header.dart';
 
 class OtherPage extends ConsumerWidget {
   const OtherPage({super.key});
@@ -15,20 +16,9 @@ class OtherPage extends ConsumerWidget {
     return Scaffold(
       body: CustomScrollView(
         controller: ScrollController(),
-        slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            pinned: true,
-            elevation: 0,
-            title: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'MENU',
-                style: TextStyles.largeFontStyle(),
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(
+        slivers: const [
+          OtherPageHeader(),
+          SliverToBoxAdapter(
             child: Row(
               children: [
                 _AboutThisApp(),
@@ -36,7 +26,7 @@ class OtherPage extends ConsumerWidget {
               ],
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: BackAppButton(),
           ),
         ],
