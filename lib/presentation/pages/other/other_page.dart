@@ -9,7 +9,9 @@ class OtherPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Menu'),
+      ),
       body: Center(
         child: TextButton(
           onPressed: () => ref.watch(routerProvider).go(MainPageRoute.name),
