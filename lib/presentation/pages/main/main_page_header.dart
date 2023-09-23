@@ -16,11 +16,11 @@ class MainPageHeader extends StatelessWidget {
         automaticallyImplyLeading: false,
         pinned: true,
         elevation: 0,
-        title: const Align(
+        title: Align(
           alignment: Alignment.centerLeft,
           child: Text(
             'COUNTERS',
-            style: TextStyles.largeFontStyle,
+            style: TextStyles.largeFontStyle(),
           ),
         ),
         bottom: TabBar(

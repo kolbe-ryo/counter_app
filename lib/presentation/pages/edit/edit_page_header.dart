@@ -14,9 +14,9 @@ class EditPageHeader extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
+          Text(
             'EDIT',
-            style: TextStyles.largeFontStyle,
+            style: TextStyles.largeFontStyle(),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
