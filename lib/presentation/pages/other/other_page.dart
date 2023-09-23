@@ -12,7 +12,7 @@ class OtherPage extends ConsumerWidget {
       body: Center(
         child: TextButton(
           onPressed: () => ref.watch(routerProvider).go(MainPageRoute.name),
-          child: const Text('Other Page'),
+          child: const Text('Other Page For Menu'),
         ),
       ),
     );
