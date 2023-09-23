@@ -13,20 +13,33 @@ class OtherPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(kPadding),
-        child: Column(
-          children: [
-            Row(
+      body: CustomScrollView(
+        controller: ScrollController(),
+        slivers: [
+          SliverAppBar(
+            automaticallyImplyLeading: false,
+            pinned: true,
+            elevation: 0,
+            title: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'MENU',
+                style: TextStyles.largeFontStyle(),
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Row(
               children: [
                 _AboutThisApp(),
                 _AboutThisApp(),
               ],
             ),
-            BackAppButton(),
-          ],
-        ),
+          ),
+          const SliverToBoxAdapter(
+            child: BackAppButton(),
+          ),
+        ],
       ),
     );
   }
@@ -40,17 +53,18 @@ class _AboutThisApp extends StatelessWidget {
     return Flexible(
       flex: 2,
       child: MenuCard.square(
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.apple,
+              color: Colors.white,
               size: settingIconSize,
             ),
-            SizedBox(height: kPadding),
+            const SizedBox(height: kPadding),
             Text(
               'About Thid App',
-              style: TextStyles.largeFontStyle,
+              style: TextStyles.largeFontStyle(color: Colors.white),
             ),
           ],
         ),
