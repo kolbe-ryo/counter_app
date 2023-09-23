@@ -59,7 +59,7 @@ class __SignInButtonsState extends State<_SignInButtons> {
         const SizedBox(height: 30),
         RoutingAppButtons.toMain(),
         const SizedBox(height: 60),
-        const BackAppButton(),
+        BackAppButton.toTop(),
       ],
     );
   }

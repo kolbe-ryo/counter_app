@@ -56,7 +56,7 @@ class __SignUpButtonsState extends State<_SignUpButtons> {
         const SizedBox(height: 30),
         AppSignUpButtons.google(),
         const SizedBox(height: 60),
-        const BackAppButton(),
+        BackAppButton.toTop(),
       ],
     );
   }

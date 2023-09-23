@@ -16,9 +16,9 @@ class OtherPage extends ConsumerWidget {
     return Scaffold(
       body: CustomScrollView(
         controller: ScrollController(),
-        slivers: const [
-          OtherPageHeader(),
-          SliverToBoxAdapter(
+        slivers: [
+          const OtherPageHeader(),
+          const SliverToBoxAdapter(
             child: Row(
               children: [
                 _AboutThisApp(),
@@ -27,7 +27,7 @@ class OtherPage extends ConsumerWidget {
             ),
           ),
           SliverToBoxAdapter(
-            child: BackAppButton(),
+            child: BackAppButton.toMain(),
           ),
         ],
       ),
