@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../util/text_styles.dart';
 
-class OtherPageHeader extends StatelessWidget {
+class OtherPageHeader extends StatelessWidget implements PreferredSizeWidget {
   const OtherPageHeader({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
+    return AppBar(
       automaticallyImplyLeading: false,
-      pinned: true,
       elevation: 0,
       title: Align(
         alignment: Alignment.centerLeft,
@@ -22,4 +21,7 @@ class OtherPageHeader extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(30);
 }
