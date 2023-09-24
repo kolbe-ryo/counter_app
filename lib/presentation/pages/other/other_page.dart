@@ -5,6 +5,7 @@ import '../../../util/logger.dart';
 import '../../../util/text_styles.dart';
 import '../../common/buttons/back_app_button.dart';
 import '../../constant_value.dart';
+import '../../router.dart';
 import 'menu_card.dart';
 import 'other_page_header.dart';
 
@@ -53,15 +54,17 @@ class OtherPage extends ConsumerWidget {
   }
 }
 
-class _AboutThisApp extends StatelessWidget {
+class _AboutThisApp extends ConsumerWidget {
   const _AboutThisApp();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Flexible(
       child: MenuCard.square(
-        // TODO: Action
-        onTap: () => logger.info('tap'),
+        onTap: () => ref.watch(routerProvider).go(
+              WebviewRoute.name,
+              extra: aboutAppUrl,
+            ),
         color: Colors.teal,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -140,16 +143,18 @@ class _RateApp extends StatelessWidget {
   }
 }
 
-class _Contact extends StatelessWidget {
+class _Contact extends ConsumerWidget {
   const _Contact();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Flexible(
       flex: 2,
       child: MenuCard.common(
-        // TODO: Action
-        onTap: () => logger.info('contact app'),
+        onTap: () => ref.watch(routerProvider).go(
+              WebviewRoute.name,
+              extra: contactUrl,
+            ),
         color: Colors.cyan,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
