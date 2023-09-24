@@ -14,21 +14,40 @@ class OtherPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const OtherPageHeader(),
-            const Row(
-              children: [
-                _AboutThisApp(),
-                _License(),
-              ],
+      body: Stack(
+        children: [
+          const Align(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  OtherPageHeader(),
+                  Row(
+                    children: [
+                      _AboutThisApp(),
+                      _License(),
+                    ],
+                  ),
+                  _RateApp(),
+                  Row(
+                    children: [
+                      _Contact(),
+                      _Reset(),
+                    ],
+                  ),
+                  _CategorySetting(),
+                ],
+              ),
             ),
-            const _RateApp(),
-            const SizedBox(height: kPadding),
-            BackAppButton.toMain(),
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: kPadding * 2),
+              child: BackAppButton.toMain(),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -101,7 +120,7 @@ class _RateApp extends StatelessWidget {
     return MenuCard.common(
       // TODO: Action
       onTap: () => logger.info('rate app'),
-      color: Colors.deepOrangeAccent,
+      color: Colors.blueAccent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -121,5 +140,91 @@ class _RateApp extends StatelessWidget {
   }
 }
 
-const _contact = 'contact';
-const _reset = 'reset';
+class _Contact extends StatelessWidget {
+  const _Contact();
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      flex: 2,
+      child: MenuCard.common(
+        // TODO: Action
+        onTap: () => logger.info('contact app'),
+        color: Colors.cyan,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.mail,
+              color: Colors.white,
+              size: settingIconSize,
+            ),
+            const SizedBox(width: kPadding * 2),
+            Text(
+              'Contact',
+              style: TextStyles.largeFontStyle(color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Reset extends StatelessWidget {
+  const _Reset();
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: MenuCard.common(
+        // TODO: Action
+        onTap: () => logger.info('reset'),
+        color: Colors.deepOrange,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.new_releases_outlined,
+              color: Colors.white,
+              size: settingIconSize,
+            ),
+            const SizedBox(width: kPadding),
+            Text(
+              'Reset',
+              style: TextStyles.largeFontStyle(color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CategorySetting extends StatelessWidget {
+  const _CategorySetting();
+
+  @override
+  Widget build(BuildContext context) {
+    return MenuCard.common(
+      // TODO: Action
+      onTap: () => logger.info('category setting'),
+      color: Colors.purpleAccent,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.palette,
+            color: Colors.white,
+            size: settingIconSize,
+          ),
+          const SizedBox(width: kPadding * 2),
+          Text(
+            'Category Setting',
+            style: TextStyles.largeFontStyle(color: Colors.white),
+          ),
+        ],
+      ),
+    );
+  }
+}
