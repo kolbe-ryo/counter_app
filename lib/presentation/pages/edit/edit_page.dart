@@ -109,7 +109,7 @@ class __ContentsEditorState extends ConsumerState<_ContentsEditor> {
             errorText: _titleErrorText,
             labelText: 'Title',
             hintText: 'Input Title',
-            textStyle: TextStyles.largeFontStyle,
+            textStyle: TextStyles.largeFontStyle(),
           ),
           _TextFormField(
             textController: _descriptionTextController,

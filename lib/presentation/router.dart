@@ -6,6 +6,7 @@ import 'error/error_page.dart';
 import 'pages/edit/edit_page.dart';
 import 'pages/main/main_page.dart';
 import 'pages/other/other_page.dart';
+import 'pages/other/webview/base_webview.dart';
 import 'pages/signin/sign_in_page.dart';
 import 'pages/signup/sign_up_page.dart';
 import 'pages/top/top_page.dart';
@@ -39,6 +40,12 @@ final routerProvider = Provider<GoRouter>(
               GoRoute(
                 path: 'other',
                 pageBuilder: (context, state) => const OtherPageRoute().buildPage(context, state),
+                routes: [
+                  GoRoute(
+                    path: 'webview',
+                    pageBuilder: (context, state) => const WebviewRoute().buildPage(context, state),
+                  ),
+                ],
               ),
             ],
           ),
@@ -162,6 +169,21 @@ class OtherPageRoute extends GoRouteData {
     return TransitionPage.fade(
       name: name,
       child: const OtherPage(),
+    );
+  }
+}
+
+class WebviewRoute extends GoRouteData {
+  const WebviewRoute();
+
+  static const name = '/main/other/webview';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    final url = state.extra! as String;
+    return TransitionPage.fade(
+      name: name,
+      child: BaseWebview(url: url),
     );
   }
 }

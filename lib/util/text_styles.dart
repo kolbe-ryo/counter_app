@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TextStyles {
-  static const TextStyle largeFontStyle = TextStyle(
-    color: Colors.black,
-    fontSize: 30,
-    fontWeight: FontWeight.bold,
-  );
+  static TextStyle largeFontStyle({Color color = Colors.black}) => TextStyle(
+        color: color,
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
+      );
 
   static const TextStyle middleFontStyle = TextStyle(
     fontSize: 18,
