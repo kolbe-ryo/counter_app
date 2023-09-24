@@ -8,13 +8,16 @@ class MenuCard extends ConsumerWidget {
   const MenuCard._(
     Widget child,
     void Function() onTap,
+    Color color,
   )   : _child = child,
-        _onTap = onTap;
+        _onTap = onTap,
+        _color = color;
 
   factory MenuCard.common({
     required Widget child,
     double? height = 60,
     required void Function() onTap,
+    required Color color,
   }) {
     return MenuCard._(
       SizedBox(
@@ -23,12 +26,14 @@ class MenuCard extends ConsumerWidget {
         child: Center(child: child),
       ),
       onTap,
+      color,
     );
   }
 
   factory MenuCard.square({
     required Widget child,
     required void Function() onTap,
+    required Color color,
   }) {
     return MenuCard._(
       AspectRatio(
@@ -39,18 +44,19 @@ class MenuCard extends ConsumerWidget {
         ),
       ),
       onTap,
+      color,
     );
   }
 
   final Widget _child;
   final void Function() _onTap;
+  final Color _color;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      elevation: 0,
-      color: Colors.amber,
-      margin: EdgeInsets.zero,
+      elevation: 1,
+      color: _color,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(kPadding),
