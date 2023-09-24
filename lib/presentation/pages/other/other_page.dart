@@ -14,22 +14,20 @@ class OtherPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: CustomScrollView(
-        controller: ScrollController(),
-        slivers: [
-          const OtherPageHeader(),
-          const SliverToBoxAdapter(
-            child: Row(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const OtherPageHeader(),
+            const Row(
               children: [
                 _AboutThisApp(),
-                _AboutThisApp(),
+                _License(),
               ],
             ),
-          ),
-          SliverToBoxAdapter(
-            child: BackAppButton.toMain(),
-          ),
-        ],
+            const SizedBox(height: kPadding),
+            BackAppButton.toMain(),
+          ],
+        ),
       ),
     );
   }
@@ -41,8 +39,9 @@ class _AboutThisApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      flex: 2,
       child: MenuCard.square(
+        onTap: () => logger.info('tap'),
+        color: Colors.teal,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -53,12 +52,40 @@ class _AboutThisApp extends StatelessWidget {
             ),
             const SizedBox(height: kPadding),
             Text(
-              'About Thid App',
+              'About App',
               style: TextStyles.largeFontStyle(color: Colors.white),
             ),
           ],
         ),
-        onTap: () => logger.info('tap'),
+      ),
+    );
+  }
+}
+
+class _License extends StatelessWidget {
+  const _License();
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: MenuCard.square(
+        onTap: () => showLicensePage(context: context),
+        color: Colors.amber,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.description_outlined,
+              color: Colors.white,
+              size: settingIconSize,
+            ),
+            const SizedBox(height: kPadding),
+            Text(
+              'License',
+              style: TextStyles.largeFontStyle(color: Colors.white),
+            ),
+          ],
+        ),
       ),
     );
   }
