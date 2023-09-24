@@ -24,6 +24,7 @@ class OtherPage extends ConsumerWidget {
                 _License(),
               ],
             ),
+            const _RateApp(),
             const SizedBox(height: kPadding),
             BackAppButton.toMain(),
           ],
@@ -40,6 +41,7 @@ class _AboutThisApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: MenuCard.square(
+        // TODO: Action
         onTap: () => logger.info('tap'),
         color: Colors.teal,
         child: Column(
@@ -90,3 +92,34 @@ class _License extends StatelessWidget {
     );
   }
 }
+
+class _RateApp extends StatelessWidget {
+  const _RateApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return MenuCard.common(
+      // TODO: Action
+      onTap: () => logger.info('rate app'),
+      color: Colors.deepOrangeAccent,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.star_rate_rounded,
+            color: Colors.white,
+            size: settingIconSize,
+          ),
+          const SizedBox(width: kPadding * 2),
+          Text(
+            'Rate App',
+            style: TextStyles.largeFontStyle(color: Colors.white),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _contact = 'contact';
+const _reset = 'reset';

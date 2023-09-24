@@ -15,7 +15,7 @@ class MenuCard extends ConsumerWidget {
 
   factory MenuCard.common({
     required Widget child,
-    double? height = 60,
+    double? height = 120,
     required void Function() onTap,
     required Color color,
   }) {
