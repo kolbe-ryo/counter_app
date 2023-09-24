@@ -8,4 +8,4 @@ const settingIconSize = 40.0;
 /// For Webview
 const aboutAppUrl = 'https://kolbe-app.site/';
 
-const contact = '${aboutAppUrl}contact/';
+const contactUrl = '${aboutAppUrl}contact/';
