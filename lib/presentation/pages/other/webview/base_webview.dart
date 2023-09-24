@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class BaseWebview extends StatelessWidget {
-  const BaseWebview({super.key});
+  BaseWebview({
+    super.key,
+    required String url,
+  }) : _uri = Uri.parse(url);
 
-  static const _aboutAppUrl = 'https://kolbe-app.site/';
-
-  static final Uri _aboutAppUri = Uri.parse(_aboutAppUrl);
+  final Uri _uri;
 
   @override
   Widget build(BuildContext context) {
     return WebViewWidget(
-      controller: WebViewController()..loadRequest(_aboutAppUri),
+      controller: WebViewController()..loadRequest(_uri),
     );
   }
 }
