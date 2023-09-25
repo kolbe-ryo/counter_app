@@ -12,7 +12,9 @@ class BaseWebview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Contact'),
+      ),
       body: WebViewWidget(
         controller: WebViewController()..loadRequest(_uri),
       ),
