@@ -11,8 +11,11 @@ class BaseWebview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WebViewWidget(
-      controller: WebViewController()..loadRequest(_uri),
+    return Scaffold(
+      appBar: AppBar(),
+      body: WebViewWidget(
+        controller: WebViewController()..loadRequest(_uri),
+      ),
     );
   }
 }
