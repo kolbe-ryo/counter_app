@@ -26,6 +26,16 @@ class EditPage extends StatelessWidget {
                 EditPageHeader(),
                 _EditCard(),
                 _ContentsEditor(),
+                // TODO: カテゴリレイアウトを実装すること
+                // TODO: カテゴリレイアウトを実装すること
+                // TODO: カテゴリレイアウトを実装すること
+                // TODO: カテゴリレイアウトを実装すること
+                // TODO: カテゴリレイアウトを実装すること
+                // TODO: カテゴリレイアウトを実装すること
+                // TODO: カテゴリレイアウトを実装すること
+                // TODO: カテゴリレイアウトを実装すること
+                // TODO: カテゴリレイアウトを実装すること
+                // TODO: カテゴリレイアウトを実装すること
               ],
             ),
           ),
