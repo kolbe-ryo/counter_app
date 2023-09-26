@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../common_object/string_value.dart';
@@ -49,7 +50,10 @@ class Counter with _$Counter {
     return Counter(
       name: StringValue('empty'),
       count: const CountValue(),
-      categoryInfo: CategoryInfo(name: 'empty'),
+      categoryInfo: CategoryInfo(
+        name: 'empty',
+        color: Colors.grey,
+      ),
       lastUpdated: UpdatedDatetimeValue.now(),
     );
   }
