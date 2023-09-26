@@ -7,6 +7,7 @@ import 'pages/edit/edit_page.dart';
 import 'pages/main/main_page.dart';
 import 'pages/other/other_page.dart';
 import 'pages/other/webview/base_webview.dart';
+import 'pages/other/webview/webview_arguments.dart';
 import 'pages/signin/sign_in_page.dart';
 import 'pages/signup/sign_up_page.dart';
 import 'pages/top/top_page.dart';
@@ -180,10 +181,13 @@ class WebviewRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    final url = state.extra! as String;
+    final webviewArguments = state.extra! as WebviewArguments;
     return TransitionPage.fade(
       name: name,
-      child: BaseWebview(url: url),
+      child: BaseWebview(
+        title: webviewArguments.title,
+        url: webviewArguments.url,
+      ),
     );
   }
 }
