@@ -159,7 +159,7 @@ class _Contact extends ConsumerWidget {
               WebviewRoute.name,
               extra: const WebviewArguments(
                 title: 'Contact',
-                url: aboutAppUrl,
+                url: contactUrl,
               ),
             ),
         color: Colors.cyan,
