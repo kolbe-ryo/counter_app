@@ -8,6 +8,7 @@ import '../edit_page.dart';
 class EditIconAction implements IconInterface {
   @override
   Future<void> onTap(WidgetRef ref) async {
+    // TODO: 戻った時に登録するか決める（Doneの時true, スライドの時nullがレスポンスされるのでそれを利用する）
     final result = await showCupertinoModalBottomSheet<bool?>(
       duration: const Duration(milliseconds: 200),
       context: ref.context,

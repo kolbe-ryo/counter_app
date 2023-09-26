@@ -8,6 +8,7 @@ import '../../constant_value.dart';
 import '../../router.dart';
 import 'menu_card.dart';
 import 'other_page_header.dart';
+import 'webview/webview_arguments.dart';
 
 class OtherPage extends ConsumerWidget {
   const OtherPage({super.key});
@@ -63,7 +64,10 @@ class _AboutThisApp extends ConsumerWidget {
       child: MenuCard.square(
         onTap: () => ref.watch(routerProvider).go(
               WebviewRoute.name,
-              extra: aboutAppUrl,
+              extra: const WebviewArguments(
+                title: 'About App',
+                url: aboutAppUrl,
+              ),
             ),
         color: Colors.teal,
         child: Column(
@@ -153,7 +157,10 @@ class _Contact extends ConsumerWidget {
       child: MenuCard.common(
         onTap: () => ref.watch(routerProvider).go(
               WebviewRoute.name,
-              extra: contactUrl,
+              extra: const WebviewArguments(
+                title: 'Contact',
+                url: contactUrl,
+              ),
             ),
         color: Colors.cyan,
         child: Row(
