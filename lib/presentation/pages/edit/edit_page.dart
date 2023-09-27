@@ -26,7 +26,8 @@ class EditPage extends StatelessWidget {
                 EditPageHeader(),
                 _EditCard(),
                 _ContentsEditor(),
-                // TODO: カテゴリレイアウトを実装すること
+                SizedBox(height: kPadding * 2),
+                _CategorySelector(),
                 // TODO: カテゴリレイアウトを実装すること
                 // TODO: カテゴリレイアウトを実装すること
                 // TODO: カテゴリレイアウトを実装すること
@@ -129,8 +130,6 @@ class __ContentsEditorState extends ConsumerState<_ContentsEditor> {
             hintText: 'Input Description',
             textStyle: TextStyles.middleFontStyle,
           ),
-          const SizedBox(height: kPadding * 2),
-          const _CategorySelector(),
         ],
       ),
     );
