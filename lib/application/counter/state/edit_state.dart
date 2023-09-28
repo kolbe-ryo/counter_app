@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../domain/repository/counter/entity/category_info.dart';
 import '../../../domain/repository/counter/entity/counter.dart';
 
 final editCardStateNotifierProvider = StateNotifierProvider<EditCardStateNotifier, Counter>(
@@ -20,7 +21,9 @@ class EditCardStateNotifier extends StateNotifier<Counter> {
   }
 
   /// カテゴリを変更する
-  void changeCategory() {}
+  void changeCategory(CategoryInfo categoryInfo) {
+    state = state.copyWith(categoryInfo: categoryInfo);
+  }
 
   /// 説明を変更する
   void changeDescription() {}
