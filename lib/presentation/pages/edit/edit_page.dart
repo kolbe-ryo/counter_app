@@ -217,6 +217,11 @@ class _CategorySelector extends ConsumerWidget {
               }
               return _CategoryElement.nonSelect(categoryInfo: categoryInfo);
             }).toList(),
+            // TODO: Add plus button
+            // TODO: Add plus button
+            // TODO: Add plus button
+            // TODO: Add plus button
+            // TODO: Add plus button
           ),
         ],
       ),
