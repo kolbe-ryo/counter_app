@@ -72,6 +72,6 @@ final categoryData = [
   ),
   CategoryInfo(
     name: 'Fruit',
-    color: Colors.pinkAccent,
+    color: Colors.green,
   ),
 ];
