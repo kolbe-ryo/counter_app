@@ -90,6 +90,8 @@ class __ContentsEditorState extends ConsumerState<_ContentsEditor> {
       _titleErrorText = _validateText(_titleTextController.text);
       _descriptionErrorText = _validateText(_descriptionTextController.text);
     });
+    ref.read(editCardStateNotifierProvider.notifier).changeCounterName(_titleTextController.text);
+    ref.read(editCardStateNotifierProvider.notifier).changeDescription(_descriptionTextController.text);
   }
 
   String? _validateText(String text) {
@@ -128,7 +130,7 @@ class __ContentsEditorState extends ConsumerState<_ContentsEditor> {
   }
 }
 
-class _TextFormField extends ConsumerStatefulWidget {
+class _TextFormField extends StatefulWidget {
   const _TextFormField({
     required TextEditingController textController,
     required void Function(String?) validation,
@@ -156,10 +158,10 @@ class _TextFormField extends ConsumerStatefulWidget {
   final TextStyle _textStyle;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => __TextFormFieldState();
+  State<StatefulWidget> createState() => __TextFormFieldState();
 }
 
-class __TextFormFieldState extends ConsumerState<_TextFormField> {
+class __TextFormFieldState extends State<_TextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
