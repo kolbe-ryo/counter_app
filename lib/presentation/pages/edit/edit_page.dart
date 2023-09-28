@@ -22,21 +22,13 @@ class EditPage extends StatelessWidget {
           behavior: HitTestBehavior.opaque,
           child: const SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 EditPageHeader(),
                 _EditCard(),
                 _ContentsEditor(),
                 SizedBox(height: kPadding * 2),
                 _CategorySelector(),
-                // TODO: カテゴリレイアウトを実装すること
-                // TODO: カテゴリレイアウトを実装すること
-                // TODO: カテゴリレイアウトを実装すること
-                // TODO: カテゴリレイアウトを実装すること
-                // TODO: カテゴリレイアウトを実装すること
-                // TODO: カテゴリレイアウトを実装すること
-                // TODO: カテゴリレイアウトを実装すること
-                // TODO: カテゴリレイアウトを実装すること
-                // TODO: カテゴリレイアウトを実装すること
               ],
             ),
           ),
@@ -201,35 +193,45 @@ class _CategorySelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentCategory = ref.watch(editCardStateNotifierProvider).categoryInfo;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Category',
-          style: TextStyle(
-            color: Colors.black38,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kPadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Category',
+            style: TextStyle(
+              color: Colors.black38,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const SizedBox(height: kPadding),
-        Wrap(
-          spacing: kPadding / 2,
-          children: categoryData.map(_CategoryElement.select).toList(),
-        ),
-      ],
+          const SizedBox(height: kPadding),
+          Wrap(
+            spacing: kPadding / 2,
+            children: categoryData.map((categoryInfo) {
+              if (categoryInfo.name == currentCategory.name) {
+                return _CategoryElement.select(categoryInfo: categoryInfo);
+              }
+              return _CategoryElement.nonSelect(categoryInfo: categoryInfo);
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 }
 
-class _CategoryElement extends StatelessWidget {
+class _CategoryElement extends ConsumerWidget {
   const _CategoryElement._(
     this._categoryInfo,
     this._buttonStyle,
     this._textStyle,
   );
 
-  factory _CategoryElement.nonSelect(CategoryInfo categoryInfo) {
+  factory _CategoryElement.nonSelect({
+    required CategoryInfo categoryInfo,
+  }) {
     return _CategoryElement._(
       categoryInfo,
       OutlinedButton.styleFrom(
@@ -246,17 +248,19 @@ class _CategoryElement extends StatelessWidget {
     );
   }
 
-  factory _CategoryElement.select(CategoryInfo categoryInfo) {
+  factory _CategoryElement.select({
+    required CategoryInfo categoryInfo,
+  }) {
     return _CategoryElement._(
       categoryInfo,
       OutlinedButton.styleFrom(
         foregroundColor: Colors.black,
         shape: const StadiumBorder(),
-        side: const BorderSide(color: Colors.pinkAccent),
+        side: BorderSide(color: categoryInfo.color),
         splashFactory: NoSplash.splashFactory,
       ),
-      const TextStyle(
-        color: Colors.pinkAccent,
+      TextStyle(
+        color: categoryInfo.color,
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
@@ -270,10 +274,11 @@ class _CategoryElement extends StatelessWidget {
   final TextStyle _textStyle;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return OutlinedButton(
       style: _buttonStyle,
       onPressed: () {
+        ref.read(editCardStateNotifierProvider.notifier).changeCategory(_categoryInfo);
         logger.info(_categoryInfo.name);
       },
       child: Text(
