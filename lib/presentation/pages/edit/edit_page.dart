@@ -54,6 +54,7 @@ class _EditCard extends ConsumerWidget {
   }
 }
 
+// TODO タイトルと説明のWidgetを共通化して分ける
 class _ContentsEditor extends ConsumerStatefulWidget {
   const _ContentsEditor();
 
@@ -211,17 +212,19 @@ class _CategorySelector extends ConsumerWidget {
           const SizedBox(height: kPadding),
           Wrap(
             spacing: kPadding / 2,
-            children: categoryData.map((categoryInfo) {
-              if (categoryInfo.name == currentCategory.name) {
-                return _CategoryElement.select(categoryInfo: categoryInfo);
-              }
-              return _CategoryElement.nonSelect(categoryInfo: categoryInfo);
-            }).toList(),
-            // TODO: Add plus button
-            // TODO: Add plus button
-            // TODO: Add plus button
-            // TODO: Add plus button
-            // TODO: Add plus button
+            children: [
+              ...categoryData.map<Widget>((categoryInfo) {
+                if (categoryInfo.name == currentCategory.name) {
+                  return _CategoryElement.select(categoryInfo: categoryInfo);
+                }
+                return _CategoryElement.nonSelect(categoryInfo: categoryInfo);
+              }),
+              IconButton.outlined(
+                // TODO: Add plus button action
+                onPressed: () => logger.info,
+                icon: const Icon(Icons.add),
+              ),
+            ],
           ),
         ],
       ),
