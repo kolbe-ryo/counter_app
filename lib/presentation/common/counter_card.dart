@@ -6,6 +6,13 @@ import '../../domain/repository/counter/entity/counter.dart';
 import '../constant_value.dart';
 import '../pages/main/main_page_icon_button.dart';
 
+// TODO: Main専用のカートにする
+// TODO: Main専用のカートにする
+// TODO: Main専用のカートにする
+// TODO: Main専用のカートにする
+// TODO: Main専用のカートにする
+// TODO: Main専用のカートにする
+// TODO: Main専用のカートにする
 class CounterCard extends ConsumerWidget {
   const CounterCard._(
     this._counter,
