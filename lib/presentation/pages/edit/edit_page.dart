@@ -6,8 +6,8 @@ import '../../../domain/mock/mock_data.dart';
 import '../../../domain/repository/counter/entity/category_info.dart';
 import '../../../util/logger.dart';
 import '../../../util/text_styles.dart';
-import '../../common/counter_card.dart';
 import '../../constant_value.dart';
+import 'edit_card.dart';
 import 'edit_page_header.dart';
 
 class EditPage extends StatelessWidget {
@@ -25,7 +25,7 @@ class EditPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 EditPageHeader(),
-                _EditCard(),
+                EditCard(),
                 _ContentsEditor(),
                 SizedBox(height: kPadding * 2),
                 _CategorySelector(),
@@ -33,22 +33,6 @@ class EditPage extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _EditCard extends ConsumerWidget {
-  const _EditCard();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final counter = ref.watch(editCardStateNotifierProvider);
-    return SizedBox(
-      height: 300,
-      width: MediaQuery.of(context).size.width,
-      child: CounterCard.forEdit(
-        counter: counter,
       ),
     );
   }
