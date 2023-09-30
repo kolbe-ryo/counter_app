@@ -44,6 +44,8 @@ class CategorySelector extends ConsumerWidget {
               ),
             ],
           ),
+          const SizedBox(height: kPadding),
+          const _CategoryColors(),
         ],
       ),
     );
@@ -113,6 +115,31 @@ class _CategoryElement extends ConsumerWidget {
         _categoryInfo.name,
         style: _textStyle,
       ),
+    );
+  }
+}
+
+class _CategoryColors extends ConsumerWidget {
+  const _CategoryColors();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Wrap(
+      spacing: kPadding,
+      runSpacing: kPadding,
+      children: appColors.map((color) {
+        return InkWell(
+          onTap: () => logger.info(color.toString()),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: color,
+            ),
+            height: 30,
+            width: 30,
+          ),
+        );
+      }).toList(),
     );
   }
 }

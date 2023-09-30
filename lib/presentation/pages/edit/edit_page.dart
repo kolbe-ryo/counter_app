@@ -20,30 +20,22 @@ class EditPage extends ConsumerWidget {
       editCardStateNotifierProvider.select((value) => value.description),
     );
     return Scaffold(
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          behavior: HitTestBehavior.opaque,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const EditPageHeader(),
-                const EditCard(),
-                ContentsEditor.title(
-                  initialText: title.value,
-                  onChangeText: ref.read(editCardStateNotifierProvider.notifier).changeCounterName,
-                ),
-                ContentsEditor.description(
-                  initialText: description ?? '',
-                  onChangeText: ref.read(editCardStateNotifierProvider.notifier).changeDescription,
-                ),
-                const SizedBox(height: kPadding * 2),
-                const CategorySelector(),
-              ],
-            ),
+      body: CustomScrollView(
+        slivers: [
+          // TODO:  Adjust Sliver
+          const EditPageHeader(),
+          const EditCard(),
+          ContentsEditor.title(
+            initialText: title.value,
+            onChangeText: ref.read(editCardStateNotifierProvider.notifier).changeCounterName,
           ),
-        ),
+          ContentsEditor.description(
+            initialText: description ?? '',
+            onChangeText: ref.read(editCardStateNotifierProvider.notifier).changeDescription,
+          ),
+          const SizedBox(height: kPadding * 2),
+          const CategorySelector(),
+        ],
       ),
     );
   }
