@@ -196,6 +196,7 @@ class _CategorySelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentCategory = ref.watch(editCardStateNotifierProvider).categoryInfo;
+    final categoryList = mockData.map((e) => e.categoryInfo).toSet().toList();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kPadding),
       child: Column(
@@ -213,7 +214,7 @@ class _CategorySelector extends ConsumerWidget {
           Wrap(
             spacing: kPadding / 2,
             children: [
-              ...categoryData.map<Widget>((categoryInfo) {
+              ...categoryList.map<Widget>((categoryInfo) {
                 if (categoryInfo.name == currentCategory.name) {
                   return _CategoryElement.select(categoryInfo: categoryInfo);
                 }
