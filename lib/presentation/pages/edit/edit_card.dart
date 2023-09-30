@@ -29,7 +29,7 @@ class _EditCardState extends ConsumerState<EditCard> {
         ),
         color: counter.categoryInfo.color,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.all(_borderRadius),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(_borderRadius),
