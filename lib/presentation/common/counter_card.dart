@@ -39,10 +39,10 @@ class CounterCard extends ConsumerWidget {
     return CounterCard._(
       counter,
       null,
-      const SizedBox.shrink(),
-      const SizedBox.shrink(),
-      const SizedBox.shrink(),
-      const SizedBox.shrink(),
+      MainPageIconButton.addCountNoAct(),
+      MainPageIconButton.minusCountNoAct(),
+      MainPageIconButton.editNoAct(),
+      MainPageIconButton.removeNoAct(),
     );
   }
 
