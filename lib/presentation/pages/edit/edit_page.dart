@@ -18,6 +18,7 @@ class EditPage extends ConsumerWidget {
           // TODO:  Adjust Sliver
           EditPageHeader(),
           EditCard(),
+          // TODO: const TextEdit（constじゃないとレンダリングが遅い）
           // ContentsEditor.title(),
           // ContentsEditor.description(),
           AppTextField(),
