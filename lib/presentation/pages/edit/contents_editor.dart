@@ -1,48 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../application/counter/state/edit_state.dart';
 import '../../../util/text_styles.dart';
 import '../../constant_value.dart';
+import 'editor_enum.dart';
+
+class AppTextField extends ConsumerStatefulWidget {
+  const AppTextField({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _TextFieldState();
+}
+
+class _TextFieldState extends ConsumerState<AppTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(kPadding, kPadding * 2, kPadding, 0),
+        width: MediaQuery.of(context).size.width,
+        child: TextFormField(
+          controller: TextEditingController(),
+          decoration: const InputDecoration(
+            labelText: '',
+            labelStyle: TextStyle(
+              color: Colors.black38,
+              fontSize: 24,
+            ),
+            hintStyle: TextStyle(
+              color: Colors.black38,
+              fontSize: 24,
+            ),
+          ),
+          style: TextStyles.middleFontStyle,
+          onChanged: (_) {
+            // _validate();
+            // _onChange();
+          },
+        ),
+      ),
+    );
+  }
+}
 
 class ContentsEditor extends ConsumerStatefulWidget {
-  const ContentsEditor._(
-    this._initialText,
-    this._onChangeText,
-    this._labelText,
-    this._hintText,
-  );
+  const ContentsEditor._(this._contentEditorEnum);
 
-  factory ContentsEditor.title({
-    required String initialText,
-    required void Function(String) onChangeText,
-  }) {
-    return ContentsEditor._(
-      initialText,
-      onChangeText,
-      'Title',
-      'Input Title',
-    );
-  }
+  factory ContentsEditor.title() => const ContentsEditor._(ContentEditorEnum.title);
 
-  factory ContentsEditor.description({
-    required String initialText,
-    required void Function(String) onChangeText,
-  }) {
-    return ContentsEditor._(
-      initialText,
-      onChangeText,
-      'Description',
-      'Input Description',
-    );
-  }
+  factory ContentsEditor.description() => const ContentsEditor._(ContentEditorEnum.description);
 
-  final String _initialText;
-
-  final void Function(String text) _onChangeText;
-
-  final String _labelText;
-
-  final String _hintText;
+  final ContentEditorEnum _contentEditorEnum;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ContentsEditorState();
@@ -56,7 +65,20 @@ class _ContentsEditorState extends ConsumerState<ContentsEditor> {
   @override
   void initState() {
     super.initState();
-    _textEditingController = TextEditingController(text: widget._initialText);
+    _textEditingController = _getTextEditController;
+  }
+
+  TextEditingController get _getTextEditController {
+    switch (widget._contentEditorEnum) {
+      case ContentEditorEnum.title:
+        return TextEditingController(
+          text: ref.read(editCardStateNotifierProvider).name.value,
+        );
+      case ContentEditorEnum.description:
+        return TextEditingController(
+          text: ref.read(editCardStateNotifierProvider).description,
+        );
+    }
   }
 
   @override
@@ -77,31 +99,44 @@ class _ContentsEditorState extends ConsumerState<ContentsEditor> {
     return null;
   }
 
+  void _onChange() {
+    switch (widget._contentEditorEnum) {
+      case ContentEditorEnum.title:
+        ref.read(editCardStateNotifierProvider.notifier).changeCounterName(_textEditingController.text);
+        break;
+      case ContentEditorEnum.description:
+        ref.read(editCardStateNotifierProvider.notifier).changeDescription(_textEditingController.text);
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(kPadding, kPadding * 2, kPadding, 0),
-      width: MediaQuery.of(context).size.width,
-      child: TextFormField(
-        controller: _textEditingController,
-        decoration: InputDecoration(
-          labelText: widget._labelText,
-          labelStyle: const TextStyle(
-            color: Colors.black38,
-            fontSize: 24,
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(kPadding, kPadding * 2, kPadding, 0),
+        width: MediaQuery.of(context).size.width,
+        child: TextFormField(
+          controller: _textEditingController,
+          decoration: InputDecoration(
+            labelText: widget._contentEditorEnum.name,
+            labelStyle: const TextStyle(
+              color: Colors.black38,
+              fontSize: 24,
+            ),
+            hintText: widget._contentEditorEnum.hintText,
+            hintStyle: const TextStyle(
+              color: Colors.black38,
+              fontSize: 24,
+            ),
+            errorText: _errorText,
           ),
-          hintText: widget._hintText,
-          hintStyle: const TextStyle(
-            color: Colors.black38,
-            fontSize: 24,
-          ),
-          errorText: _errorText,
+          style: TextStyles.middleFontStyle,
+          onChanged: (_) {
+            _validate();
+            _onChange();
+          },
         ),
-        style: TextStyles.middleFontStyle,
-        onChanged: (_) {
-          _validate();
-          widget._onChangeText(_textEditingController.text);
-        },
       ),
     );
   }

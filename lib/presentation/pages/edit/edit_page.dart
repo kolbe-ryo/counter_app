@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../application/counter/state/edit_state.dart';
 import '../../constant_value.dart';
 import 'category_selector.dart';
 import 'contents_editor.dart';
@@ -13,28 +12,19 @@ class EditPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final title = ref.watch(
-      editCardStateNotifierProvider.select((value) => value.name),
-    );
-    final description = ref.watch(
-      editCardStateNotifierProvider.select((value) => value.description),
-    );
-    return Scaffold(
+    return const Scaffold(
       body: CustomScrollView(
         slivers: [
           // TODO:  Adjust Sliver
-          const EditPageHeader(),
-          const EditCard(),
-          ContentsEditor.title(
-            initialText: title.value,
-            onChangeText: ref.read(editCardStateNotifierProvider.notifier).changeCounterName,
+          EditPageHeader(),
+          EditCard(),
+          // ContentsEditor.title(),
+          // ContentsEditor.description(),
+          AppTextField(),
+          SliverPadding(
+            padding: EdgeInsets.only(top: kPadding * 2),
           ),
-          ContentsEditor.description(
-            initialText: description ?? '',
-            onChangeText: ref.read(editCardStateNotifierProvider.notifier).changeDescription,
-          ),
-          const SizedBox(height: kPadding * 2),
-          const CategorySelector(),
+          CategorySelector(),
         ],
       ),
     );

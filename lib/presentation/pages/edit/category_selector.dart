@@ -14,39 +14,41 @@ class CategorySelector extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentCategory = ref.watch(editCardStateNotifierProvider).categoryInfo;
     final categoryList = mockData.map((e) => e.categoryInfo).toSet().toList();
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kPadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Category',
-            style: TextStyle(
-              color: Colors.black38,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: kPadding),
-          Wrap(
-            spacing: kPadding / 2,
-            children: [
-              ...categoryList.map<Widget>((categoryInfo) {
-                if (categoryInfo.name == currentCategory.name) {
-                  return _CategoryElement.select(categoryInfo: categoryInfo);
-                }
-                return _CategoryElement.nonSelect(categoryInfo: categoryInfo);
-              }),
-              IconButton.outlined(
-                // TODO: Add plus button action
-                onPressed: () => logger.info,
-                icon: const Icon(Icons.add),
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: kPadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Category',
+              style: TextStyle(
+                color: Colors.black38,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
-          const SizedBox(height: kPadding),
-          const _CategoryColors(),
-        ],
+            ),
+            const SizedBox(height: kPadding),
+            Wrap(
+              spacing: kPadding / 2,
+              children: [
+                ...categoryList.map<Widget>((categoryInfo) {
+                  if (categoryInfo.name == currentCategory.name) {
+                    return _CategoryElement.select(categoryInfo: categoryInfo);
+                  }
+                  return _CategoryElement.nonSelect(categoryInfo: categoryInfo);
+                }),
+                IconButton.outlined(
+                  // TODO: Add plus button action
+                  onPressed: () => logger.info,
+                  icon: const Icon(Icons.add),
+                ),
+              ],
+            ),
+            const SizedBox(height: kPadding),
+            // const _CategoryColors(),
+          ],
+        ),
       ),
     );
   }
