@@ -6,44 +6,6 @@ import '../../../util/text_styles.dart';
 import '../../constant_value.dart';
 import 'editor_enum.dart';
 
-class AppTextField extends ConsumerStatefulWidget {
-  const AppTextField({super.key});
-
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _TextFieldState();
-}
-
-class _TextFieldState extends ConsumerState<AppTextField> {
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(kPadding, kPadding * 2, kPadding, 0),
-        width: MediaQuery.of(context).size.width,
-        child: TextFormField(
-          controller: TextEditingController(),
-          decoration: const InputDecoration(
-            labelText: '',
-            labelStyle: TextStyle(
-              color: Colors.black38,
-              fontSize: 24,
-            ),
-            hintStyle: TextStyle(
-              color: Colors.black38,
-              fontSize: 24,
-            ),
-          ),
-          style: TextStyles.middleFontStyle,
-          onChanged: (_) {
-            // _validate();
-            // _onChange();
-          },
-        ),
-      ),
-    );
-  }
-}
-
 class ContentsEditor extends ConsumerStatefulWidget {
   const ContentsEditor._(this._contentEditorEnum);
 
