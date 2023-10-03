@@ -15,7 +15,6 @@ class EditPage extends ConsumerWidget {
     return const Scaffold(
       body: CustomScrollView(
         slivers: [
-          // TODO:  Adjust Sliver
           EditPageHeader(),
           EditCard(),
           ContentsEditorForTitle(),
