@@ -2,24 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../application/counter/state/edit_state.dart';
+import '../../../util/text_field_validator.dart';
 import '../../../util/text_styles.dart';
 import '../../constant_value.dart';
-import 'editor_enum.dart';
 
-class ContentsEditor extends ConsumerStatefulWidget {
-  const ContentsEditor._(this._contentEditorEnum);
-
-  factory ContentsEditor.title() => const ContentsEditor._(ContentEditorEnum.title);
-
-  factory ContentsEditor.description() => const ContentsEditor._(ContentEditorEnum.description);
-
-  final ContentEditorEnum _contentEditorEnum;
+class ContentsEditorForTitle extends ConsumerStatefulWidget {
+  const ContentsEditorForTitle({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ContentsEditorState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ContentsEditorForTitleState();
 }
 
-class _ContentsEditorState extends ConsumerState<ContentsEditor> {
+class _ContentsEditorForTitleState extends ConsumerState<ContentsEditorForTitle> {
   late final TextEditingController _textEditingController;
 
   String? _errorText;
@@ -27,20 +21,8 @@ class _ContentsEditorState extends ConsumerState<ContentsEditor> {
   @override
   void initState() {
     super.initState();
-    _textEditingController = _getTextEditController;
-  }
-
-  TextEditingController get _getTextEditController {
-    switch (widget._contentEditorEnum) {
-      case ContentEditorEnum.title:
-        return TextEditingController(
-          text: ref.read(editCardStateNotifierProvider).name.value,
-        );
-      case ContentEditorEnum.description:
-        return TextEditingController(
-          text: ref.read(editCardStateNotifierProvider).description,
-        );
-    }
+    final initText = ref.read(editCardStateNotifierProvider).name.value;
+    _textEditingController = TextEditingController(text: initText);
   }
 
   @override
@@ -51,26 +33,10 @@ class _ContentsEditorState extends ConsumerState<ContentsEditor> {
 
   // バリデーションチェック関数
   void _validate() {
-    setState(() => _errorText = _validateText(_textEditingController.text));
+    setState(() => _errorText = TextEditValidator.validateText(_textEditingController.text));
   }
 
-  String? _validateText(String text) {
-    if (text.isEmpty) {
-      return 'Form is empty..';
-    }
-    return null;
-  }
-
-  void _onChange() {
-    switch (widget._contentEditorEnum) {
-      case ContentEditorEnum.title:
-        ref.read(editCardStateNotifierProvider.notifier).changeCounterName(_textEditingController.text);
-        break;
-      case ContentEditorEnum.description:
-        ref.read(editCardStateNotifierProvider.notifier).changeDescription(_textEditingController.text);
-        break;
-    }
-  }
+  void _onChange() => ref.read(editCardStateNotifierProvider.notifier).changeCounterName(_textEditingController.text);
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +47,76 @@ class _ContentsEditorState extends ConsumerState<ContentsEditor> {
         child: TextFormField(
           controller: _textEditingController,
           decoration: InputDecoration(
-            labelText: widget._contentEditorEnum.name,
+            labelText: 'Title',
             labelStyle: const TextStyle(
               color: Colors.black38,
               fontSize: 24,
             ),
-            hintText: widget._contentEditorEnum.hintText,
+            hintText: 'Input title',
+            hintStyle: const TextStyle(
+              color: Colors.black38,
+              fontSize: 24,
+            ),
+            errorText: _errorText,
+          ),
+          style: TextStyles.middleFontStyle,
+          onChanged: (_) {
+            _validate();
+            _onChange();
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class ContentsEditorForDescription extends ConsumerStatefulWidget {
+  const ContentsEditorForDescription({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _ContentsEditorForDescriptionState();
+}
+
+class _ContentsEditorForDescriptionState extends ConsumerState<ContentsEditorForDescription> {
+  late final TextEditingController _textEditingController;
+
+  String? _errorText;
+
+  @override
+  void initState() {
+    super.initState();
+    final initText = ref.read(editCardStateNotifierProvider).description;
+    _textEditingController = TextEditingController(text: initText);
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  // バリデーションチェック関数
+  void _validate() {
+    setState(() => _errorText = TextEditValidator.validateText(_textEditingController.text));
+  }
+
+  void _onChange() => ref.read(editCardStateNotifierProvider.notifier).changeCounterName(_textEditingController.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(kPadding, kPadding * 2, kPadding, 0),
+        width: MediaQuery.of(context).size.width,
+        child: TextFormField(
+          controller: _textEditingController,
+          decoration: InputDecoration(
+            labelText: 'Description',
+            labelStyle: const TextStyle(
+              color: Colors.black38,
+              fontSize: 24,
+            ),
+            hintText: 'Input description',
             hintStyle: const TextStyle(
               color: Colors.black38,
               fontSize: 24,

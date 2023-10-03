@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../constant_value.dart';
 import 'category_selector.dart';
+import 'contents_editor.dart';
 import 'edit_card.dart';
 import 'edit_page_header.dart';
 
@@ -17,9 +18,8 @@ class EditPage extends ConsumerWidget {
           // TODO:  Adjust Sliver
           EditPageHeader(),
           EditCard(),
-          // TODO: const TextEdit（constじゃないとレンダリングが遅い）
-          // ContentsEditor.title(),
-          // ContentsEditor.description(),
+          ContentsEditorForTitle(),
+          ContentsEditorForDescription(),
           SliverPadding(
             padding: EdgeInsets.only(top: kPadding * 2),
           ),
