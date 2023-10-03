@@ -7,20 +7,18 @@ import '../../../domain/repository/counter/entity/category_info.dart';
 import '../../../util/logger.dart';
 import '../../constant_value.dart';
 
-class CategorySelector extends ConsumerWidget {
+class CategorySelector extends StatelessWidget {
   const CategorySelector({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentCategory = ref.watch(editCardStateNotifierProvider).categoryInfo;
-    final categoryList = mockData.map((e) => e.categoryInfo).toSet().toList();
-    return SliverToBoxAdapter(
+  Widget build(BuildContext context) {
+    return const SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kPadding),
+        padding: EdgeInsets.symmetric(horizontal: kPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Category',
               style: TextStyle(
                 color: Colors.black38,
@@ -28,28 +26,39 @@ class CategorySelector extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: kPadding),
-            Wrap(
-              spacing: kPadding / 2,
-              children: [
-                ...categoryList.map<Widget>((categoryInfo) {
-                  if (categoryInfo.name == currentCategory.name) {
-                    return _CategoryElement.select(categoryInfo: categoryInfo);
-                  }
-                  return _CategoryElement.nonSelect(categoryInfo: categoryInfo);
-                }),
-                IconButton.outlined(
-                  // TODO: Add plus button action
-                  onPressed: () => logger.info,
-                  icon: const Icon(Icons.add),
-                ),
-              ],
-            ),
-            const SizedBox(height: kPadding),
-            // const _CategoryColors(),
+            SizedBox(height: kPadding),
+            _CategoryElements(),
+            SizedBox(height: kPadding),
+            _CategoryColors(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _CategoryElements extends ConsumerWidget {
+  const _CategoryElements();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentCategory = ref.watch(editCardStateNotifierProvider).categoryInfo;
+    final categoryList = mockData.map((e) => e.categoryInfo).toSet().toList();
+    return Wrap(
+      spacing: kPadding / 2,
+      children: [
+        ...categoryList.map<Widget>((categoryInfo) {
+          if (categoryInfo.name == currentCategory.name) {
+            return _CategoryElement.select(categoryInfo: categoryInfo);
+          }
+          return _CategoryElement.nonSelect(categoryInfo: categoryInfo);
+        }),
+        IconButton.outlined(
+          // TODO: Add plus button action
+          onPressed: () => logger.info,
+          icon: const Icon(Icons.add),
+        ),
+      ],
     );
   }
 }
