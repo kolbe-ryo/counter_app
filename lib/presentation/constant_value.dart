@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../domain/repository/counter/entity/category_info.dart';
+
 /// For Layout
 const kPadding = 16.0;
 
@@ -13,7 +15,20 @@ const aboutAppUrl = 'https://kolbe-app.site/';
 const contactUrl = '${aboutAppUrl}contact/';
 
 /// Default Category
-const defaultCategory = [];
+final defaultCategory = [
+  CategoryInfo(
+    name: 'Food',
+    color: appColors[0],
+  ),
+  CategoryInfo(
+    name: 'Drink',
+    color: appColors[1],
+  ),
+  CategoryInfo(
+    name: 'Fruit',
+    color: appColors[2],
+  ),
+];
 
 /// Colors
 const appColors = [
