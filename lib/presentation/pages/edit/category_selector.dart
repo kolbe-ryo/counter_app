@@ -30,6 +30,7 @@ class CategorySelector extends StatelessWidget {
             _CategoryElements(),
             SizedBox(height: kPadding),
             _CategoryColors(),
+            SizedBox(height: kPadding * 3),
           ],
         ),
       ),
