@@ -107,6 +107,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
 
               final isLastCard = index == mockData.length - 1;
 
+              // TODO: 長押しでカードの場所を変更できるようにする
               return Transform.translate(
                 offset: fadeOutTranslation,
                 child: Opacity(

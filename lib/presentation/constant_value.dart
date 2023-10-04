@@ -12,19 +12,22 @@ const aboutAppUrl = 'https://kolbe-app.site/';
 
 const contactUrl = '${aboutAppUrl}contact/';
 
+/// Default Category
+const defaultCategory = [];
+
 /// Colors
 const appColors = [
-  Colors.pink,
+  // Colors.pink,
   Colors.pinkAccent,
   Colors.red,
-  Colors.redAccent,
-  Colors.deepOrange,
+  // Colors.redAccent,
+  // Colors.deepOrange,
   Colors.deepOrangeAccent,
   Colors.orange,
-  Colors.orangeAccent,
-  Colors.amber,
+  // Colors.orangeAccent,
+  // Colors.amber,
   Colors.amberAccent,
-  Colors.yellow,
+  // Colors.yellow,
   Colors.yellowAccent,
   Colors.lime,
   Colors.limeAccent,
@@ -33,18 +36,18 @@ const appColors = [
   Colors.green,
   Colors.greenAccent,
   Colors.teal,
-  Colors.tealAccent,
+  // Colors.tealAccent,
   Colors.cyan,
   Colors.cyanAccent,
-  Colors.lightBlue,
-  Colors.lightBlueAccent,
-  Colors.blue,
+  // Colors.lightBlue,
+  // Colors.lightBlueAccent,
+  // Colors.blue,
   Colors.blueAccent,
   Colors.indigo,
-  Colors.indigoAccent,
+  // Colors.indigoAccent,
   Colors.purple,
   Colors.purpleAccent,
-  Colors.deepPurple,
+  // Colors.deepPurple,
   Colors.deepPurpleAccent,
   Colors.blueGrey,
   Colors.brown,
