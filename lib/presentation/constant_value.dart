@@ -25,8 +25,12 @@ final defaultCategory = [
     color: appColors[1],
   ),
   CategoryInfo(
-    name: 'Fruit',
+    name: 'Consumable',
     color: appColors[2],
+  ),
+  CategoryInfo(
+    name: 'Drug',
+    color: appColors[3],
   ),
 ];
 
