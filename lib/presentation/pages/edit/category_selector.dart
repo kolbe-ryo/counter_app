@@ -96,13 +96,13 @@ class _CategoryElement extends ConsumerWidget {
     return _CategoryElement._(
       categoryInfo,
       OutlinedButton.styleFrom(
+        backgroundColor: categoryInfo.color,
         foregroundColor: Colors.black,
         shape: const StadiumBorder(),
-        side: BorderSide(color: categoryInfo.color),
         splashFactory: NoSplash.splashFactory,
       ),
-      TextStyle(
-        color: categoryInfo.color,
+      const TextStyle(
+        color: Colors.white,
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
@@ -136,16 +136,19 @@ class _CategoryColors extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentColor = ref.watch(editCardStateNotifierProvider).categoryInfo.color;
     return Wrap(
       spacing: kPadding,
       runSpacing: kPadding,
       children: appColors.map((color) {
+        final isSameColor = currentColor == color;
         return InkWell(
           onTap: () => logger.info(color.toString()),
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: color,
+              border: isSameColor ? Border.all(width: 3) : null,
             ),
             height: 30,
             width: 30,
