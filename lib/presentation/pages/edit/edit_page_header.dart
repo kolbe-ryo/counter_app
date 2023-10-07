@@ -14,7 +14,7 @@ class EditPageHeader extends ConsumerWidget {
       backgroundColor: Colors.white,
       pinned: true,
       title: Padding(
-        padding: const EdgeInsets.all(kPadding),
+        padding: const EdgeInsets.symmetric(vertical: kPadding),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
