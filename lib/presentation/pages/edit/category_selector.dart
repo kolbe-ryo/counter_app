@@ -143,6 +143,7 @@ class _CategoryColors extends ConsumerWidget {
       children: appColors.map((color) {
         final isSameColor = currentColor == color;
         return InkWell(
+          // TODO: カラーを変更する
           onTap: () => logger.info(color.toString()),
           child: Container(
             decoration: BoxDecoration(
