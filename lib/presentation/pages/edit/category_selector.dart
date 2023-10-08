@@ -136,15 +136,17 @@ class _CategoryColors extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentColor = ref.watch(editCardStateNotifierProvider).categoryInfo.color;
+    final currentCategory = ref.watch(editCardStateNotifierProvider).categoryInfo;
     return Wrap(
       spacing: kPadding,
       runSpacing: kPadding,
       children: appColors.map((color) {
-        final isSameColor = currentColor == color;
+        final isSameColor = currentCategory.color == color;
         return InkWell(
-          // TODO: カラーを変更する
-          onTap: () => logger.info(color.toString()),
+          onTap: () {
+            final changedColor = currentCategory.copyWith(color: color);
+            ref.read(editCardStateNotifierProvider.notifier).changeCategory(changedColor);
+          },
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
