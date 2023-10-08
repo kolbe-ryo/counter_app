@@ -144,8 +144,8 @@ class _CategoryColors extends ConsumerWidget {
         final isSameColor = currentCategory.color == color;
         return InkWell(
           onTap: () {
-            final changedColor = currentCategory.copyWith(color: color);
-            ref.read(editCardStateNotifierProvider.notifier).changeCategory(changedColor);
+            final changedCategory = currentCategory.copyWith(color: color);
+            ref.read(editCardStateNotifierProvider.notifier).changeCategory(changedCategory);
           },
           child: Container(
             decoration: BoxDecoration(
