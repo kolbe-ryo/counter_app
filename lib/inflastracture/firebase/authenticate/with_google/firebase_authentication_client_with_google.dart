@@ -37,6 +37,8 @@ class FirebaseAuthClientWithGoogle {
         return;
       }
 
+      // TODO: キャンセル時の対応
+
       final auth = await signinAccount.authentication;
       final credential = GoogleAuthProvider.credential(
         idToken: auth.idToken,
