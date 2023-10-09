@@ -1,8 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../domain/repository/common_object/string_value.dart';
+import '../../../domain/repository/counter/entity/category_info.dart';
 import '../../../domain/repository/counter/entity/counter.dart';
 
 final editCardStateNotifierProvider = StateNotifierProvider<EditCardStateNotifier, Counter>(
+  // TODO: この変更を通知して、MainPageのCounter側を変更する
   (ref) => EditCardStateNotifier(),
 );
 
@@ -16,12 +19,19 @@ class EditCardStateNotifier extends StateNotifier<Counter> {
 
   /// 名前を変更する
   void changeCounterName(String name) {
-    // TODO: List<Couter>の該当のCounterを変更する
+    if (name.isEmpty) {
+      return;
+    }
+    state = state.copyWith(name: StringValue(name));
   }
 
   /// カテゴリを変更する
-  void changeCategory() {}
+  void changeCategory(CategoryInfo categoryInfo) {
+    state = state.copyWith(categoryInfo: categoryInfo);
+  }
 
   /// 説明を変更する
-  void changeDescription() {}
+  void changeDescription(String? description) {
+    state = state.copyWith(description: description);
+  }
 }

@@ -60,7 +60,39 @@ class MainPageIconButton extends ConsumerWidget {
     );
   }
 
-  final IconInterface _conInterface;
+  factory MainPageIconButton.addCountNoAct() {
+    return const MainPageIconButton._(
+      null,
+      Icons.add,
+      Colors.black12,
+    );
+  }
+
+  factory MainPageIconButton.minusCountNoAct() {
+    return const MainPageIconButton._(
+      null,
+      Icons.remove,
+      Colors.black12,
+    );
+  }
+
+  factory MainPageIconButton.editNoAct() {
+    return const MainPageIconButton._(
+      null,
+      Icons.edit,
+      Colors.black12,
+    );
+  }
+
+  factory MainPageIconButton.removeNoAct() {
+    return const MainPageIconButton._(
+      null,
+      Icons.delete,
+      Colors.black12,
+    );
+  }
+
+  final IconInterface? _conInterface;
 
   final IconData _iconData;
 
@@ -69,7 +101,7 @@ class MainPageIconButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
-      onPressed: () => _conInterface.onTap(ref),
+      onPressed: () => _conInterface?.onTap(ref),
       icon: Icon(
         _iconData,
         size: 40,

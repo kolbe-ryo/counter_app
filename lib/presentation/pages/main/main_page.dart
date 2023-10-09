@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../application/counter/state/edit_state.dart';
 import '../../../domain/mock/mock_data.dart';
-import '../../common/counter_card.dart';
+import 'counter_card.dart';
 import 'main_page_header.dart';
 import 'strategy/sliver_list_delegate_service.dart';
 
@@ -107,6 +107,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
 
               final isLastCard = index == mockData.length - 1;
 
+              // TODO: 長押しでカードの場所を変更できるようにする
               return Transform.translate(
                 offset: fadeOutTranslation,
                 child: Opacity(
@@ -129,7 +130,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
                               alignment: Alignment.topCenter,
                               minHeight: unwrapCardArea + wrapCardArea,
                               maxHeight: unwrapCardArea + wrapCardArea,
-                              child: CounterCard.forMain(
+                              child: CounterCard(
                                 index: index,
                                 onTap: () async {
                                   if (tapDetection || _isTapCard) {
