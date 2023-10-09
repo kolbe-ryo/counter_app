@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../application/counter/edit_counter_service.dart';
 import '../../../application/counter/state/edit_state.dart';
 import '../../../util/text_field_validator.dart';
 import '../../../util/text_styles.dart';
@@ -36,7 +37,7 @@ class _ContentsEditorForTitleState extends ConsumerState<ContentsEditorForTitle>
     setState(() => _errorText = TextEditValidator.validateText(_textEditingController.text));
   }
 
-  void _onChange() => ref.read(editCardStateNotifierProvider.notifier).changeCounterName(_textEditingController.text);
+  void _onChange() => ref.read(editCounterServiceProvider).changeCounterName(name: _textEditingController.text);
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +101,7 @@ class _ContentsEditorForDescriptionState extends ConsumerState<ContentsEditorFor
     setState(() => _errorText = TextEditValidator.validateText(_textEditingController.text));
   }
 
-  void _onChange() => ref.read(editCardStateNotifierProvider.notifier).changeCounterName(_textEditingController.text);
+  void _onChange() => ref.read(editCounterServiceProvider).changeDescription(description: _textEditingController.text);
 
   @override
   Widget build(BuildContext context) {
