@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../application/authentication/authentication_service.dart';
-import '../../../inflastracture/firebase/authenticate/with_google/authentication_repository_with_google.dart';
+import '../../../inflastracture/firebase/authenticate/authenticate_enum.dart';
 import 'app_button.dart';
 import 'app_icon_button.dart';
 
@@ -19,7 +19,7 @@ class AppSignInButtons extends ConsumerWidget {
     return AppSignInButtons._(
       backgroundColor: Colors.lightBlue,
       buttonName: 'Email',
-      onPressed: (ref) => {},
+      onPressed: (ref) async => ref.read(authenticationServiceProvider(AuthenticationMethod.email)).signIn(),
       iconData: FontAwesomeIcons.envelope,
     );
   }
@@ -28,7 +28,7 @@ class AppSignInButtons extends ConsumerWidget {
     return AppSignInButtons._(
       backgroundColor: Colors.cyan,
       buttonName: 'Apple',
-      onPressed: (ref) => {},
+      onPressed: (ref) async => ref.read(authenticationServiceProvider(AuthenticationMethod.apple)).signIn(),
       iconData: FontAwesomeIcons.apple,
     );
   }
@@ -37,13 +37,7 @@ class AppSignInButtons extends ConsumerWidget {
     return AppSignInButtons._(
       backgroundColor: Colors.deepOrangeAccent,
       buttonName: 'Google',
-      onPressed: (ref) async => ref
-          .read(
-            authenticationServiceProvider(
-              ref.watch(firebaseAuthRepositoryWithGoogleProvider),
-            ),
-          )
-          .signIn(),
+      onPressed: (ref) async => ref.read(authenticationServiceProvider(AuthenticationMethod.google)).signIn(),
       iconData: FontAwesomeIcons.google,
     );
   }
