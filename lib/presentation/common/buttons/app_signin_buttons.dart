@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../application/authentication/authentication_service.dart';
+import '../../../inflastracture/firebase/authenticate/with_google/authentication_repository_with_google.dart';
 import 'app_button.dart';
 import 'app_icon_button.dart';
 
-class AppSignInButtons extends StatelessWidget {
+class AppSignInButtons extends ConsumerWidget {
   const AppSignInButtons._({
     required this.backgroundColor,
     required this.buttonName,
@@ -16,7 +19,7 @@ class AppSignInButtons extends StatelessWidget {
     return AppSignInButtons._(
       backgroundColor: Colors.lightBlue,
       buttonName: 'Email',
-      onPressed: () => {},
+      onPressed: (ref) => {},
       iconData: FontAwesomeIcons.envelope,
     );
   }
@@ -25,7 +28,7 @@ class AppSignInButtons extends StatelessWidget {
     return AppSignInButtons._(
       backgroundColor: Colors.cyan,
       buttonName: 'Apple',
-      onPressed: () => {},
+      onPressed: (ref) => {},
       iconData: FontAwesomeIcons.apple,
     );
   }
@@ -34,23 +37,29 @@ class AppSignInButtons extends StatelessWidget {
     return AppSignInButtons._(
       backgroundColor: Colors.deepOrangeAccent,
       buttonName: 'Google',
-      onPressed: () => {},
+      onPressed: (ref) async => ref
+          .read(
+            authenticationServiceProvider(
+              ref.watch(firebaseAuthRepositoryWithGoogleProvider),
+            ),
+          )
+          .signIn(),
       iconData: FontAwesomeIcons.google,
     );
   }
 
   final Color backgroundColor;
   final String buttonName;
-  final void Function() onPressed;
+  final void Function(WidgetRef) onPressed;
   final IconData iconData;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppButton.largeWidth(
       appButtonStyle: AppIconButton(
         backgroundColor: backgroundColor,
         buttonName: buttonName,
-        onPressed: onPressed,
+        onPressed: () => onPressed(ref),
         iconData: iconData,
       ),
     );
