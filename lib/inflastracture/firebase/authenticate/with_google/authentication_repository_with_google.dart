@@ -4,18 +4,18 @@ import '../../../../domain/repository/authentication/authentication_repository.d
 import '../../../../domain/repository/authentication/entity/authenticate_user_data.dart';
 import 'firebase_authentication_client_with_google.dart';
 
-final firebaseAuthRepositoryWithAppleProvider = Provider<FirebaseAuthRepositoryWithApple>(
-  (ref) => FirebaseAuthRepositoryWithApple(
-    client: ref.watch(firebaseAuthClientWithAppleProvider),
+final firebaseAuthRepositoryWithGoogleProvider = Provider<FirebaseAuthRepositoryWithGoogle>(
+  (ref) => FirebaseAuthRepositoryWithGoogle(
+    client: ref.watch(firebaseAuthClientWithGoogleProvider),
   ),
 );
 
 // TODO: FirebaseAuthRepositoryをFirebaseAuthRepositoryWithGoogleなどを用意すること
 /// Apple版リポジトリRepository
-class FirebaseAuthRepositoryWithApple implements AuthenticationRepository {
-  const FirebaseAuthRepositoryWithApple({required this.client});
+class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
+  const FirebaseAuthRepositoryWithGoogle({required this.client});
 
-  final FirebaseAuthClientWithApple client;
+  final FirebaseAuthClientWithGoogle client;
 
   @override
   Future<void> signUp({required AuthenticateUserData userData}) async {
