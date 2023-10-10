@@ -26,7 +26,6 @@ class FirebaseAuthClientWithGoogle {
   final GoogleSignIn googleClient;
 
   Future<void> signUp() async {
-    // TODO: Google ID登録の外部遷移
     logger.info('To external browser for signinig up Google');
   }
 
