@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../application/counter/edit_counter_service.dart';
 import '../../../application/counter/state/edit_state.dart';
 import '../../../domain/mock/mock_data.dart';
 import '../../../domain/repository/counter/entity/category_info.dart';
@@ -120,7 +121,7 @@ class _CategoryElement extends ConsumerWidget {
     return OutlinedButton(
       style: _buttonStyle,
       onPressed: () {
-        ref.read(editCardStateNotifierProvider.notifier).changeCategory(_categoryInfo);
+        ref.read(editCounterServiceProvider).changeCategory(categoryInfo: _categoryInfo);
         logger.info(_categoryInfo.name);
       },
       child: Text(
@@ -145,7 +146,7 @@ class _CategoryColors extends ConsumerWidget {
         return InkWell(
           onTap: () {
             final changedCategory = currentCategory.copyWith(color: color);
-            ref.read(editCardStateNotifierProvider.notifier).changeCategory(changedCategory);
+            ref.read(editCounterServiceProvider).changeCategory(categoryInfo: changedCategory);
           },
           child: Container(
             decoration: BoxDecoration(

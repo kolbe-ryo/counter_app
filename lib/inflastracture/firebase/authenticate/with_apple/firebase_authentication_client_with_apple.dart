@@ -8,14 +8,14 @@ import '../../../../domain/exceptions.dart';
 import '../../../../util/logger.dart';
 import '../clients.dart';
 
-final firebaseAuthClientWithGoogleProvider = Provider<FirebaseAuthClientWithGoogle>(
-  (ref) => FirebaseAuthClientWithGoogle(
+final firebaseAuthClientWithAppleProvider = Provider<FirebaseAuthClientWithApple>(
+  (ref) => FirebaseAuthClientWithApple(
     client: ref.watch(firebaseAuthProvider),
   ),
 );
 
-class FirebaseAuthClientWithGoogle {
-  const FirebaseAuthClientWithGoogle({
+class FirebaseAuthClientWithApple {
+  const FirebaseAuthClientWithApple({
     required this.client,
   });
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../application/counter/state/edit_state.dart';
+import '../../../application/counter/edit_counter_service.dart';
 import '../../../domain/mock/mock_data.dart';
 import 'counter_card.dart';
 import 'main_page_header.dart';
@@ -67,7 +67,7 @@ class _StackedCardListState extends ConsumerState<_StackedCardList> {
 
   // カードタップ状態の変更と現在タップしたカードのインデックス更新
   Future<void> _tapCard(int index) async {
-    ref.read(editCardStateNotifierProvider.notifier).updateState(mockData[index]);
+    ref.read(editCounterServiceProvider).updateState(counter: mockData[index]);
     setState(() {
       _isTapCard = !_isTapCard;
       _activateCardIndex = index;
