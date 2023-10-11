@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../inflastracture/firebase/authenticate/clients.dart';
+import '../util/stream_listenable.dart';
 import 'error/error_page.dart';
 import 'pages/edit/edit_page.dart';
 import 'pages/main/main_page.dart';
@@ -54,13 +56,16 @@ final routerProvider = Provider<GoRouter>(
       ),
     ],
     redirect: (_, state) {
-      // TODO: ログインに成功したらリダイレクトできるよう通知する設定を行うこと
-      // if (FirebaseAuth.instance.currentUser == null) {
-      //   return state.matchedLocation == '/signin' ? null : '/';
-      // }
+      if (ref.watch(firebaseAuthProvider).currentUser == null && state.matchedLocation != '/signin') {
+        return '/main';
+      }
       return null;
     },
-    // refreshListenable: ref.watch(ログイン状態の監視)
+    refreshListenable: GoRouterRefreshStream(
+      // FirebaseのAuthStateをStreamで監視するメソッド
+      ref.watch(firebaseAuthProvider).authStateChanges(),
+    ),
+
     /// エラー画面
     /// routing内で不正なURL("/**/定義されていないURL")などにアクセスした場合に下記を表示する
     // TODO: エラーページを用意すること
