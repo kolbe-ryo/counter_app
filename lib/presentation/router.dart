@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../inflastracture/firebase/authenticate/clients.dart';
-import '../util/stream_listenable.dart';
+import '../util/logger.dart';
 import 'error/error_page.dart';
 import 'pages/edit/edit_page.dart';
 import 'pages/main/main_page.dart';
@@ -56,15 +56,14 @@ final routerProvider = Provider<GoRouter>(
       ),
     ],
     redirect: (_, state) {
-      if (ref.watch(firebaseAuthProvider).currentUser == null && state.matchedLocation != '/signin') {
-        return '/main';
+      // StreamでAutnを監視し、Sign in成功時にデータ取得できたらメイン画面にリダイレクトする
+      final authUser = ref.watch(firebaseUserStreamProvider);
+      logger.info(authUser);
+      if (state.matchedLocation == TopPageRoute.name && authUser.value != null) {
+        return MainPageRoute.name;
       }
       return null;
     },
-    refreshListenable: GoRouterRefreshStream(
-      // FirebaseのAuthStateをStreamで監視するメソッド
-      ref.watch(firebaseAuthProvider).authStateChanges(),
-    ),
 
     /// エラー画面
     /// routing内で不正なURL("/**/定義されていないURL")などにアクセスした場合に下記を表示する
