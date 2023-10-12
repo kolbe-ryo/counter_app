@@ -8,6 +8,13 @@ final firebaseAuthProvider = Provider<FirebaseAuth>(
   (ref) => FirebaseAuth.instance,
 );
 
+final firebaseUserStreamProvider = StreamProvider<User?>((ref) async* {
+  final userStream = ref.watch(firebaseAuthProvider).authStateChanges();
+  await for (final user in userStream) {
+    yield user;
+  }
+});
+
 /// GoogleSingInクライアントプロバイダー
 const _googleAuthenticateType = 'email';
 const _googleAuthUrl = 'https://www.googleapis.com/auth/contacts.readonly';
