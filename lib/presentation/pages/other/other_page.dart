@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../inflastracture/firebase/authenticate/clients.dart';
 import '../../../util/logger.dart';
 import '../../../util/text_styles.dart';
 import '../../common/buttons/back_app_button.dart';
@@ -213,14 +214,14 @@ class _Reset extends StatelessWidget {
   }
 }
 
-class _CategorySetting extends StatelessWidget {
+class _CategorySetting extends ConsumerWidget {
   const _CategorySetting();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MenuCard.common(
-      // TODO: Action
-      onTap: () => logger.info('category setting'),
+      // TODO: Applicationにサインアウトメソッドを作成して、直接Inflastactureから呼ばないようにする
+      onTap: () => ref.watch(firebaseAuthProvider).signOut(),
       color: Colors.purpleAccent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -232,7 +233,7 @@ class _CategorySetting extends StatelessWidget {
           ),
           const SizedBox(width: kPadding * 2),
           Text(
-            'Category Setting',
+            'Sign Out',
             style: TextStyles.largeFontStyle(color: Colors.white),
           ),
         ],
