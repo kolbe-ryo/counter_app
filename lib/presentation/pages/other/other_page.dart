@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../inflastracture/firebase/authenticate/clients.dart';
+import '../../../application/authentication/authentication_service.dart';
+import '../../../inflastracture/firebase/authenticate/authenticate_enum.dart';
 import '../../../util/logger.dart';
 import '../../../util/text_styles.dart';
 import '../../common/buttons/back_app_button.dart';
@@ -220,8 +221,7 @@ class _CategorySetting extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MenuCard.common(
-      // TODO: Applicationにサインアウトメソッドを作成して、直接Inflastactureから呼ばないようにする
-      onTap: () => ref.watch(firebaseAuthProvider).signOut(),
+      onTap: () => ref.watch(authenticationServiceProvider(AuthenticationMethod.google)),
       color: Colors.purpleAccent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

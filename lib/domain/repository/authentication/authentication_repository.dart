@@ -18,10 +18,7 @@ abstract class AuthenticationRepository {
     required AuthenticateUserData userData,
   });
 
-  Future<void> signOut({
-    // TODO: 認証に必要な情報を渡す
-    required AuthenticateUserData userData,
-  });
+  Future<void> signOut();
 
   /// 認証状態を確認する
   Future<void> checkAuthState({

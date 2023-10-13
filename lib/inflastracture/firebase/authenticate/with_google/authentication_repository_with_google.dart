@@ -29,7 +29,7 @@ class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
   }
 
   @override
-  Future<void> signOut({required AuthenticateUserData userData}) async {
+  Future<void> signOut() async {
     await client.signOut();
   }
 
