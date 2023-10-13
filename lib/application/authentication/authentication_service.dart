@@ -27,4 +27,8 @@ class AuthenticationService {
   Future<void> signIn() async {
     await repo.signIn(userData: AuthenticateUserData.create('test11', 'test22'));
   }
+
+  Future<void> signOut() async {
+    await repo.signOut();
+  }
 }
