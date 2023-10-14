@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/repository/authentication/authentication_repository.dart';
-import '../../domain/repository/authentication/entity/authenticate_user_data.dart';
 import '../../inflastracture/firebase/authenticate/authenticate_enum.dart';
 import '../../inflastracture/firebase/authenticate/with_apple/authentication_repository_with_apple.dart';
 import '../../inflastracture/firebase/authenticate/with_email/authentication_repository_with_email.dart';
@@ -25,7 +24,7 @@ class AuthenticationService {
   final AuthenticationRepository repo;
 
   Future<void> signIn() async {
-    await repo.signIn(userData: AuthenticateUserData.create('test11', 'test22'));
+    await repo.signIn();
   }
 
   Future<void> signOut() async {

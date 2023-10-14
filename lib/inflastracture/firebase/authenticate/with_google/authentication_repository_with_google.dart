@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../domain/repository/authentication/authentication_repository.dart';
-import '../../../../domain/repository/authentication/entity/authenticate_user_data.dart';
 import 'firebase_authentication_client_with_google.dart';
 
 final firebaseAuthRepositoryWithGoogleProvider = Provider<FirebaseAuthRepositoryWithGoogle>(
@@ -18,13 +17,13 @@ class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
   final FirebaseAuthClientWithGoogle client;
 
   @override
-  Future<void> signUp({required AuthenticateUserData userData}) async {
+  Future<void> signUp() async {
     // TODO: 他に処理がある場合はクライアントではなくこちらに記載すること
     await client.signUp();
   }
 
   @override
-  Future<void> signIn({required AuthenticateUserData userData}) async {
+  Future<void> signIn() async {
     await client.signIn();
   }
 
@@ -34,7 +33,7 @@ class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
   }
 
   @override
-  Future<void> checkAuthState({required AuthenticateUserData userData}) {
+  Future<void> checkAuthState() {
     // TODO: implement checkAuthState
     throw UnimplementedError();
   }
