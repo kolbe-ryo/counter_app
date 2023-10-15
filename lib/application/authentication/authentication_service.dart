@@ -10,6 +10,7 @@ import '../../inflastracture/firebase/authenticate/with_google/authentication_re
 final authenticationServiceProvider = Provider.family<AuthenticationService, AuthenticationMethod>((ref, authMethod) {
   switch (authMethod) {
     // TODO: signOutだけ特定のクライアントから受け取る必要がない
+    // そもそも分ける必要ない？抽象クラスを受け取るようにしていれば問題なさそう
     case AuthenticationMethod.email:
       return AuthenticationService(repo: ref.watch(firebaseAuthRepositoryWithEmailProvider));
     case AuthenticationMethod.apple:
