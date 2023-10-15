@@ -30,7 +30,6 @@ class FirebaseAuthRepositoryWithEmail implements AuthenticationRepository, Reset
   @override
   Future<void> signOut() async {
     await client.signOut();
-    // TODO: 認証情報の削除
   }
 
   @override

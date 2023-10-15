@@ -9,6 +9,7 @@ import '../../inflastracture/firebase/authenticate/with_google/authentication_re
 /// リポジトリ一覧サービスプロバイダー
 final authenticationServiceProvider = Provider.family<AuthenticationService, AuthenticationMethod>((ref, authMethod) {
   switch (authMethod) {
+    // TODO: signOutだけ特定のクライアントから受け取る必要がない
     case AuthenticationMethod.email:
       return AuthenticationService(repo: ref.watch(firebaseAuthRepositoryWithEmailProvider));
     case AuthenticationMethod.apple:
