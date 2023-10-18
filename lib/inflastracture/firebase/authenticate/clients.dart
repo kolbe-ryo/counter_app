@@ -8,6 +8,7 @@ final firebaseAuthProvider = Provider<FirebaseAuth>(
   (ref) => FirebaseAuth.instance,
 );
 
+/// Auth監視StreamProvider
 final firebaseUserStreamProvider = StreamProvider<User?>((ref) async* {
   final userStream = ref.watch(firebaseAuthProvider).authStateChanges();
   await for (final user in userStream) {
