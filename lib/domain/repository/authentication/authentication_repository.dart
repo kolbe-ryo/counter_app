@@ -11,9 +11,6 @@ abstract class AuthenticationRepository {
   Future<void> signIn();
 
   Future<void> signOut();
-
-  /// 認証状態を確認する
-  Future<void> checkAuthState();
 }
 
 abstract class ResetPasswordRepository {

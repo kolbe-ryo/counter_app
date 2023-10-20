@@ -9,7 +9,6 @@ final firebaseAuthRepositoryWithGoogleProvider = Provider<FirebaseAuthRepository
   ),
 );
 
-// TODO: FirebaseAuthRepositoryをFirebaseAuthRepositoryWithGoogleなどを用意すること
 /// Apple版リポジトリRepository
 class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
   const FirebaseAuthRepositoryWithGoogle({required this.client});
@@ -18,7 +17,6 @@ class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
 
   @override
   Future<void> signUp() async {
-    // TODO: 他に処理がある場合はクライアントではなくこちらに記載すること
     await client.signUp();
   }
 
@@ -30,11 +28,5 @@ class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
   @override
   Future<void> signOut() async {
     await client.signOut();
-  }
-
-  @override
-  Future<void> checkAuthState() {
-    // TODO: implement checkAuthState
-    throw UnimplementedError();
   }
 }
