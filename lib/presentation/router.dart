@@ -67,8 +67,7 @@ final routerProvider = Provider<GoRouter>(
 
     /// エラー画面
     /// routing内で不正なURL("/**/定義されていないURL")などにアクセスした場合に下記を表示する
-    // TODO: エラーページを用意すること
-    // errorPageBuilder: (context, state) => ErrorRoute(state.error).buildPage(context, state),
+    errorPageBuilder: (context, state) => ErrorRoute(state.error).buildPage(context, state),
   ),
 );
 

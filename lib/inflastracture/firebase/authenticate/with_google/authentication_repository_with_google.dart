@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../domain/repository/authentication/authentication_repository.dart';
-import '../../../../domain/repository/authentication/entity/authenticate_user_data.dart';
 import 'firebase_authentication_client_with_google.dart';
 
 final firebaseAuthRepositoryWithGoogleProvider = Provider<FirebaseAuthRepositoryWithGoogle>(
@@ -10,7 +9,6 @@ final firebaseAuthRepositoryWithGoogleProvider = Provider<FirebaseAuthRepository
   ),
 );
 
-// TODO: FirebaseAuthRepositoryをFirebaseAuthRepositoryWithGoogleなどを用意すること
 /// Apple版リポジトリRepository
 class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
   const FirebaseAuthRepositoryWithGoogle({required this.client});
@@ -18,24 +16,17 @@ class FirebaseAuthRepositoryWithGoogle implements AuthenticationRepository {
   final FirebaseAuthClientWithGoogle client;
 
   @override
-  Future<void> signUp({required AuthenticateUserData userData}) async {
-    // TODO: 他に処理がある場合はクライアントではなくこちらに記載すること
+  Future<void> signUp() async {
     await client.signUp();
   }
 
   @override
-  Future<void> signIn({required AuthenticateUserData userData}) async {
+  Future<void> signIn() async {
     await client.signIn();
   }
 
   @override
-  Future<void> signOut({required AuthenticateUserData userData}) async {
+  Future<void> signOut() async {
     await client.signOut();
-  }
-
-  @override
-  Future<void> checkAuthState({required AuthenticateUserData userData}) {
-    // TODO: implement checkAuthState
-    throw UnimplementedError();
   }
 }
