@@ -3,12 +3,26 @@
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('test name', () {
-    final counter = Counter();
+  group('Counter', () {
+    test('value should start at 0', () {
+      expect(Counter().value, 0);
+    });
 
-    counter.increment();
+    test('value should be incremented', () {
+      final counter = Counter();
 
-    expect(counter.value, 1);
+      counter.increment();
+
+      expect(counter.value, 1);
+    });
+
+    test('value should be decremented', () {
+      final counter = Counter();
+
+      counter.decrement();
+
+      expect(counter.value, -1);
+    });
   });
 }
 
