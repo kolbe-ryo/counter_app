@@ -19,6 +19,13 @@ void main() {
       final counterIncrement = counter.increment();
       expect(counterIncrement.count.count, 1);
     });
+    test('increment over 99', () {
+      var counterIncrement = counter;
+      for (var i = 0; i < 100; i++) {
+        counterIncrement = counterIncrement.increment();
+      }
+      expect(counterIncrement.count.count, 99);
+    });
     test('decrement', () {
       final counterDecrement = counter.decrement();
       expect(counterDecrement.count.count, 0);
@@ -38,7 +45,7 @@ void main() {
   group('Boundary Test', () {
     test('Count validation check', () {
       try {
-        final counter = Counter.init(
+        Counter.init(
           '',
           CategoryInfo(
             name: 'empty',
