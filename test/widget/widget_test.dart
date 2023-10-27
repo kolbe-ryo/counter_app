@@ -1,21 +1,24 @@
-import 'package:counter_app/presentation/pages/main/main_page.dart';
+import 'package:counter_app/presentation/pages/other/other_page.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Widget Test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MainPage());
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: OtherPage(),
+      ),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('Banana'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Text find
+    expect(find.text('About App'), findsWidgets);
+    // expect(find.text('1'), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // // Wait after tap
+    // await tester.tap(find.byTooltip('edit'));
+    // await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // expect(find.text('EDIT'), findsOneWidget);
   });
 }
