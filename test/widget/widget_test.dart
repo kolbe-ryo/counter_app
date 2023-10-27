@@ -13,8 +13,8 @@ void main() {
     await tester.pump();
 
     // Text find
-    expect(find.text('BANANA'), findsOneWidget);
-    // expect(find.text('1'), findsNothing);
+    expect(find.text('Banana'), findsOneWidget);
+    expect(find.text('BANANA'), findsNothing);
 
     // // Wait after tap
     // await tester.tap(find.byTooltip('edit'));
