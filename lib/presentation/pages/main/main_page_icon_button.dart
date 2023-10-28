@@ -10,6 +10,7 @@ class MainPageIconButton extends ConsumerWidget {
     this._conInterface,
     this._iconData,
     this._color,
+    this._tooltip,
   );
 
   factory MainPageIconButton.addNewCard() {
@@ -17,6 +18,7 @@ class MainPageIconButton extends ConsumerWidget {
       AddHeaderIconAction(),
       Icons.add_circle,
       Colors.black,
+      'addNewCard',
     );
   }
 
@@ -25,6 +27,7 @@ class MainPageIconButton extends ConsumerWidget {
       MenuHeaderIconAction(),
       Icons.menu,
       Colors.black,
+      'menu',
     );
   }
 
@@ -33,6 +36,7 @@ class MainPageIconButton extends ConsumerWidget {
       AddIconAction(),
       Icons.add,
       Colors.white,
+      'addCount',
     );
   }
 
@@ -41,6 +45,7 @@ class MainPageIconButton extends ConsumerWidget {
       MinusIconAction(),
       Icons.remove,
       Colors.white,
+      'minusCount',
     );
   }
 
@@ -49,6 +54,7 @@ class MainPageIconButton extends ConsumerWidget {
       EditIconAction(),
       Icons.edit,
       Colors.black54,
+      'edit',
     );
   }
 
@@ -57,6 +63,7 @@ class MainPageIconButton extends ConsumerWidget {
       RemoveIconAction(),
       Icons.delete,
       Colors.black54,
+      'remove',
     );
   }
 
@@ -65,6 +72,7 @@ class MainPageIconButton extends ConsumerWidget {
       null,
       Icons.add,
       Colors.black12,
+      'addCountNoAct',
     );
   }
 
@@ -73,6 +81,7 @@ class MainPageIconButton extends ConsumerWidget {
       null,
       Icons.remove,
       Colors.black12,
+      'minusCountNoAct',
     );
   }
 
@@ -81,6 +90,7 @@ class MainPageIconButton extends ConsumerWidget {
       null,
       Icons.edit,
       Colors.black12,
+      'editNoAct',
     );
   }
 
@@ -89,6 +99,7 @@ class MainPageIconButton extends ConsumerWidget {
       null,
       Icons.delete,
       Colors.black12,
+      'removeNoAct',
     );
   }
 
@@ -98,9 +109,12 @@ class MainPageIconButton extends ConsumerWidget {
 
   final Color _color;
 
+  final String _tooltip;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
+      tooltip: _tooltip,
       onPressed: () => _conInterface?.onTap(ref),
       icon: Icon(
         _iconData,
