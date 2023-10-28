@@ -17,9 +17,10 @@ void main() {
     expect(find.text('BANANA'), findsNothing);
 
     // // Wait after tap
-    // await tester.tap(find.byTooltip('edit'));
-    // await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('menu'));
+    await tester.pumpAndSettle();
+    await tester.pump();
 
-    // expect(find.text('EDIT'), findsOneWidget);
+    expect(find.byTooltip('menu'), findsOneWidget);
   });
 }
